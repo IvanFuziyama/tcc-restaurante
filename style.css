@@ -25,3 +25,8 @@ nav a{
     font-size: 20px;
     padding: 10px;
 }
+body{
+    background-color: var(--cor4);
+    color: var(--cor-fonte);
+    font-family: var(--fonte-padrao);
+}
