@@ -30,3 +30,17 @@ body{
     color: var(--cor-fonte);
     font-family: var(--fonte-padrao);
 }
+
+footer{
+    background-color: black;
+    height: 15vh;
+    display:flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+footer p{
+    text-align: center;
+    font-family: var(--fonte-padrao);
+    padding: 10px;
+}
