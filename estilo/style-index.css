@@ -113,6 +113,14 @@ div#sobre{
 
 div#contato{
     background-color: var(--cor4);
+    margin-bottom: 60px;
+}
+
+/*...  */
+
+
+div#endereco{
+    background-color: #ffffff;
 }
 footer{
     background-color: var(--cor6);
