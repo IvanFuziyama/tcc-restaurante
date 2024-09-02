@@ -48,22 +48,22 @@
             <div class="container">
                 <div id="contato">  
                     <h2>Contato</h2>
-                    <form action="contato.php" method="post">
+                    <form action="contato.php" method="post" autocomplete="on">
                         <p>
-                            <label for=""></label>
-                            <input type="text" name="nome" id="nome" placeholder="Nome">
+                            <label for="nome"></label>
+                            <input type="text" name="nome" id="nome" placeholder="Nome" required minlength="4" maxlength="30">
                         </p>
                         <p>
-                            <label for=""></label>
-                            <input type="tel" name="telefone" id="telefone" placeholder="Telefone: (xx)xxxxx-xxxx">
+                            <label for="tel"></label>
+                            <input type="tel" name="telefone" id="telefone" placeholder="Telefone: (xx)xxxxx-xxxx" required autocomplete="off" pattern="^\(\d{2}\)\d{4,5}-\d{4}$">
                         </p>
                         <p>
-                            <label for=""></label>
-                            <input type="email" name="email" id="email" placeholder="E-mail:">
+                            <label for="email"></label>
+                            <input type="email" name="email" id="email" placeholder="E-mail:" required>
                         </p>
                         <p>
-                            <label for=""></label>
-                            <textarea name="msg" id="msg" cols="30" rows="10" placeholder="Digite uma mensagem aqui..."></textarea>
+                            <label for="msg"></label>
+                            <textarea name="msg" id="msg" cols="30" rows="10" placeholder="Digite uma mensagem aqui..." required autocomplete="off"></textarea>
                         </p>
                     </form>
                 </div>
