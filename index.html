@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="estilo/style-index.css">
+    <link rel="stylesheet" href="estilo/style-index.css" media="all">
     <title>Yaki'n Box</title>
 </head>
 <body>
@@ -45,9 +45,27 @@
             </div>
         </section>
         <section>
-            <div id="contato">
-                <div class="container">
+            <div class="container">
+                <div id="contato">  
                     <h2>Contato</h2>
+                    <form action="contato.php" method="post">
+                        <p>
+                            <label for=""></label>
+                            <input type="text" name="nome" id="nome" placeholder="Nome">
+                        </p>
+                        <p>
+                            <label for=""></label>
+                            <input type="tel" name="telefone" id="telefone" placeholder="Telefone: (xx)xxxxx-xxxx">
+                        </p>
+                        <p>
+                            <label for=""></label>
+                            <input type="email" name="email" id="email" placeholder="E-mail:">
+                        </p>
+                        <p>
+                            <label for=""></label>
+                            <textarea name="msg" id="msg" cols="30" rows="10" placeholder="Digite uma mensagem aqui..."></textarea>
+                        </p>
+                    </form>
                 </div>
             </div>
         </section>
