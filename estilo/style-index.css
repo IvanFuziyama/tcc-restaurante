@@ -60,7 +60,7 @@ div.container{
 
 div#pedido{
     background-color: var(--cor4);
-    width: 22vw;
+    max-width: 28vw;
     height: 40vh;
     border-radius: 10px;
     padding: 30px;
@@ -70,6 +70,7 @@ div#pedido{
 div#pedido p{
     font-size: 18px;
     text-align: justify;
+    color: var(--cor-fonte-branco);
 }
 #icarrinho{
     background-color: var(--cor7);
@@ -84,7 +85,8 @@ div#cardapio{
     align-items: center;
     justify-content: center;
     background-color: #ffffff;
-    background-image: url();
+    background: url(../imgs/comida2.jpg) no-repeat center;
+    background-size: cover;
     margin-bottom: 60px;
     height: 100vh;
 }
@@ -92,18 +94,19 @@ div#cardapio a{
     text-decoration: none;
     background-color: #000000;
     padding: 10px;
-    width: 150px;
-    height: 70px;
+    width: 200px;
+    height: 110px;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    opacity: 0.4;
+    opacity: 0.8;
 }
 div#cardapio h2{
     color: var(--cor-fonte-branco);
     text-align: center;
     padding: 20px;
+    font-size: 40px;
 }
 div#cardapio h2:hover{
     color: var(--cor2);
@@ -129,10 +132,14 @@ div#contato{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 div#contato input, textarea{
     margin: 10px;
     padding: 5px;
+}
+div#contato input{
+    width: 235px;
 }
 div textarea{resize: none;}
 /*...  */
@@ -140,6 +147,16 @@ div textarea{resize: none;}
 
 div#endereco{
     background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#div#endereco h2,p{
+    color: var(--cor-fonte-preto);
+}
+iframe{
+    margin: 20px 0;
 }
 footer{
     background-color: var(--cor6);
