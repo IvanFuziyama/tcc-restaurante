@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,55 +8,70 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <title>Yaki'n Box</title>
 </head>
+
 <body>
+    <header>
+        <a href="index.html">Logo</a>
         <nav>
-            <a href="index.html">Logo</a>
-            <a href="cardapio.html">Cardápio</a>
-            <a href="#">Sobre</a>
-            <a href="#">Contato</a>
-            <a href="#">Retirada</a>
-            <a href="#">Delivery</a>
+            <ul>
+                <li><a href="cardapio.html">Cardápio</a></li>
+                <li><a href="#">Sobre</a></li>
+                <li><a href="#">Contato</a></li>
+                <li><a href="#">Retirada</a></li>
+                <li><a href="#">Delivery</a></li>
+            </ul>
         </nav>
+    </header>
     <main>
         <div id="inicio">
-                <h1>Yaki'n Box</h1>
+            <h1>Yaki'n Box</h1>
             </img>
         </div>
         <article>
             <div class="container">
                 <div id="pedido">
                     <span class="material-symbols-outlined" id="icarrinho">shopping_cart</span>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias nisi vel tempora autem, voluptatum modi! Repellendus in facere voluptates excepturi sed?</p>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias nisi vel tempora autem,
+                        voluptatum modi! Repellendus in facere voluptates excepturi sed?</p>
                 </div>
             </div>
         </article>
         <article>
             <div id="cardapio">
                 <a href="cardapio.html" target="_blank">
-                    <h2>Acesse o Cardápio</h2>
+                    <h2>Cardápio</h2>
                 </a>
-            </div>  
+            </div>
         </article>
         <section>
             <div class="container">
-                <div id="sobre">
-                    <h2></h2>
-                    <!--... mais coisas-->
+                <div id="sobreContainer">
+                    <div id="sobreBox">
+                        <h2>Sobre</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias eligendi veniam
+                            accusantium repellat delectus nihil cumque itaque laboriosam, architecto est asperiores
+                            autem sed dignissimos ut quasi. Corporis saepe quae minus.
+                        </p>
+                    </div>
+                    <img src="../imgs/comida2.jpg" alt="" sizes="" srcset="">
                 </div>
             </div>
         </section>
         <section>
             <div class="container">
-                <div id="contato">  
+                <div id="contato">
                     <h2>Contato</h2>
                     <form action="contato.php" method="post" autocomplete="on">
                         <p>
                             <label for="nome"></label>
-                            <input type="text" name="nome" id="nome" placeholder="Nome" required minlength="4" maxlength="30">
+                            <input type="text" name="nome" id="nome" placeholder="Nome" required minlength="4"
+                                maxlength="30">
                         </p>
                         <p>
                             <label for="tel"></label>
-                            <input type="tel" name="telefone" id="telefone" placeholder="Telefone: (xx)xxxxx-xxxx" required autocomplete="off" pattern="^\(\d{2}\)\d{4,5}-\d{4}$">
+                            <input type="tel" name="telefone" id="telefone" placeholder="Telefone: (xx)xxxxx-xxxx"
+                                required autocomplete="off" pattern="^\(\d{2}\)\d{4,5}-\d{4}$">
                         </p>
                         <p>
                             <label for="email"></label>
@@ -63,7 +79,8 @@
                         </p>
                         <p>
                             <label for="msg"></label>
-                            <textarea name="msg" id="msg" cols="30" rows="10" placeholder="Digite uma mensagem aqui..." required autocomplete="off"></textarea>
+                            <textarea name="msg" id="msg" cols="30" rows="10" placeholder="Digite uma mensagem aqui..."
+                                required autocomplete="off"></textarea>
                         </p>
                     </form>
                 </div>
@@ -71,19 +88,21 @@
         </section>
         <section>
             <div id="endereco">
-                <div class="container">
-                    <h2>Endereço</h2>
-                    <iframe src="" frameborder="1">
-                        Mapa do endereço
-                    </iframe>
-                    <p>colocar o endereco</p>
-                </div>
+                <h2>Endereço</h2>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3669.0030417739677!2d-46.56703892468286!3d-23.133564079096132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cec16cf851c719%3A0xc036aa084056e044!2s*21Yaki&#39;%20n%20box%20o%20yakisoba%20da%20caixinha%20marrom!5e0!3m2!1spt-BR!2sbr!4v1725643013610!5m2!1spt-BR!2sbr"
+                    width="600" height="450" style="border:1;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                    Mapa do endereço
+                </iframe>
+                <p>Av. Cel. Miguel Brizola de Oliveira, 148 - Jardim do Alvinopolis, Atibaia - SP, 12943-500</p>
             </div>
         </section>
     </main>
     <footer>
         <p>@Yaki'n Box 2024</p>
     </footer>
-    
+
 </body>
+
 </html>
