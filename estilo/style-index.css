@@ -6,10 +6,8 @@
     --cor3:#C0925E;
     --cor4:#3A3A3A;
     --cor5:#272727;
-    --cor6:#000000;
-    --cor7: #ffffff;
-    --cor-fonte-branco:#ffffff;
-    --cor-fonte-preto: #000000;
+    --cor-branco:#ffffff;
+    --cor-preto: #000000;
     --fonte-padrao: "Actor",sans-serif;
     --fonte-titulo: "Josefin Sans", sans-serif; 
 }
@@ -19,7 +17,7 @@
 }
 body{
     background-color: var(--cor5);
-    color: var(--cor-fonte-branco);
+    color: var(--cor-branco);
     font-family: var(--fonte-padrao);
 }
 header{
@@ -30,8 +28,8 @@ header{
     padding: 10px;
     position: sticky;
     top: 0;
-    background-color: var(--cor6);
-    border-bottom: 1px solid white;
+    background-color: var(--cor5);
+    border-bottom: 1px solid var(--cor2);
 }
 nav a, header a{
     text-decoration: none;
@@ -50,7 +48,6 @@ div#inicio{
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: wheat;
     margin-bottom: 60px;
     background: url(../imgs/comida4.jpg) no-repeat center;
     background-size: cover;
@@ -79,10 +76,10 @@ div#pedido{
 div#pedido p{
     font-size: 2vw;
     text-align: justify;
-    color: var(--cor-fonte-branco);
+    color: var(--cor-branco);
 }
 #icarrinho{
-    background-color: var(--cor7);
+    background-color: var(--cor-branco);
     border-radius: 50%;
     color: #000000;
     padding: 10px;
@@ -101,7 +98,7 @@ div#cardapio{
 }
 div#cardapio a{
     text-decoration: none;
-    background-color: var(--cor2);
+    background-color: var(--cor-fonte-preto);
     padding-inline: 1.1rem;
     padding-block: 0.5rem;
     width: 12vw;
@@ -109,11 +106,9 @@ div#cardapio a{
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 4px;
-    
 }
 div#cardapio h2{
-    color: var(--cor-fonte-preto);
+    color: var(--cor-preto);
     text-align: center;
     padding: 20px;
     font-size: 2em;
@@ -122,7 +117,6 @@ div#cardapio h2:hover{
     color: var(--cor1);
     transition: 0.5s;
 }
-
 div#sobreContainer{
     display: flex;
     flex-direction: row;
@@ -135,7 +129,6 @@ div#sobreContainer{
     justify-content: space-between;
     padding-inline: 4rem;
     padding-block: 2rem;
-
     
 }
 
@@ -192,7 +185,7 @@ div#endereco{
     text-align: center;
 }
 div#endereco h2, div#endereco p{
-    color: var(--cor-fonte-preto);
+    color: var(--cor-preto);
     padding: 10px;
 }
 iframe{
@@ -200,7 +193,7 @@ iframe{
     width: 70%;
 }
 footer{
-    background-color: var(--cor6);
+    background-color: var(--cor-preto);
     height: 15vh;
     display:flex;
     align-items: center;
@@ -211,5 +204,5 @@ footer p{
     text-align: center;
     font-family: var(--fonte-padrao);
     padding: 10px;
-    color: var(--cor-fonte-branco);
+    color: var(--cor-branco);
 }
