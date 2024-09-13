@@ -48,21 +48,28 @@ div#inicio{
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin-bottom: 60px;
     background: url(../imgs/comida4.jpg) no-repeat center;
     background-size: cover;
 }
 div#inicio h1{
     font-size: 10vw;
     font-weight: bolder;
+    color: var(--cor2);
 }
 
 div.container{
     display: flex;
     justify-content: center;
     align-items: center;
-}
+}   
 
+article.c1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--cor5);
+    padding-top: 50px;
+}
 div#pedido{
     background-color: var(--cor4);
     max-width: 28vw;
@@ -71,13 +78,33 @@ div#pedido{
     padding: 30px;
     margin-bottom: 60px;
     text-align: center;
-    flex-wrap: wrap;
 }
 div#pedido p{
-    font-size: 2vw;
+    font-size: 1.4em;
     text-align: justify;
     color: var(--cor-branco);
+    margin-bottom: 20px;
 }
+div#pedido button{
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+}
+
+button#botao-retirada{
+    background-color: var(--cor2);
+}
+button#botao-delivery{
+    background-color: var(--cor1);
+}
+div#pedido a{
+    text-decoration: none;
+    color: var(--cor-branco);
+}
+
 #icarrinho{
     background-color: var(--cor-branco);
     border-radius: 50%;
@@ -93,27 +120,28 @@ div#cardapio{
     align-items: center;
     justify-content: center;
     background-color: #ffffff;
-    background: url(../imgs/comida3.jpg) no-repeat center;
+    background: url(../imgs/comida3.png) no-repeat center;
     background-size: cover;
-    margin-bottom: 60px;
+    margin-bottom: 80px;
     height: 100vh;
 }
 div#cardapio a{
     text-decoration: none;
-    color: var(--cor-branco);
-    font-size: 2em;   
+    color: var(--cor2); 
+    font-size: 1em;  
+    font-weight: 500; 
 }
 button#botao-cardapio{
-    background-color: #E99E1E;
-    border-color: #af7a1e;
-    border-radius: 5px;
-    padding: 20px 30px;
+    background-color: var(--cor4);
+    border: none;
+    border-radius: 4px;
+    padding: 15px 25px;
 }
 div#cardapio h2{
-    color: var(--cor-branco);
+    color: var(--cor2);
     text-align: center;
     padding: 20px;
-    font-size: 7em;
+    font-size: 4em;
 }
 
 div#sobreContainer{
@@ -141,6 +169,8 @@ div#sobreBox{
     align-self: center;
     justify-content: flex-start;
     font-size: 24px;
+    color: var(--cor2);
+    margin-bottom: 20px;
 }
 
 #sobreContainer img{
@@ -156,7 +186,6 @@ div#sobreBox{
 
 /*...  */
 
-
 div#contato{
     background-color: var(--cor4);
     margin-bottom: 60px;
@@ -166,6 +195,9 @@ div#contato{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+div#contato h2{
+    color: var(--cor2);
 }
 div#contato input, textarea{
     margin-top: 10px;
@@ -182,7 +214,11 @@ div#endereco{
     flex-direction: column;
     text-align: center;
 }
-div#endereco h2, div#endereco p{
+div#endereco h2{
+    padding-top: 20px;
+    color: var(--cor2);
+}
+div#endereco p{
     color: var(--cor-preto);
     padding: 10px;
 }
