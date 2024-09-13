@@ -57,13 +57,7 @@ div#inicio h1{
     color: var(--cor2);
 }
 
-div.container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}   
-
-article.c1{
+article#c1{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -114,7 +108,7 @@ div#pedido a{
     font-size: 40px;
 }
 
-div#cardapio{
+article#cardapio{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -125,10 +119,10 @@ div#cardapio{
     margin-bottom: 80px;
     height: 100vh;
 }
-div#cardapio a{
+article#cardapio a{
     text-decoration: none;
     color: var(--cor2); 
-    font-size: 1em;  
+    font-size: 1.2em;  
     font-weight: 500; 
 }
 button#botao-cardapio{
@@ -137,13 +131,18 @@ button#botao-cardapio{
     border-radius: 4px;
     padding: 15px 25px;
 }
-div#cardapio h2{
+article#cardapio h2{
     color: var(--cor2);
     text-align: center;
     padding: 20px;
     font-size: 4em;
 }
 
+section#c2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 div#sobreContainer{
     display: flex;
     flex-direction: row;
@@ -156,15 +155,12 @@ div#sobreContainer{
     justify-content: space-between;
     padding-inline: 4rem;
     padding-block: 2rem;
-    
 }
-
 div#sobreBox{
     display: flex;
     flex-direction: column;
     width: 40%;
 }
-
 #sobreBox h2{
     align-self: center;
     justify-content: flex-start;
@@ -172,13 +168,11 @@ div#sobreBox{
     color: var(--cor2);
     margin-bottom: 20px;
 }
-
 #sobreContainer img{
     width: 50%;
     height: 80%;
     border-radius: 8px;
 }
-
 #sobreBox p{
     text-align: justify;
     font-size: 16px;
@@ -186,6 +180,11 @@ div#sobreBox{
 
 /*...  */
 
+section#c3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 div#contato{
     background-color: var(--cor4);
     margin-bottom: 60px;
@@ -209,16 +208,16 @@ div#contato input{
 div textarea{resize: none;}
 /*...  */
 
-div#endereco{
+section#endereco{
     background-color: #ffffff;
     flex-direction: column;
     text-align: center;
 }
-div#endereco h2{
+section#endereco h2{
     padding-top: 20px;
     color: var(--cor2);
 }
-div#endereco p{
+section#endereco p{
     color: var(--cor-preto);
     padding: 10px;
 }
