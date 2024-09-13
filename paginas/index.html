@@ -5,23 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../estilo/style-index.css" media="all">
+    <link rel="stylesheet" href="../estilo/style-media.css">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <title>Yaki'n Box</title>
 </head>
-
 <body>
     <header>
         <a href="index.html">Logo</a>
         <nav>
             <ul>
                 <li><a href="cardapio.html">Cardápio</a></li>
-                <li><a href="#">Sobre</a></li>
-                <li><a href="#">Contato</a></li>
+                <li><a href="#link-sobre">Sobre</a></li>
+                <li><a href="#link-contato">Contato</a></li>
                 <li><a href="#">Retirada</a></li>
                 <li><a href="#">Delivery</a></li>
             </ul>
         </nav>
     </header>
+
     <main>
         <div id="inicio">
             <h1>Yaki'n Box</h1>
@@ -36,16 +37,17 @@
                 </div>
             </div>
         </article>
+
         <article>
             <div id="cardapio">
-                <div id="caixa">
-                    <a href="cardapio.html" target="_blank">
-                        <h2>Cardápio</h2>
-                    </a>
+                        <h2>Faça o seu pedido</h2>
+                        <button id="botao-cardapio"><a href="cardapio.html">Cardápio</a></button>
                 </div>
             </div>
         </article>
+
         <section>
+            <a name="link-sobre"></a>
             <div class="container">
                 <div id="sobreContainer">
                     <div id="sobreBox">
@@ -57,9 +59,11 @@
                         </p>
                     </div>
                     <img src="../imgs/comida2.jpg" alt="" sizes="" srcset="">
+                    <a name="link-contato"></a>
                 </div>
             </div>
         </section>
+
         <section>
             <div class="container">
                 <div id="contato">
@@ -84,10 +88,14 @@
                             <textarea name="msg" id="msg" cols="30" rows="10" placeholder="Digite uma mensagem aqui..."
                                 required autocomplete="off"></textarea>
                         </p>
+                        <p>
+                            <input type="submit" value="Enviar" id="enviar">
+                        </p>
                     </form>
                 </div>
             </div>
         </section>
+
         <section>
             <div id="endereco">
                 <h2>Endereço</h2>
@@ -101,6 +109,7 @@
             </div>
         </section>
     </main>
+
     <footer>
         <p>@Yaki'n Box 2024</p>
     </footer>
