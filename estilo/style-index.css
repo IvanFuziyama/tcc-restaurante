@@ -163,24 +163,39 @@ div#sobreBox{
     flex-direction: column;
     width: 40%;
 }
-#sobreBox h2{
+div#sobreBox h2{
     align-self: center;
     justify-content: flex-start;
     font-size: 24px;
     color: var(--cor2);
     margin-bottom: 20px;
 }
-#sobreContainer img{
+div#sobreContainer img{
     width: 50%;
     height: 80%;
     border-radius: 8px;
 }
-#sobreBox p{
+div#sobreBox p{
     text-align: justify;
     font-size: 16px;
 }
 
-/*...  */
+section#mvv{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+}
+div.mvv-col1,
+div.mvv-col2,
+div.mvv-col3{
+    width: 500px;
+}
+section#mvv h2{
+    margin: 10px 0;
+    color: var(--cor2);
+}
+section#mvv p{margin: 10px 0 40px 0;}
 
 section#c3{
     display: flex;
@@ -242,7 +257,7 @@ iframe{
     width: 70%;
 }
 footer{
-    background-color: var(--cor-preto);
+    background-color: var(--cor5);
     height: 15vh;
     display:flex;
     align-items: center;
