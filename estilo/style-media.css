@@ -13,4 +13,6 @@
         margin-bottom: 20px;
         width: 400px;
     }
+    section#info{display: block;}
+    div#container-hora{display: block;}
 }

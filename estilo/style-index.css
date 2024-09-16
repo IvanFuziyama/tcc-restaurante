@@ -51,6 +51,7 @@ div#inicio{
     height: 100vh;
     background: url(../imgs/comida4.jpg) no-repeat center;
     background-size: cover;
+    background-attachment: fixed;
 }
 div#inicio h1{
     font-size: 10vw;
@@ -118,6 +119,7 @@ article#cardapio{
     background-size: cover;
     margin-bottom: 80px;
     height: 100vh;
+    background-attachment: fixed;
 }
 article#cardapio a{
     text-decoration: none;
@@ -217,6 +219,8 @@ section#info{
     color: var(--cor-preto);
     padding: 10px;
 }
+section#info h2,
+section#info hr{margin: 10px 0 10px 0;}
 div.info-col1,
 div.info-col2,
 div.info-col3{
@@ -250,4 +254,7 @@ footer p{
     font-family: var(--fonte-padrao);
     padding: 10px;
     color: var(--cor-branco);
+}
+footer img{
+    width: 24px;
 }
