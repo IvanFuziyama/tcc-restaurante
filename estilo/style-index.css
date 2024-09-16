@@ -16,6 +16,7 @@
     padding: 0;
     transition: 0.5s;
 }
+
 body{
     background-color: var(--cor5);
     color: var(--cor-branco);
@@ -177,7 +178,7 @@ div#sobreContainer img{
 }
 div#sobreBox p{
     text-align: justify;
-    font-size: 16px;
+    font-size: 1.2em;
 }
 
 section#mvv{
