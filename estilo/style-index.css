@@ -14,6 +14,7 @@
 *{
     margin: 0;
     padding: 0;
+    transition: 0.5s;
 }
 body{
     background-color: var(--cor5);
@@ -66,8 +67,7 @@ article#c1{
 }
 div#pedido{
     background-color: var(--cor4);
-    max-width: 28vw;
-    height: 60vh;
+    max-width: 280px;
     border-radius: 10px;
     padding: 30px;
     margin-bottom: 60px;
@@ -150,7 +150,7 @@ div#sobreContainer{
     width: 904px;
     height: 380px;
     margin-bottom: 60px;
-    border-radius: 10px;
+    border-radius: 5px;
     align-items: center;
     justify-content: space-between;
     padding-inline: 4rem;
@@ -194,6 +194,7 @@ div#contato{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    border-radius: 5px;
 }
 div#contato h2{
     color: var(--cor2);

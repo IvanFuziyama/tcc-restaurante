@@ -1,1 +1,16 @@
 @charset "UTF-8";
+@media screen and (max-width: 992px) {
+    *{
+        transition: 0.5s;
+    }
+    div#sobreContainer{
+        flex-direction: column;
+        width: 370px;
+        height: 400px;
+    }
+    div#sobreContainer img{width: 70%;}
+    div#sobreBox{
+        margin-bottom: 20px;
+        width: 400px;
+    }
+}
