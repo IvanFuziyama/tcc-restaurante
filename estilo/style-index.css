@@ -209,18 +209,29 @@ div#contato input{
 div textarea{resize: none;}
 /*...  */
 
-section#endereco{
+section#info{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--cor-branco);
+    color: var(--cor-preto);
+    padding: 10px;
+}
+div.info-col1,
+div.info-col2,
+div.info-col3{
+    width: 500px;
+}
+div#container-hora{display: flex;}
+div.hora1,
+div.hora2{
+    flex: 1; 
+    padding: 5px; 
+}
+section#mapa{
     background-color: #ffffff;
     flex-direction: column;
     text-align: center;
-}
-section#endereco h2{
-    padding-top: 20px;
-    color: var(--cor2);
-}
-section#endereco p{
-    color: var(--cor-preto);
-    padding: 10px;
 }
 iframe{
     margin: 10px 0;
