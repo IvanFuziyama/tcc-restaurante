@@ -1,8 +1,15 @@
 function clickMenu(){
-    let itens = document.querySelector('nav#itens-nav')
-    if(itens.style.display == 'block'){
-        itens.style.display = 'none'
+    var menu = document.getElementById('menu');
+    if(menu.style.display == 'none'){
+        menu.style.display = 'block'
     }else{
-        itens.style.display = 'block'
+        menu.style.display = 'none'
+    }
+}
+function mudouTamanho(){
+    if(window.innerWidth >= 768){
+        menu.style.display = 'block'
+    }else{
+        menu.style.display = 'none'
     }
 }

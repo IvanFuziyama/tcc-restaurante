@@ -23,32 +23,34 @@ body{
     font-family: var(--fonte-padrao);
 }
 header{
-    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+}
+nav#navbar{
     justify-content: space-between;
     display: flex;
     align-items: center;
     padding: 10px;
-    position: sticky;
-    top: 0;
     background-color: var(--cor5);
     border-bottom: 1px solid var(--cor2);
 }
-span#burguer-nav{
-    display: none;
-    cursor: pointer;
-}
-nav a, header a{
+nav#navbar a{
     text-decoration: none;
-    color: white;
+    color: var(--cor-branco);
 }
-nav li{
-    padding: 10px;
-    margin-left: 10px;
-}
-nav ul{
+nav#navbar ul{
     list-style: none;
     display: flex;
 }
+nav#navbar li{
+    padding: 10px;
+    margin-left: 10px;
+}
+span#burguer{
+    cursor: pointer;
+    display: none;
+}
+
 div#inicio{
     display: flex;
     justify-content: center;
@@ -244,7 +246,7 @@ section#info hr{margin: 10px 0 10px 0;}
 div.info-col1,
 div.info-col2,
 div.info-col3{
-    width: 500px;
+    width: 400px;
 }
 div#container-hora{display: flex;}
 div.hora1,

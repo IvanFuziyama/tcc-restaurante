@@ -10,20 +10,23 @@
 </head>
 <!--"Baixar" os icons no google icons
     Fazer a responsividade, usando o inspecionar-->
-<body>
+<body onresize="mudouTamanho()">
     <header>
-        <a href="index.html">Logo</a>
-        <span class="material-symbols-outlined" id="burguer-nav" onclick="clickMenu()">
-            menu
-            </span>
-        <nav id="itens-nav">
-            <ul>
-                <li><a href="cardapio.html">Cardápio</a></li>
-                <li><a href="#link-sobre">Sobre</a></li>
-                <li><a href="#link-contato">Contato</a></li>
-                <li><a href="#">Retirada</a></li>
-                <li><a href="https://www.ifood.com.br/delivery/atibaia-sp/yakin-box-jardim-alvinopolis/ae237a80-9fa8-4bc2-bec3-847cd60aae52?UTM_Medium=share" target="_blank">Delivery</a></li>
-            </ul>
+        <nav id="navbar">
+            <div id="logo">
+                <a href="index.html">Logo</a>
+            </div>
+            <span id="burguer" class="material-symbols-outlined" onclick="clickMenu()">menu</span>
+                <menu id="menu">
+                    <ul>
+                        <li><a href="cardapio.html">Cardápio</a></li>
+                        <li><a href="#link-sobre">Sobre</a></li>
+                        <li><a href="#link-contato">Contato</a></li>
+                        <li><a href="#">Retirada</a></li>
+                        <li><a href="https://www.ifood.com.br/delivery/atibaia-sp/yakin-box-jardim-alvinopolis/ae237a80-9fa8-4bc2-bec3-847cd60aae52?UTM_Medium=share" target="_blank">Delivery</a></li>
+                    </ul>
+                </div>
+            </menu>
         </nav>
     </header>
 
