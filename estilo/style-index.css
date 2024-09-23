@@ -191,6 +191,7 @@ section#mvv{
     display: flex;
     justify-content: center;
     padding: 10px;
+    margin-bottom: 30px;
 }
 div.mvv-col1,
 div.mvv-col2,
@@ -233,11 +234,9 @@ div#contato input, textarea{
     margin-top: 10px;
     padding: 5px;
 }
-div#contato input{
-    width: 235px;
-}
+div#contato input{width: 235px;}
+div#contato #enviar{width: 250px;}
 div textarea{resize: none;}
-/*...  */
 
 section#info{
     display: flex;

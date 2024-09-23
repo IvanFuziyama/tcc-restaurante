@@ -3,26 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../estilo/style-cardapio.css">
-    <title>Cardapio</title>
+    <link rel="stylesheet" href="../estilo/style-cardapio.css" media="all">
+    <link rel="stylesheet" href="../estilo/style-media-cardapio.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <title>Cardápio</title>
 </head>
-<body>
+<body onresize="mudouTamanho()">
     <header>
-        <nav>
-            <a href="index.html">Logo</a>
-            <a href="cardapio.html">Cardápio</a>
-            <a href="sobre.html">Sobre</a>
-            <a href="contato.html">Contato</a>
-            <a href="#">Retirada</a>
-            <a href="#">Delivery</a>
+        <nav id="navbar">
+            <div id="logo">
+                <a href="index.html">Logo</a>
+            </div>
+            <span id="burguer" class="material-symbols-outlined" onclick="clickMenu()">menu</span>
+                <menu id="menu">
+                    <ul>
+                        <li><a href="cardapio.html">Cardápio</a></li>
+                        <li><a href="index.html#link-sobre">Sobre</a></li>
+                        <li><a href="index.html#link-contato">Contato</a></li>
+                        <li><a href="#">Retirada</a></li>
+                        <li><a href="https://www.ifood.com.br/delivery/atibaia-sp/yakin-box-jardim-alvinopolis/ae237a80-9fa8-4bc2-bec3-847cd60aae52?UTM_Medium=share" target="_blank">Delivery</a></li>
+                    </ul>
+                </div>
+            </menu>
         </nav>
     </header>
     <main>
 
     </main>
     <footer>
-        <p>@Yaki'n Box 2024</p>
+        <a href="https://www.instagram.com/yakinbox1/" target="_blank"><img src="../imgs/logo-instagram.png" alt="Instagram"></a>
+        <p>©Yaki'n Box 2024</p>
     </footer>
-    
+    <script src="../scripts/menu.js"></script>
 </body>
 </html>

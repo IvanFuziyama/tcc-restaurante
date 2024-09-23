@@ -5,34 +5,59 @@
     --cor2:#E99E1E;
     --cor3:#C0925E;
     --cor4:#3A3A3A;
-    --cor5:#000000;
-    --cor-fonte:#ffffff;
+    --cor5:#272727;
+    --cor-branco:#ffffff;
+    --cor-preto: #000000;
     --fonte-padrao: "Actor",sans-serif;
-    --fonte-titulo: "Josefin Sans", sans-serif;
+    --fonte-titulo: "Josefin Sans", sans-serif; 
 }
 *{
     margin: 0;
     padding: 0;
+    transition: 0.5s;
 }
-nav{
+
+body{
     background-color: var(--cor5);
-    padding: 10px;
+    color: var(--cor-branco);
+    font-family: var(--fonte-padrao);
 }
-nav a{
+header{
+    position: sticky;
+    top: 0;
+}
+nav#navbar{
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: var(--cor5);
+    border-bottom: 1px solid var(--cor2);
+}
+nav#navbar a{
     text-decoration: none;
-    color: var(--cor-fonte);
-    font-family: var(--fonte-titulo);
-    font-size: 20px;
-    padding: 10px;
+    color: var(--cor-branco);
 }
+nav#navbar ul{
+    list-style: none;
+    display: flex;
+}
+nav#navbar li{
+    padding: 10px;
+    margin-left: 10px;
+}
+span#burguer{
+    cursor: pointer;
+    display: none;
+}
+
 body{
     background-color: var(--cor4);
     color: var(--cor-fonte);
     font-family: var(--fonte-padrao);
 }
-
 footer{
-    background-color: black;
+    background-color: var(--cor5);
     height: 15vh;
     display:flex;
     align-items: center;
@@ -43,4 +68,8 @@ footer p{
     text-align: center;
     font-family: var(--fonte-padrao);
     padding: 10px;
+    color: var(--cor-branco);
+}
+footer img{
+    width: 24px;
 }
