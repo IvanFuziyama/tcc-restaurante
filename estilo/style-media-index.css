@@ -45,21 +45,32 @@
         display: flex;
         flex-direction: column;
     }
-    div#sobreContainer{
-        flex-direction: column;
-        max-width: 220px;
-        height: 400px;
-    }
-    div#sobreContainer img{width: 70%;}
+    div#inicio h1{margin-bottom: 100px;}
+    div#sobreContainer{flex-direction: column;}
+    div#sobreContainer img{width: 100%;}
     div#sobreBox{
         margin-bottom: 20px;
-        width: 300px;
+        width: 100%;
     }
     div#container-hora{display: block;}
-    /* section#mvv{
+    section#mvv{
         display: flex;
         flex-direction: column;
-    }  deixar em uma unica coluna*/
+    }
+    section#info{
+        display: flex;
+        flex-direction: column;
+    }
+    div.mvv-col1,
+    div.mvv-col2,
+    div.mvv-col3,
+    div.info-col1,
+    div.info-col2,
+    div.info-col3{
+    width: auto;
+    }
+    iframe{
+        width: 95%;
+    }
 }
 
-/* outras medias */
