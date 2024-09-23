@@ -33,6 +33,10 @@ header{
     background-color: var(--cor5);
     border-bottom: 1px solid var(--cor2);
 }
+span#burguer-nav{
+    display: none;
+    cursor: pointer;
+}
 nav a, header a{
     text-decoration: none;
     color: white;

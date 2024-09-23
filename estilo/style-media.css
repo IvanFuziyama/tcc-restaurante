@@ -3,6 +3,12 @@
     *{
         transition: 0.5s;
     }
+    span#burguer-nav{
+        display: block;
+    }
+    nav#itens-nav{
+        display: none;
+    }
     div#sobreContainer{
         flex-direction: column;
         max-width: 220px;

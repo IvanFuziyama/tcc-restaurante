@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="../estilo/style-index.css" media="all">
     <link rel="stylesheet" href="../estilo/style-media.css">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-    <script src="../scripts/menu.js"></script>
     <title>Yaki'n Box</title>
 </head>
 <!--"Baixar" os icons no google icons
@@ -14,7 +13,10 @@
 <body>
     <header>
         <a href="index.html">Logo</a>
-        <nav>
+        <span class="material-symbols-outlined" id="burguer-nav" onclick="clickMenu()">
+            menu
+            </span>
+        <nav id="itens-nav">
             <ul>
                 <li><a href="cardapio.html">Cardápio</a></li>
                 <li><a href="#link-sobre">Sobre</a></li>
@@ -150,7 +152,7 @@
         <a href="https://www.instagram.com/yakinbox1/" target="_blank"><img src="../imgs/logo-instagram.png" alt="Instagram"></a>
         <p>©Yaki'n Box 2024</p>
     </footer>
-
+    <script src="../scripts/menu.js"></script>
 </body> 
 
 </html>
