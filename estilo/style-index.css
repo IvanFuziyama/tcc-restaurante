@@ -190,7 +190,6 @@ div#sobreBox p{
 section#mvv{
     display: flex;
     justify-content: center;
-    text-align: center;
     padding: 10px;
 }
 div.mvv-col1,
@@ -201,8 +200,15 @@ div.mvv-col3{
 section#mvv h2{
     margin: 10px 0;
     color: var(--cor2);
+    text-align: center;
 }
-section#mvv p{margin: 10px 0 40px 0;}
+section#mvv p{
+    text-align: justify;
+    margin: 10px;
+}
+section#mvv li{
+    margin: 0 10px;
+}
 
 section#c3{
     display: flex;
