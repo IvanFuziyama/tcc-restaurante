@@ -95,17 +95,20 @@ div#pedido button{
     border-radius: 5px;
     border: none;
 }
-
-button#botao-retirada{
-    background-color: var(--cor2);
-}
-button#botao-delivery{
-    background-color: var(--cor1);
-}
 div#pedido a{
     text-decoration: none;
     color: var(--cor-branco);
 }
+div#pedido a{
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+}
+a#botao-retirada{background-color: var(--cor2);}
+a#botao-delivery{background-color: var(--cor1);}
 
 #icarrinho{
     background-color: var(--cor-branco);
@@ -134,7 +137,7 @@ article#cardapio a{
     font-size: 1.2em;  
     font-weight: 500; 
 }
-button#botao-cardapio{
+a#botao-cardapio{
     background-color: var(--cor4);
     border: none;
     border-radius: 4px;
@@ -235,7 +238,10 @@ div#contato input, textarea{
     padding: 5px;
 }
 div#contato input{width: 235px;}
-div#contato #enviar{width: 250px;}
+div#contato #enviar{
+    width: 250px;
+    cursor: pointer;
+}
 div textarea{resize: none;}
 
 section#info{
