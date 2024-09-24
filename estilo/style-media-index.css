@@ -46,7 +46,17 @@
         flex-direction: column;
     }
     div#inicio h1{margin-bottom: 100px;}
-    div#sobreContainer{flex-direction: column;}
+
+    div#sobreContainer{
+        flex-direction: column;
+        padding-inline: 0;
+        padding-block: 0;
+    }
+    div#sobreBox h2{padding: 10px;}
+    div#sobreBox p{
+        padding: 0 20px;
+        text-align: center;
+    }
     div#sobreContainer img{width: 100%;}
     div#sobreBox{
         margin-bottom: 20px;
@@ -69,8 +79,6 @@
     div.info-col3{
     width: auto;
     }
-    iframe{
-        width: 95%;
-    }
+    iframe#endereco-mapa{width: 95%;}
 }
 

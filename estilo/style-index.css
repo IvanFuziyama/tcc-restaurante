@@ -26,6 +26,7 @@ header{
     position: sticky;
     top: 0;
 }
+/* nav */
 nav#navbar{
     justify-content: space-between;
     display: flex;
@@ -51,6 +52,7 @@ span#burguer{
     display: none;
 }
 
+/* Início - título e o img de fundo */
 div#inicio{
     display: flex;
     justify-content: center;
@@ -66,6 +68,7 @@ div#inicio h1{
     color: var(--cor2);
 }
 
+/* Pedidos */
 article#c1{
     display: flex;
     justify-content: center;
@@ -98,7 +101,6 @@ div#pedido a{
 }
 a#botao-retirada{background-color: var(--cor2);}
 a#botao-delivery{background-color: var(--cor1);}
-
 #icarrinho{
     background-color: var(--cor-branco);
     border-radius: 50%;
@@ -108,6 +110,7 @@ a#botao-delivery{background-color: var(--cor1);}
     font-size: 40px;
 }
 
+/* Cardápio - subtítulo, img de fundo, e o botão para o cardápio */
 article#cardapio{
     display: flex;
     flex-direction: column;
@@ -139,6 +142,7 @@ article#cardapio h2{
     font-size: 8vw;
 }
 
+/* Sobre - texto de um lado e img do outro*/
 section#c2{
     display: flex;
     justify-content: center;
@@ -178,11 +182,12 @@ div#sobreBox p{
     font-size: 1.2em;
 }
 
+/* Missão, Visão e Valores */
 section#mvv{
     display: flex;
     justify-content: center;
     padding: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 60px;
 }
 section#mvv h2{
     margin: 10px 0;
@@ -202,6 +207,7 @@ div.mvv-col3{
     width: 400px;
 }
 
+/* Contato - formulário que manda no email */
 section#c3{
     display: flex;
     justify-content: center;
@@ -224,14 +230,15 @@ div#contato h2{
 div#contato input, textarea{
     margin-top: 10px;
     padding: 5px;
+    width: 235px;
 }
-div#contato input{width: 235px;}
 div#contato #enviar{
     width: 250px;
     cursor: pointer;
 }
 div textarea{resize: none;}
 
+/*  Endereço, Horário e Número do WhatsApp */
 section#info{
     display: flex;
     justify-content: center;
@@ -252,15 +259,19 @@ div.hora2{
     flex: 1; 
     padding: 5px; 
 }
+
+/* Mapa */
 section#mapa{
     background-color: #ffffff;
     flex-direction: column;
     text-align: center;
 }
-iframe{
+iframe#endereco-mapa{
     margin: 10px 0;
     width: 70%;
 }
+
+/* Rodapé */
 footer{
     background-color: var(--cor5);
     height: 15vh;
