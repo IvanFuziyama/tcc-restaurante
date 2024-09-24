@@ -29,6 +29,7 @@ body, html{
     height: 100%;
     width: 100%;
 }
+img#logo-yaki{width: 84px;}
 main#box{
     margin-top: 50px;
     text-align: center;

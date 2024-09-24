@@ -51,9 +51,7 @@ span#burguer{
     cursor: pointer;
     display: none;
 }
-img#logo-yaki{
-    width: 60px;
-}
+img#logo-yaki{width: 48px;}
 
 /* Início - título e o img de fundo */
 div#inicio{
@@ -300,7 +298,7 @@ footer img{
         transition: 0.5s;
     }
     div#logo{
-        text-align: center;
+        text-align: center; 
     }
     span#burguer{
         display: block;
