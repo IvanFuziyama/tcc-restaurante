@@ -5,6 +5,12 @@
     font-family: var(--fonte);
 }
 :root{
+    --azul-escuro: #2C3E50;
+    --azul-medio:#57687A;
+    --azul-claro: #919AA4;
+    --cinza-claro: #BDC3C7;
+
+    /* cores da pagina principal */
     --vermelho:#B31E22;
     --amarelo:#E99E1E;
     --marrom:#C0925E;
@@ -14,20 +20,30 @@
     --cor-preto: #000000;
     --fonte: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
-body{
+/* Usar paleta de cores diferetes */
+body, html{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: linear-gradient(to bottom, var(--amarelo), var(--marrom));
+    background-image: linear-gradient(to bottom, var(--azul-escuro), var(--azul-medio));
+    height: 100%;
+    width: 100%;
 }
 main#box{
-    margin-top: 100px;
+    margin-top: 50px;
     text-align: center;
-    background-color: rgb(184, 184, 184);
+    background-color: var(--cor-branco);
     padding: 50px;
-    border-radius: 5px;
+    border-radius: 2px;
 }
 input{margin: 10px 0;}
 input#botao-entrar{
     width: 100%;
+    background-color: var(--cinza-claro);
+    border-radius: 4px;
+    border: 0;
+    padding: 5px;
+    font-size: 1.2em;
+    font-weight: 600;
+    cursor: pointer;
 }
