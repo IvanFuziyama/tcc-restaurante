@@ -38,6 +38,10 @@ main#box{
     border-radius: 2px;
 }
 input{margin: 10px 0;}
+input#email,
+input#senha{
+    padding: 4px;
+}
 input#botao-entrar{
     width: 100%;
     background-color: var(--cinza-claro);
