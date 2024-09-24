@@ -377,7 +377,10 @@ footer img{
         padding: 0 20px;
         text-align: center;
     }
-    div#sobreContainer img{width: 100%;}
+    div#sobreContainer img{
+        width: 100%;
+        border-radius: 0;
+    }
     div#sobreBox{
         margin-bottom: 20px;
         width: 100%;
