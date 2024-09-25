@@ -7,7 +7,6 @@
     --preto1:#3A3A3A;
     --preto2:#272727;
     --cor-branco:#ffffff;
-    --cor-branco-medio:#dadada;
     --cor-preto: #000000;
     --fonte-padrao: "Actor",sans-serif;
     --fonte-titulo: "Josefin Sans", sans-serif; 
@@ -40,11 +39,27 @@ nav#navbar a{
     text-decoration: none;
     color: var(--cor-branco);
 }
-nav#navbar ul{
+menu#menu a{
+    position: relative;
+    transition: color 0.3s ease;
+}
+menu#menu a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--amarelo);
+    transition: width 0.3s ease;
+}
+menu#menu a:hover::after {width: 100%; }
+menu#menu a:hover {color: var(--amarelo);}
+menu#menu ul{
     list-style: none;
     display: flex;
 }
-nav#navbar li{
+menu#menu li{
     padding: 10px;
     margin-left: 10px;
 }
@@ -53,6 +68,7 @@ span#burguer{
     display: none;
 }
 img#logo-yaki{width: 48px;}
+img#logo-yaki:hover{filter: grayscale(40%);}
 
 /* Início - título e o img de fundo */
 div#inicio{
@@ -103,6 +119,11 @@ div#pedido a{
 }
 a#botao-retirada{background-color: var(--marrom);}
 a#botao-delivery{background-color: var(--vermelho);}
+a#botao-retirada:hover,
+a#botao-delivery:hover{
+    filter: opacity(70%);
+    transition: 0.5s;
+}
 #icarrinho{
     background-color: var(--cor-branco);
     border-radius: 50%;
@@ -254,7 +275,7 @@ div#contato #enviar{
     border-radius: 2px;
 }
 div#contato #enviar:hover{
-    background-color: var(--cor-branco-medio);
+    filter: opacity(70%);
     transform: 0.5s;
 }
 div textarea{resize: none;}
@@ -274,6 +295,12 @@ div.info-col1,
 div.info-col2,
 div.info-col3{
     width: 400px;
+}
+div.info-col3 img{
+    width: 30px;
+    background-color: var(--cor-preto);
+    margin-top: 10px;
+    border-radius: 10px;
 }
 div.hora1,
 div.hora2{
@@ -342,6 +369,10 @@ footer img{
         display: block;
         padding: 0;
     }
+    nav#navbar a::after {
+        width: 0; 
+        transition: none;}
+    nav#navbar a:hover::after {width: 0;}
     menu#menu{display: none;}
     menu#menu ul{list-style-type: none;}
     menu#menu a{

@@ -38,11 +38,27 @@ nav#navbar a{
     text-decoration: none;
     color: var(--cor-branco);
 }
-nav#navbar ul{
+menu#menu a{
+    position: relative;
+    transition: color 0.3s ease;
+}
+menu#menu a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--amarelo);
+    transition: width 0.3s ease;
+}
+menu#menu a:hover::after {width: 100%; }
+menu#menu a:hover {color: var(--amarelo);}
+menu#menu ul{
     list-style: none;
     display: flex;
 }
-nav#navbar li{
+menu#menu li{
     padding: 10px;
     margin-left: 10px;
 }
@@ -51,6 +67,7 @@ span#burguer{
     display: none;
 }
 img#logo-yaki{width: 48px;}
+img#logo-yaki:hover{filter: grayscale(40%);}
 
 body{
     background-color: var(--preto1);
@@ -106,6 +123,10 @@ footer img{
         display: block;
         padding: 0;
     }
+    nav#navbar a::after {
+        width: 0; 
+        transition: none;}
+    nav#navbar a:hover::after {width: 0;}
     menu#menu{display: none;}
     menu#menu ul{list-style-type: none;}
     menu#menu a{
