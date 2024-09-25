@@ -1,0 +1,23 @@
+@charset "UTF-8";
+*{
+    margin: 0;
+    padding: 0;
+}
+:root{
+    /*cores da pagina login*/
+    --azul-escuro: #2C3E50;
+    --azul-medio:#57687A;
+    --azul-claro: #919AA4;
+    --azul-box: #c7c7e9;
+    --cinza-claro: #BDC3C7;
+
+    /* cores da pagina principal */
+    --vermelho:#B31E22;
+    --amarelo:#E99E1E;
+    --marrom:#C0925E;
+    --preto1:#3A3A3A;
+    --preto2:#272727;
+    --cor-branco:#ffffff;
+    --cor-preto: #000000;
+    --fonte: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
