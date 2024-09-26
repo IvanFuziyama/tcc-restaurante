@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../estilo/style-cadastro.css">
+    <title>Cadastro</title>
+</head>
+<body>
+    <p>
+        <h1>Cadastrar administradores</h1>
+    </p>
+    <p>
+        <label for="email">Email: </label>
+        <input type="email" name="email" id="email" placeholder="Digite o email" required>
+    </p>
+    <p>
+        <label for="senha">Senha: </label>
+        <input type="password" name="senha" id="senha" placeholder="Digite a senha" required>
+    </p>
+    <p>
+        <label for="confirmar-senha">Confirmar a senha: </label>
+        <input type="password" name="confirmar-senha" id="confirmar-senha">
+    </p>
+    <p>
+        <input type="button" value="Cadastrar" onclick="Cadastrar()" id="botao-cadastro">
+    </p>
+    <script src="../scripts/cadastro.js"></script>
+</body>
+</html>
