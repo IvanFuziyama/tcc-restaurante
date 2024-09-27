@@ -26,7 +26,7 @@ body, html{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: linear-gradient(to bottom, var(--azul-escuro), var(--azul-medio));
+    background-image: linear-gradient(to bottom, var(--preto1), var(--preto2));
     height: 100%;
     width: 100%;
 }
@@ -34,16 +34,22 @@ img#logo-yaki{width: 84px;}
 main#box{
     margin-top: 50px;
     text-align: center;
-    background-color: var(--azul-box);
+    background-color: var(--cinza-claro);
     padding: 50px;
     border-radius: 5px;
 }
 input{margin: 10px 0;}
 input#email,
 input#senha{
+    border:none;
+    outline: none;
     padding: 4px;
+    border-radius: 4px;
 }
 input#botao-entrar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     background-color: var(--azul-medio);
     border-radius: 4px;
