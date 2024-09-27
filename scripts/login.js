@@ -8,6 +8,7 @@ async function Entrar() {
     const senha = document.querySelector('input#senha').value;
 
     if (email === "" || senha === "") {
+        alert('Insira as informações')
         console.log('Nada digitado');
         return;
     }

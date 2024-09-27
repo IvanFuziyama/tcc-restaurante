@@ -70,9 +70,34 @@ img#logo-yaki{width: 48px;}
 img#logo-yaki:hover{filter: grayscale(40%);}
 
 body{
-    background-color: var(--preto1);
+    background-color: var(--cor-branco);
     color: var(--cor-fonte);
     font-family: var(--fonte-padrao);
+}
+main#container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+main h1{
+    color: var(--cor-preto);
+    margin-top: 20px;
+}
+article.itensContainer{
+    display: flex;
+    flex-direction: row;
+    width: 904px;
+    margin-bottom: 60px;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 4rem;
+    padding-block: 2rem;
+    background-color: var(--marrom);
+}
+div.itens{
+  
 }
 footer{
     background-color: var(--preto2);
