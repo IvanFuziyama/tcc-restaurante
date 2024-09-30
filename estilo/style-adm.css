@@ -35,8 +35,7 @@ section#secao{
 }
 aside#barra-lateral{
     background-color: var(--cor-branco);
-    height: 100%;
-    width: 10vw;
+    width: 20vw;
     padding: 0 10px;
     margin-right: 10px;
     border-radius: 2px;
