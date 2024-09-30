@@ -34,3 +34,15 @@ async function Entrar() {
         alert('Senha incorreta.');
     }
 }
+function verSenha(){
+    const senhaTxt = document.querySelector('input#senha')
+    const senhaVer = document.querySelector('span#ver-senha')
+
+    if (senhaTxt.type === 'password') {
+        senhaTxt.type = 'text';
+        senhaVer.textContent = 'visibility_off'; // Muda o ícone para "olho fechado"
+    } else {
+        senhaTxt.type = 'password';
+        senhaVer.textContent = 'visibility'; // Muda o ícone para "olho aberto"
+    }
+}

@@ -7,9 +7,7 @@
 :root{
     --azul-escuro: #2C3E50;
     --azul-medio:#57687A;
-    --azul-claro: #919AA4;
-    --azul-box: #c7c7e9;
-    --cinza-claro: #BDC3C7;
+    --cor-box:#ffffffe8;
 
     /* cores da pagina principal */
     --vermelho:#B31E22;
@@ -30,28 +28,55 @@ body, html{
     height: 100%;
     width: 100%;
 }
-img#logo-yaki{width: 84px;}
 main#box{
+    width: 280px;
     margin-top: 50px;
     text-align: center;
-    background-color: var(--cinza-claro);
+    background-color: var(--cor-box);
     padding: 50px;
     border-radius: 5px;
 }
-input{margin: 10px 0;}
+img#logo-yaki{width: 84px;}
+main#box h1{margin: 10px;}
+main#box label{
+    display: flex;
+    margin-top: 10px;
+}
+input{margin:5px 0;}
 input#email,
 input#senha{
-    border:none;
-    outline: none;
-    padding: 4px;
-    border-radius: 4px;
+    border-radius: 40px;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    padding: 6px 40px;
+}
+div.input-text{
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+span#usu-email,
+span#usu-senha{
+    border-right: 1px solid var(--cor-preto);
+    padding-right: 5px; 
+}
+div.input-text span{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+div.input-text span:first-child {left: 10px;}
+div.input-text span:last-child {
+    right: 10px; 
+    cursor: pointer; 
 }
 input#botao-entrar{
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    background-color: var(--azul-medio);
+    background-color: var(--azul-escuro);
     border-radius: 4px;
     border: 0;
     padding: 5px;
@@ -59,8 +84,10 @@ input#botao-entrar{
     font-weight: 600;
     cursor: pointer;
     color: var(--cor-branco);
+    margin-right: 10px;
+    margin-top: 20px;
 }
 input#botao-entrar:hover{
-    background-color: var(--azul-claro);
+    background-color: var(--azul-medio);
     transition: 0.5s;
 }

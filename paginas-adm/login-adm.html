@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../estilo/style-login.css" media="all">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="shortcut icon" href="../imgs/logo.ico" type="image/x-icon">
     <title>Admin</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
@@ -15,18 +16,20 @@
     <main id="box">
         <img src="../imgs/logo-semfundo.png" alt="yaki" id="logo-yaki">
         <h1>Yaki'n Box</h1>
-        <hr>
-        <p>
-            <label for="email">E-mail: </label>
-            <input type="email" name="email" id="email" placeholder="Digite seu e-mail" required>
-        </p>
-        <p>
-            <label for="senha">Senha: </label>
-            <input type="password" name="senha" id="senha" placeholder="Digite sua senha" required>
-        </p>
-        <p>
+        <label for="email" class="">E-mail</label>
+        <div class="input-text">
+            <span class="material-symbols-outlined" id="usu-email">account_circle</span>
+            <input type="email" name="email" id="email" required>
+        </div>
+        <label for="senha">Senha</label>
+        <div class="input-text">
+            <span class="material-symbols-outlined" id="usu-senha">lock</span>
+            <input type="password" name="senha" id="senha" required>
+            <span class="material-symbols-outlined" id="ver-senha" onclick="verSenha()">visibility</span>
+        </div>
+        <div class="input-botao">
             <input type="button" value="Entrar" onclick="Entrar()" id="botao-entrar">
-        </p>
+        </div>
     </main>
 </body>
 
