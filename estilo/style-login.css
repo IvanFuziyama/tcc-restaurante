@@ -37,7 +37,11 @@ main#box{
     border-radius: 5px;
 }
 img#logo-yaki{width: 84px;}
-main#box h1{margin: 10px;}
+main#box hr{
+    margin: auto;
+    width: 40%;
+    border: 1px solid var(--cor-preto);
+}
 main#box label{
     display: flex;
     margin-top: 10px;
