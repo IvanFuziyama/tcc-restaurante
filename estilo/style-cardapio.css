@@ -82,7 +82,7 @@ main#container{
 }
 main h1{
     color: var(--cor-preto);
-    margin-top: 20px;
+    margin: 20px 0;
 }
 article.itensContainer{
     display: flex;
@@ -95,9 +95,6 @@ article.itensContainer{
     padding-inline: 4rem;
     padding-block: 2rem;
     background-color: var(--marrom);
-}
-div.itens{
-  
 }
 footer{
     background-color: var(--preto2);
@@ -115,6 +112,15 @@ img#logo-insta:hover,
 img#logo-whats:hover{
     background-color: var(--cor-preto);
     border-radius: 10px;
+}
+div.itens img{
+    width: 400px;
+    margin-top: 10px;
+    border-radius: 2px;
+}
+div.imgContainer{
+    display: flex;
+    justify-content: center;
 }
 footer p{
     text-align: center;

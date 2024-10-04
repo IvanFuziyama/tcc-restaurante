@@ -41,9 +41,9 @@ function verSenha(){
 
     if (senhaTxt.type === 'password') {
         senhaTxt.type = 'text';
-        senhaVer.textContent = 'visibility_off'; // Muda o ícone para "olho fechado"
+        senhaVer.textContent = 'visibility_off'; // olho fechado
     } else {
         senhaTxt.type = 'password';
-        senhaVer.textContent = 'visibility'; // Muda o ícone para "olho aberto"
+        senhaVer.textContent = 'visibility'; // olho aberto
     }
 }
