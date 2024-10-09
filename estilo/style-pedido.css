@@ -1,5 +1,123 @@
 @charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Actor&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+:root{
+    --vermelho:#B31E22;
+    --amarelo:#E99E1E;
+    --marrom:#C0925E;
+    --preto1:#3A3A3A;
+    --preto2:#272727;
+    --cor-branco:#ffffff;
+    --cor-preto: #000000;
+    --fonte-padrao: "Actor",sans-serif;
+    --fonte-titulo: "Josefin Sans", sans-serif; 
+}
 *{
     margin: 0;
     padding: 0;
+    transition: 0.5s;
+}
+
+body{
+    background-color: var(--preto2);
+    color: var(--cor-branco);
+    font-family: var(--fonte-padrao);
+}
+header{
+    position: sticky;
+    top: 0;
+}
+/* nav */
+nav#navbar{
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: var(--preto2);
+    border-bottom: 1px solid var(--amarelo);
+}
+nav#navbar a{
+    text-decoration: none;
+    color: var(--cor-branco);
+}
+menu#menu a{
+    position: relative;
+    transition: color 0.3s ease;
+}
+menu#menu a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--amarelo);
+    transition: width 0.3s ease;
+}
+menu#menu a:hover::after {width: 100%; }
+menu#menu a:hover {color: var(--amarelo);}
+menu#menu ul{
+    list-style: none;
+    display: flex;
+}
+menu#menu li{
+    padding: 10px;
+    margin-left: 10px;
+}
+span#burguer{
+    cursor: pointer;
+    display: none;
+}
+img#logo-yaki{width: 48px;}
+img#logo-yaki:hover{filter: grayscale(40%);}
+
+@media screen and (max-width:768px) {
+    *{
+        transition: 0.5s;
+    }
+    div#logo{
+        text-align: center; 
+    }
+    span#burguer{
+        display: block;
+        color: var(--cor-branco);
+        text-align: center;
+        padding: 8px;
+        cursor: pointer;
+    }
+    span#burguer:hover{
+        background-color: var(--preto1);
+        transition: 0.6s;
+    }
+    nav#navbar{
+        justify-content: center;
+        display: block;
+        padding: 0;
+    }
+    nav#navbar a::after {
+        width: 0; 
+        transition: none;}
+    nav#navbar a:hover::after {width: 0;}
+    menu#menu{display: none;}
+    menu#menu ul{list-style-type: none;}
+    menu#menu a{
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+        background-color: var(--preto1);
+        color: var(--cor-branco);
+        text-align: center;
+        border-top: 1px solid var(--cor-preto);
+    }
+    menu#menu a:hover{
+        background-color: var(--preto2);
+        transition: 0.6s;
+    }
+    nav#navbar li{
+        padding: 0;
+        margin-left: 0;
+    }
+    nav#navbar ul{
+        display: flex;
+        flex-direction: column;
+    }
 }
