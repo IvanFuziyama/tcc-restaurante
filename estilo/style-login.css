@@ -30,7 +30,6 @@ body, html{
 }
 main#box{
     width: 280px;
-    margin-top: 50px;
     text-align: center;
     background-color: var(--cor-box);
     padding: 50px;
@@ -74,6 +73,9 @@ div.input-text span:first-child {left: 10px;}
 div.input-text span:last-child {
     right: 10px; 
     cursor: pointer; 
+}
+p.msg-erro{
+    color: red;
 }
 input#botao-entrar{
     display: flex;

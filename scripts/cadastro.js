@@ -25,14 +25,12 @@ const firebaseConfig = {
 
     auth.createUserWithEmailAndPassword(email, senha)
     .then((userCredential) => {
-        // Sucesso ao criar usuário
         alert("Seus dados foram cadastrados com sucesso!");
         document.querySelector('input#email').value = '';
         document.querySelector('input#senha').value = '';
         document.querySelector('input#confirmar-senha').value = '';
     })
     .catch((error) => {
-        // Falha no cadastro
         alert("Falha ao cadastrar: " + error.message);
     });
 }

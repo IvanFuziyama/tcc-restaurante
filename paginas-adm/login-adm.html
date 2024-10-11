@@ -7,9 +7,10 @@
     <link rel="stylesheet" href="../estilo/style-login.css" media="all">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="shortcut icon" href="../imgs/logo.ico" type="image/x-icon">
-    <title>Login</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>   
     <script src="../scripts/login.js" defer></script>
+    <title>Login</title>
 </head>
 
 <body>
@@ -28,10 +29,10 @@
             <input type="password" name="senha" id="senha" required>
             <span class="material-symbols-outlined" id="ver-senha" onclick="verSenha()">visibility_off</span>
         </div>
+            <p class="msg-erro"></p>
         <div class="input-botao">
-            <input type="button" value="Entrar" onclick="Entrar()" id="botao-entrar">
+            <input type="button" value="Entrar" onclick="entrar()" id="botao-entrar">
         </div>
     </main>
 </body>
-
 </html>
