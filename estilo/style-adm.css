@@ -2,6 +2,7 @@
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 :root{
     /*cores da pagina login*/
@@ -22,5 +23,9 @@
 }
 body{
     background-color: var(--cinza);
+    display: flex;
+}
+nav#sidebar{
+    background-color: var(--cor-branco);
 }
 img#logo-yaki{width: 48px;}
