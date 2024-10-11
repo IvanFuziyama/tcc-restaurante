@@ -23,27 +23,4 @@
 body{
     background-color: var(--cinza);
 }
-nav#navbar{
-    background-color: var(--cor-branco);
-    padding: 6px;
-    border-bottom: 2px solid var(--cinza);
-}
 img#logo-yaki{width: 48px;}
-section#secao{
-    display: flex;
-    flex-direction: row;
-}
-aside#barra-lateral{
-    background-color: var(--cor-branco);
-    width: 20vw;
-    padding: 0 10px;
-    margin-right: 10px;
-    border-radius: 2px;
-    padding: 10px;
-}
-main#principio{
-    background-color: var(--cor-branco);
-    flex: 1;
-    border-radius: 2px;
-    padding: 10px;
-}
