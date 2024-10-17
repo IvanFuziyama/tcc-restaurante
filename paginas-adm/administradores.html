@@ -4,12 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../imgs/logo-semfundo.png" type="image/x-icon">
-    <link rel="stylesheet" href="../estilo/style-adm-inicio.css">
+    <link rel="stylesheet" href="../estilo/style-administradores.css">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
     <script src="../scripts/adm-sidebar.js" defer></script>
-    <script src="../scripts/auth-seguranca.js" defer></script>
+    <script type="module" src="../scripts/administradores.js" defer></script>
     <title>Administrador</title>
 </head>
 <body>
@@ -78,7 +76,18 @@
         </div>
     </nav>
     <main>
-        <h1>Página inicial</h1>
+        <h1>Lista de Administradores</h1>
+        <table id="adminTable">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="adminList">
+                <!-- Administradores aparecerão aqui -->
+            </tbody>
+        </table>
     </main>
 </body>
 </html>
