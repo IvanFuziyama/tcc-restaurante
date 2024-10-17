@@ -24,6 +24,7 @@ function entrar() {
 
     auth.signInWithEmailAndPassword(email, senha)
         .then((userCredential) => {
+            localStorage.setItem('userEmail', userCredential.user.email);
             window.location.href = "adm.html";
         })
         .catch((error) => {
