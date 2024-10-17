@@ -6,49 +6,59 @@
     <link rel="shortcut icon" href="../imgs/logo-semfundo.png" type="image/x-icon">
     <link rel="stylesheet" href="../estilo/style-adm.css">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script src="../scripts/adm-sidebar.js" defer></script>
     <title>Administrador</title>
 </head>
 <body>
     <nav id="sidebar">
-        <div id="sidebar-content">
+        <div id="sidebar_content">
             <div id="user">
                 <img src="../imgs/logo-semfundo.png" alt="yaki" id="logo-yaki">
                 <div id="infos">
-                    <p><span class="user-item" id="email">email</span></p>
-                    <p><span class="user-item" id="senha">senha</span></p>
+                    <span class="user_item" id="email">email</span>
                 </div>
             </div>
             <ul id="side_itens">
-                <li class="side-item">
+                <li class="side_item">
                     <a href="#">
-                        <p><span class="material-symbols-outlined">
+                        <span class="material-symbols-outlined">
                             admin_panel_settings
-                            </span>Cadastro de Administradores</p>
+                            </span>
+                            <span class="item_descricao">Cadastro de Administradores</span>
                     </a>
                 </li>
-                <li class="side-item">
+                <li class="side_item">
                     <a href="#">
-                        <p><span class="material-symbols-outlined">
-                            import_contacts
-                            </span>Cardápio</p>
-                    </a>
-                </li>
-                <li class="side-item">
-                    <a href="#">
-                        <p><span class="material-symbols-outlined">
+                        <span class="material-symbols-outlined">
                             view_compact_alt
-                            </span>Página Principal</p>
+                            </span>
+                            <span class="item_descricao">Administradores</span>
                     </a>
                 </li>
+                <li class="side_item">
+                    <a href="#">
+                        <span class="material-symbols-outlined">
+                            import_contacts
+                            </span>
+                            <span class="item_descricao">Cardápio</span>
+                    </a>
+                </li>
+                <li class="side_item">
+                    <a href="#">
+                        <span class="material-symbols-outlined">
+                            account_circle
+                            </span>
+                            <span class="item_descricao">Contato</span>
+                    </a>
+                </li>    
             </ul>
-            <button id="side-botao">
+            <button id="side_botao"><!--open_btn-->
                 <span class="material-symbols-outlined">
-                    chevron_right
-                    </span>
+                    chevron_right</span>
             </button>
         </div>
-        <div id="saida">
-            <button id="saida_botao">
+        <div id="saida"><!--logout-->
+            <button id="saida_botao"><!--logout_btn-->
                 <p><span class="material-symbols-outlined">
                         logout
                         </span>Sair
