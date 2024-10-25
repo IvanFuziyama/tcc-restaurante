@@ -4,19 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../estilo/style-login.css" media="all">
+    <link rel="stylesheet" href="../estilo/style-login-usuario.css" media="all">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="shortcut icon" href="../imgs/logo-semfundo.png" type="image/x-icon">
     <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script> 
-    <script src="../scripts/login.js" defer></script>
+    <script src="../scripts/login-usuario.js" defer></script>
     <title>Login</title>
 </head>
 
 <body>
     <main id="box">
         <img src="../imgs/logo-semfundo.png" alt="yaki" id="logo-yaki">
-        <h1>Yaki'n Box</h1>
+        <h1>Login</h1>
         <hr>
         <label for="email" class="">E-mail</label>
         <div class="input-text">
@@ -28,6 +28,9 @@
             <span class="material-symbols-outlined" id="usu-senha">lock</span>
             <input type="password" name="senha" id="senha" required>
             <span class="material-symbols-outlined" id="ver-senha" onclick="verSenha()">visibility_off</span>
+        </div>
+        <div class="input-botao">
+            <input type="button" value="Esqueceu a senha" onclick="esqueceu()" id="botao-esqueceu">
         </div>
             <p class="msg-erro"></p>
         <div class="input-botao">

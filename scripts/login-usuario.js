@@ -25,7 +25,7 @@ function entrar() {
     auth.signInWithEmailAndPassword(email, senha)
         .then((userCredential) => {
             localStorage.setItem('userEmail', userCredential.user.email);
-            window.location.href = "adm.html";
+            window.location.href = "index.html";
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -37,6 +37,9 @@ function entrar() {
 
             msgErro.innerHTML = "Erro ao fazer login. Tente novamente.";
         });
+}
+function esqueceu(){
+    //Fazer o esqueceu a senha do usuario
 }
   
 function verSenha(){
