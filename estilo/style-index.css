@@ -6,6 +6,7 @@
     --marrom:#C0925E;
     --preto1:#3A3A3A;
     --preto2:#272727;
+    --branco-botao: #ffffff;
     --cor-branco:#ffffff;
     --cor-preto: #000000;
     --fonte-padrao: "Actor",sans-serif;
@@ -66,6 +67,12 @@ menu#menu li{
 span#burguer{
     cursor: pointer;
     display: none;
+}
+a#login-usu{
+    
+}
+nav#navbar a#cadastro-usu{
+
 }
 img#logo-yaki{width: 48px;}
 img#logo-yaki:hover{filter: grayscale(40%);}
