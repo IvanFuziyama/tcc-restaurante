@@ -38,8 +38,22 @@ function entrar() {
             msgErro.innerHTML = "Erro ao fazer login. Tente novamente.";
         });
 }
-function esqueceu(){
-    //Fazer o esqueceu a senha do usuario
+function esqueceu() {
+    const email = document.querySelector('#email').value;
+    
+    if (!email) {
+        alert("Por favor, insira seu email para redefinir a senha.");
+        return;
+    }
+
+    auth.sendPasswordResetEmail(email)
+        .then(() => {
+            alert('Email de redefinição de senha enviado com sucesso!');
+        })
+        .catch((error) => {
+            console.error("Erro ao enviar email:", error.message);
+            alert("Erro ao enviar email de redefinição de senha. Verifique o email e tente novamente.");
+        });
 }
   
 function verSenha(){

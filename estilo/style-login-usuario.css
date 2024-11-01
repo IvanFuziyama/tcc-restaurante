@@ -34,6 +34,8 @@ main#box{
     background-color: var(--cor-box);
     padding: 50px;
     border-radius: 5px;
+    border-color: var(--amarelo);
+    border: 2px solid var(--amarelo);
 }
 img#logo-yaki{width: 84px;}
 main#box hr{
@@ -79,7 +81,7 @@ p.msg-erro{
 }
 input#botao-esqueceu{
     cursor: pointer;
-    color: var(--cor-preto);
+    color: var(--vermelho);
     display: flex;
     align-items: flex-start;
     border: none;

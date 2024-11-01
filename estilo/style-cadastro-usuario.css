@@ -34,6 +34,7 @@ main#box{
     background-color: var(--cor-box);
     padding: 50px;
     border-radius: 5px;
+    border: 2px solid var(--amarelo);
 }
 img#logo-yaki{width: 84px;}
 main#box hr{
