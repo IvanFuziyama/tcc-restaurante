@@ -68,12 +68,6 @@ span#burguer{
     cursor: pointer;
     display: none;
 }
-a#login-usu{
-    
-}
-nav#navbar a#cadastro-usu{
-
-}
 img#logo-yaki{width: 48px;}
 img#logo-yaki:hover{filter: grayscale(40%);}
 
