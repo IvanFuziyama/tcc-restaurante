@@ -64,3 +64,7 @@ function verSenhaConfirme(){
         senhaConfirmeVer.textContent = 'visibility_off'; // olho aberto
     }
 }
+
+function voltar(){
+    window.location.href = "index.html"
+}

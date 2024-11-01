@@ -36,6 +36,15 @@ main#box{
     border-radius: 5px;
     border-color: var(--amarelo);
     border: 2px solid var(--amarelo);
+    position: relative;
+}
+div#voltar {
+    position: absolute;
+    top: 10px; 
+    left: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer; 
 }
 img#logo-yaki{width: 84px;}
 main#box hr{

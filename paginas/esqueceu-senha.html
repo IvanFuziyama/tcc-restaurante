@@ -1,0 +1,34 @@
+    <!DOCTYPE html>
+    <html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../estilo/style-esqueceu-senha.css">
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+        <link rel="shortcut icon" href="../imgs/logo-semfundo.png" type="image/x-icon">
+        <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script> 
+        <script src="../scripts/esqueceu-senha.js" defer></script>
+        <title>Cadastro</title>
+    </head>
+    <body>
+        <main id="box">
+            <div id="voltar">
+                <span class="material-symbols-outlined" onclick="voltar()">
+                    arrow_back
+                    </span>
+            </div>
+            <h1 id="titulo">Redefinir a senha</h1>
+            <hr>
+            <p id="texto">Digite seu e-mail de recuperação para redefinir a sua senha no serviço do seu email</p>
+            <label for="email">E-mail</label>
+            <div class="input-text">
+                <span class="material-symbols-outlined" id="usu-email">account_circle</span>
+                <input type="email" name="email" id="email" required>
+            </div>
+            <div class="input-botao">
+                <input type="button" value="Enviar" onclick="esqueceu()" id="botao-esqueceu">
+            </div>
+        </main>
+    </body>
+    </html>

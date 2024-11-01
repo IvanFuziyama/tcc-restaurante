@@ -19,7 +19,6 @@
     --cor-preto: #000000;
     --fonte: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
-/* Usar paleta de cores diferetes */
 body, html{
     display: flex;
     justify-content: center;
@@ -27,15 +26,6 @@ body, html{
     background-image: linear-gradient(to bottom, var(--preto1), var(--preto2));
     height: 100%;
     width: 100%;
-}
-main#box{
-    width: 280px;
-    text-align: center;
-    background-color: var(--cor-box);
-    padding: 50px;
-    border-radius: 5px;
-    border: 2px solid var(--amarelo);
-    position: relative;
 }
 div#voltar {
     position: absolute;
@@ -45,20 +35,35 @@ div#voltar {
     align-items: center;
     cursor: pointer; 
 }
+main#box{
+    width: 280px;
+    text-align: center;
+    background-color: var(--cor-box);
+    padding: 50px;
+    border-radius: 5px;
+    border-color: var(--amarelo);
+    border: 2px solid var(--amarelo);
+    position: relative;
+}
 img#logo-yaki{width: 84px;}
+h1#titulo{
+    margin-bottom: 10px;
+}
 main#box hr{
     margin: auto;
     width: 40%;
     border: 1px solid var(--cor-preto);
+    margin-bottom: 10px;
+}
+p#texto{
+    text-align: start;
 }
 main#box label{
     display: flex;
     margin-top: 10px;
 }
 input{margin:5px 0;}
-input#email,
-input#senha,
-input#confirmar-senha{
+input#email{
     border-radius: 40px;
     width: 100%;
     height: 100%;
@@ -70,8 +75,7 @@ div.input-text{
     align-items: center;
     position: relative;
 }
-span#usu-email,
-span#usu-senha{
+span#usu-email{
     border-right: 1px solid var(--cor-preto);
     padding-right: 5px; 
 }
@@ -85,18 +89,7 @@ div.input-text span:last-child {
     right: 10px; 
     cursor: pointer; 
 }
-p.msg-erro{
-    color: red;
-}
 input#botao-esqueceu{
-    cursor: pointer;
-    color: var(--cor-preto);
-    display: flex;
-    align-items: flex-start;
-    border: none;
-    text-decoration-line: underline;
-}
-input#botao-cadastrar{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -112,8 +105,7 @@ input#botao-cadastrar{
     margin-right: 10px;
     margin-top: 20px;
 }
-input#botao-cadastrar:hover{
+input#botao-esqueceu:hover{
     background-color: var(--azul-medio);
     transition: 0.5s;
 }
-
