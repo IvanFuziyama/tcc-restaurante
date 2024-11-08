@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="shortcut icon" href="../imgs/logo-semfundo.png" type="image/x-icon">
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
+    <link rel="stylesheet" href="../estilo/style-login-adm.css">
+    <title>Administrador</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <hr>
+    <label for="email" class="">E-mail</label>
+    <div class="input-text">
+        <span class="material-symbols-outlined" id="usu-email">account_circle</span>
+        <input type="email" name="email" id="email" required>
+    </div>
+    <label for="senha">Senha</label>
+    <div class="input-text">
+        <span class="material-symbols-outlined" id="usu-senha">lock</span>
+        <input type="password" name="senha" id="senha" required>
+        <span class="material-symbols-outlined" id="ver-senha" onclick="verSenha()">visibility_off</span>
+    </div>
+    <div class="input-botao">
+        <input type="button" value="Esqueceu a senha" onclick="esquecer()" id="botao-esqueceu">
+    </div>
+        <p class="msg-erro"></p>
+    <div class="input-botao">
+        <input type="button" value="Entrar" onclick="entrar()" id="botao-entrar">
+    </div>
+</main>
+</body>
+</html>

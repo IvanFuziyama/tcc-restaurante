@@ -1,4 +1,4 @@
-// Inicializar Firebase (importante configurar isso conforme seu firebaseConfig)
+
 const firebaseConfig = {
     apiKey: "AIzaSyCbgUdVBog-R0DmIZi0mG51_uuhDfnWj4c",
     authDomain: "yaki-bb90f.firebaseapp.com",
@@ -12,7 +12,6 @@ const firebaseConfig = {
 const app = firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
-// Listener para verificar o estado de autenticação
 // Verifica o estado de autenticação do Firebase
 auth.onAuthStateChanged((user) => {
     const loginUsu = document.getElementById("login-usu");
