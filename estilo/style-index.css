@@ -86,6 +86,9 @@ div#inicio h1{
     font-weight: bolder;
     color: var(--amarelo);
 }
+span#user-ativo{
+    display: none;/*quando estiver logado tira o login e cadastro e aparece o icone no lugar*/
+}
 
 /* Pedidos */
 article#c1{
