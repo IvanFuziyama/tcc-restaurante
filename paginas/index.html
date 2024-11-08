@@ -7,7 +7,11 @@
     <link rel="stylesheet" href="../estilo/style-index.css" media="all">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="shortcut icon" href="../imgs/logo-semfundo.png" type="image/x-icon">
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
+    <script src="../scripts/index.js" defer></script>
     <script src="../scripts/menu.js" defer></script>
+
     <title>Yaki'n Box</title>
 </head>
 <!-- o "Baixar" os icons no google icons
@@ -34,11 +38,17 @@
                     <li><a href="pedido.html">Retirada</a></li>
                     <li><a href="https://www.ifood.com.br/delivery/atibaia-sp/yakin-box-jardim-alvinopolis/ae237a80-9fa8-4bc2-bec3-847cd60aae52?UTM_Medium=share"
                     target="_blank">Delivery</a></li>
-                    <li><a href="login-usuario.html" id="login-usu">Login</a></li>
-                    <li><a href="cadastro-usuario.html" id="cadastro-usu">Cadastro</a></li>
-                    <span class="material-symbols-outlined" id="user-ativo">
-                        account_circle
-                    </span>
+                    <li id="login-usu"><a href="login-usuario.html">Login</a></li>
+                    <li id="cadastro-usu"><a href="cadastro-usuario.html">Cadastro</a></li>
+                    
+                    <span class="material-symbols-outlined" id="user-ativo" onclick="abrirPerfil()">account_circle</span>
+                    <div id="user-perfil" style="display: none;">
+                        <ul>
+                            <li id="email-usuario"></li>
+                            <li><a href="perfil.html">Perfil</a></li>
+                            <li><a href="#" onclick="sair()">Sair</a></li>
+                        </ul>
+                    </div>
                 </ul>
                 </div>
             </menu>
