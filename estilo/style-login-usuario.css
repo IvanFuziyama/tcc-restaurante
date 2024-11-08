@@ -86,7 +86,7 @@ div.input-text span:last-child {
     cursor: pointer; 
 }
 p.msg-erro{
-    color: red;
+    color: var(--vermelho);
 }
 input#botao-esqueceu{
     cursor: pointer;
