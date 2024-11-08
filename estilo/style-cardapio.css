@@ -22,17 +22,12 @@ body{
     color: var(--cor-branco);
     font-family: var(--fonte-padrao);
 }
-header{
-    position: sticky;
-    top: 0;
-}
 nav#navbar{
     justify-content: space-between;
     display: flex;
     align-items: center;
     padding: 10px;
     background-color: var(--preto2);
-    border-bottom: 1px solid var(--amarelo);
 }
 nav#navbar a{
     text-decoration: none;
