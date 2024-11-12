@@ -108,3 +108,8 @@ input#botao-esqueceu:hover{
     background-color: var(--azul-medio);
     transition: 0.5s;
 }
+div#mensagem {
+    font-size: 16px;
+    margin-top: 10px;
+    font-weight: bold;
+}

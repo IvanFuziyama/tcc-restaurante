@@ -14,19 +14,22 @@ const auth = firebase.auth();
 
 function esqueceu() {
     const email = document.querySelector('#email').value;
+    const mensagem = document.getElementById("mensagem");
     
     if (!email) {
-        alert("Por favor, insira seu email para redefinir a senha.");
+        mensagem.textContent = ("Por favor, insira seu email para redefinir a senha.");
         return;
     }
 
     auth.sendPasswordResetEmail(email)
         .then(() => {
-            alert('Email de redefinição de senha enviado com sucesso!');
+            mensagem.textContent = ('Email de redefinição de senha enviado com sucesso!');
+            mensagem.style.color = "green";
         })
         .catch((error) => {
             console.error("Erro ao enviar email:", error.message);
-            alert("Erro ao enviar email de redefinição de senha. Verifique o email e tente novamente.");
+            mensagem.textContent = ("Erro ao enviar email de redefinição de senha. Verifique o email e tente novamente.");
+            mensagem.style.color = "red";
         });
 }
 

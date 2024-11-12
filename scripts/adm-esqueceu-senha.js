@@ -15,26 +15,29 @@ const adminEmail = "ivanseiji21@gmail.com";
 
 function esqueceu() {
     const email = document.getElementById("email").value;
+    const mensagem = document.getElementById("mensagem");
 
     if (!email) {
-        alert("Por favor, insira o email do administrador.");
+        mensagem.textContent = ("Por favor, insira o email do administrador.");
+        mensagem.style.color = "red"
         return;
     }
 
-    // Verifica se o email digitado corresponde ao email autorizado
     if (email !== adminEmail) {
-        alert("Esse email não está autorizado para redefinição de senha.");
+        mensagem.textContent = ("Esse email não está autorizado para redefinição de senha.");
+        mensagem.style.color = "red"
         return;
     }
 
-    // Envia o email de redefinição caso o email seja autorizado
     firebase.auth().sendPasswordResetEmail(email)
         .then(() => {
-            alert("Um email de redefinição de senha foi enviado para " + email);
+            mensagem.textContent = ("Um email de redefinição de senha foi enviado");
+            mensagem.style.color = "green"
         })
         .catch((error) => {
             console.error("Erro ao enviar email de redefinição:", error);
-            alert("Não foi possível enviar o email de redefinição. Verifique o email e tente novamente.");
+            mensagem.textContent = ("Não foi possível enviar o email de redefinição. Verifique o email e tente novamente.");
+            mensagem.style.color = "red"
         });
 }
 
