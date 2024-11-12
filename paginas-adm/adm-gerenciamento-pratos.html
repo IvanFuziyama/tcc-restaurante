@@ -4,14 +4,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../imgs/logo-semfundo.png" type="image/x-icon">
     <link rel="stylesheet" href="../estilo/style-adm-gerenciamento-prato.css">
-    <title>Gerenciamento de Pratos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
-    <script type="module" src="../scripts/exibir-pratos.js" defer></script>
+    <script src="../scripts/exibir-pratos.js"></script>
+    <title>Gerenciamento de Pratos</title>
 </head>
 <body>
+    <nav id="navbar">
+        <div id="voltar">
+            <span class="material-symbols-outlined" onclick="voltar()">
+                arrow_back
+                </span>
+        </div>
+    </nav>
     <main>
         <h1>Lista de Pratos</h1>
+<div id="formulario-edicao" style="display: none;">
+    <h2>Editar Prato</h2>
+    <form id="form-edit-prato">
+        <label for="edit-nome">Nome do Prato:</label>
+        <input type="text" id="edit-nome" required>
+        
+        <label for="edit-descricao">Descrição:</label>
+        <input type="text" id="edit-descricao" required>
+        
+        <label for="edit-valor">Valor:</label>
+        <input type="number" id="edit-valor" step="0.01" required>
+        
+        <label for="edit-disponibilidade">Disponibilidade:</label>
+        <select id="edit-disponibilidade" required>
+            <option value="Disponível">Disponível</option>
+            <option value="Indisponível">Indisponível</option>
+        </select>
+        
+        <label for="edit-categoria">Categoria:</label>
+        <select id="edit-categoria" required>
+            <!-- As opções de categorias serão carregadas dinamicamente -->
+        </select>
+    
+        <!-- O campo de imagem já está bem posicionado e não precisa de alteração no HTML. -->
+        <!-- Adiciona o campo para nova imagem sem mostrar a imagem atual -->
+        <label for="edit-imagem">Imagem:</label>
+        <input type="file" id="edit-imagem" accept="image/*">
+
+        <!-- Pré-visualização da imagem, mas ela estará oculta. -->
+        <img id="imagem-preview" style="display:none; width: 100px; height: auto; margin-top: 10px;" alt="Imagem atual">
+
+    
+        <button type="submit">Salvar Alterações</button>
+        <button type="button" onclick="cancelarEdicao()">Cancelar</button>
+    </form>
+    
+</div>
         <div id="lista-pratos">
             <!-- Os pratos serão exibidos aqui -->
         </div>

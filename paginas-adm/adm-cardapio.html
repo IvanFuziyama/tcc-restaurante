@@ -96,11 +96,34 @@
                 <select name="categoria" id="categoria" required>
                     <!-- As categorias serão carregadas aqui -->
                 </select>
-                
-            <div id="nova-categoria-div">
-                <label for="nova-categoria">Nova Categoria:</label>
-                <input type="text" name="nova-categoria" id="nova-categoria" placeholder="Digite a nova categoria">
-                <button type="button" id="salvar-categoria">Salvar Categoria</button>
+            </div>
+            <button type="button" id="gerenciar-categorias-btn">Gerenciar categorias</button>
+            <div id="modal-categorias" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <span id="fechar-modal" class="fechar">&times;</span>
+                    <h2>Gerenciar Categorias</h2>
+                    
+                    <div>
+                        <label for="nova-categoria">Nova Categoria:</label>
+                        <input type="text" id="nova-categoria" placeholder="Digite a nova categoria">
+                        <button type="button" id="salvar-categoria">Salvar Categoria</button>
+                    </div>
+                    
+                    <div>
+                        <h3>Categorias Existentes</h3>
+                        <ul id="categorias-lista">
+                            <!-- Categorias serão carregadas aqui -->
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <label for="remover-categoria">Remover Categoria:</label>
+                        <select id="remover-categoria">
+                            <option value="">Selecione uma Categoria</option>
+                        </select>
+                        <button type="button" id="remover-categoria-btn">Remover Categoria</button>
+                    </div>
+                </div>
             </div>
 
                 <button type="submit" id="salvar-prato">Salvar</button>

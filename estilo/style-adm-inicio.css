@@ -7,8 +7,8 @@
 }
 :root{
     /*cores da pagina login*/
-    --cor-fundo: #dfdfdf;
-    --cor-box:#f8f8f8e8;
+    --cinza: #dfdfdf;
+    --cor-fundo: #eeeeee;
 
     /* cores da pagina principal */
     --vermelho:#B31E22;
@@ -21,7 +21,7 @@
     --fonte: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 body{
-    background-color: var(--cor-box);
+    background-color: var(--cor-fundo);
     display: flex;
     min-height: -100vh;
     
@@ -69,7 +69,7 @@ li.side_item{
 }
 li.side_item:hover,
 button#saida_botao:hover{
-    background-color: var(--cor-fundo);
+    background-color: var(--cinza);
 }
 li.side_item a{
     text-decoration: none;
@@ -80,7 +80,7 @@ ul#side_itens .material-symbols-outlined{
     margin-right: 5px;
 }
 div#saida{
-    border-top: 1px solid var(--cor-fundo);
+    border-top: 1px solid var(--cinza);
     padding: 12px;
 }
 button#saida_botao{
