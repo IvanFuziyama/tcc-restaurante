@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="../estilo/style-adm-cardapio.css">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>    
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>   
     <script type="module" src="../scripts/adm-sidebar.js" defer></script>
     <script type="module" src="../scripts/cadastro-cardapio.js"></script>
     <title>Administrador</title>
@@ -57,24 +58,27 @@
     </nav>
 
     <main>
-        <h1>Cardápio</h1>
+        <div id="info-inicio">
+            <h1>Cardápio</h1>
+            <a href="../paginas-adm/adm-gerenciamento-pratos.html" id="acesso-pratos" target="_blank">Acessar todos os pratos</a>
+        </div>
         <form id="form-cardapio">
-            <div>
+            <div class="info">
                 <label for="nome">Nome do Prato:</label>
                 <input type="text" name="nome" id="nome" required>
             </div>
 
-            <div>
+            <div class="info">
                 <label for="descricao">Descrição:</label>
                 <input type="text" name="descricao" id="descricao" required>
             </div>
 
-            <div>
+            <div class="info">
                 <label for="valor">Valor:</label>
                 <input type="number" name="valor" id="valor" required>
             </div>
 
-            <div>
+            <div class="info">
                 <label for="disponibilidade">Disponibilidade:</label>
                 <select name="disponibilidade" id="disponibilidade">
                     <option value="disponivel">Disponível</option>
@@ -82,14 +86,14 @@
                 </select>
             </div>
 
-            <div>
+            <div class="info">
                 <label for="img">Imagem:</label>
                 <input type="file" name="img" id="img" accept="image/*" required>
             </div>
 
-            <div>
+            <div class="info">
                 <label for="categoria">Categoria:</label>
-                <select name="categoria" id="categoria">
+                <select name="categoria" id="categoria" required>
                     <!-- As categorias serão carregadas aqui -->
                 </select>
                 
@@ -99,9 +103,7 @@
                 <button type="button" id="salvar-categoria">Salvar Categoria</button>
             </div>
 
-            <div>
                 <button type="submit" id="salvar-prato">Salvar</button>
-            </div>
         </form>
     </main>
 </body>

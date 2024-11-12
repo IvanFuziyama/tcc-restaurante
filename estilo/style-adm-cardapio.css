@@ -16,6 +16,19 @@
 main {
     margin-left: 160px;
 }
+h1{
+    margin-right: 120px;
+}
+a#acesso-pratos{
+    color: var(--vermelho);
+    font-weight: bold;
+}
+
+a#acesso-pratos:hover{color: var(--botao-hover);}
+div#info-inicio{
+    display: flex;
+    align-items: center;
+}
 form#form-cardapio{
     display: flex;
     flex-direction: column;
@@ -32,6 +45,9 @@ form select {
     border: 1px solid var(--cor-fundo);
     width: 100%;
 }
+button#salvar-categoria{
+    margin-bottom: 10px;
+}
 form button#salvar-prato {
     background-color: var(--vermelho);
     color: white;
@@ -42,4 +58,4 @@ form button#salvar-prato {
     cursor: pointer;
 }
 form button#salvar-prato:hover {background-color: var(--botao-hover);}
-form div {margin-bottom: 12px;}
+div.info {margin-bottom: 10px;}

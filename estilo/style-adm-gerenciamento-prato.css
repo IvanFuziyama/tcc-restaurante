@@ -1,0 +1,39 @@
+@charset "UTF-8";
+*{
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+#lista-pratos {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.prato {
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.prato h2 {
+    color: #B31E22; /* Ajuste conforme a paleta do site */
+}
+
+.prato img {
+    display: block;
+    margin: 10px 0;
+    border-radius: 5px;
+}
