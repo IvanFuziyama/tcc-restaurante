@@ -10,6 +10,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>    
     <script type="module" src="../scripts/adm-sidebar.js" defer></script>
+    <script type="module" src="../scripts/cadastro-cardapio.js"></script>
     <title>Administrador</title>
 </head>
 <body>
@@ -84,6 +85,18 @@
             <div>
                 <label for="img">Imagem:</label>
                 <input type="file" name="img" id="img" accept="image/*" required>
+            </div>
+
+            <div>
+                <label for="categoria">Categoria:</label>
+                <select name="categoria" id="categoria">
+                    <!-- As categorias serão carregadas aqui -->
+                </select>
+                
+            <div id="nova-categoria-div">
+                <label for="nova-categoria">Nova Categoria:</label>
+                <input type="text" name="nova-categoria" id="nova-categoria" placeholder="Digite a nova categoria">
+                <button type="button" id="salvar-categoria">Salvar Categoria</button>
             </div>
 
             <div>

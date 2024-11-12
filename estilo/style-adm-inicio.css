@@ -24,10 +24,10 @@ body{
     background-color: var(--cor-box);
     display: flex;
     min-height: -100vh;
+    
 }
 main{
     padding: 20px;
-    position: fixed;
     z-index: 1;
     padding-left: 102px;
 }
@@ -38,7 +38,7 @@ nav#sidebar{
     justify-content: space-between;
     height: 100vh;
     border-radius: 0px 18px 18px 0;
-    position: relative;
+    position: fixed;
     transition: min-width 0.5s ease;
     min-width: 82px;
     z-index: 2;
