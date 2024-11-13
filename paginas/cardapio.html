@@ -6,11 +6,12 @@
     <link rel="stylesheet" href="../estilo/style-cardapio.css" media="all">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="shortcut icon" href="../imgs/logo-semfundo.png" type="image/x-icon">
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
     <script src="../scripts/menu.js" defer></script>
     <script src="../scripts/itens.js" defer></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+    <script src="../scripts/index.js" defer></script>
     <title>Cardápio</title>
-    <!-- Ter o id do ifood Yaki'n Box -->
 </head>
 <body onresize="mudouTamanho()">
     <header>
@@ -19,14 +20,26 @@
                 <a href="index.html"><img src="../imgs/logo-semfundo.png" alt="yaki" id="logo-yaki"></a>
             </div>
             <span id="burguer" class="material-symbols-outlined" onclick="clickMenu()">menu</span>
-                <menu id="menu">
-                    <ul>
-                        <li><a href="cardapio.html">Cardápio</a></li>
-                        <li><a href="index.html#link-sobre">Sobre</a></li>
-                        <li><a href="index.html#link-contato">Contato</a></li>
-                        <li><a href="pedido.html">Retirada</a></li>
-                        <li><a href="https://www.ifood.com.br/delivery/atibaia-sp/yakin-box-jardim-alvinopolis/ae237a80-9fa8-4bc2-bec3-847cd60aae52?UTM_Medium=share" target="_blank">Delivery</a></li>
-                    </ul>
+            <menu id="menu">
+                <ul>
+                    <li><a href="cardapio.html">Cardápio</a></li>
+                    <li><a href="#link-sobre">Sobre</a></li>
+                    <li><a href="#link-contato">Contato</a></li>
+                    <li><a href="pedido.html">Retirada</a></li>
+                    <li><a href="https://www.ifood.com.br/delivery/atibaia-sp/yakin-box-jardim-alvinopolis/ae237a80-9fa8-4bc2-bec3-847cd60aae52?UTM_Medium=share"
+                    target="_blank">Delivery</a></li>
+                    <li id="login-usu"><a href="login-usuario.html">Login</a></li>
+                    <li id="cadastro-usu"><a href="cadastro-usuario.html">Cadastro</a></li>
+                    
+                    <span class="material-symbols-outlined" id="user-ativo" onclick="abrirPerfil()">account_circle</span>
+                    <div id="user-perfil" style="display: none;">
+                        <ul>
+                            <li id="email-usuario"></li>
+                            <li><a href="perfil.html">Perfil</a></li>
+                            <li><a href="#" onclick="sair()">Sair</a></li>
+                        </ul>
+                    </div>
+                </ul>
                 </div>
             </menu>
         </nav>
@@ -35,25 +48,32 @@
         <h1>Cardápio</h1>
         <article class="itensContainer">
             <div class="itens">
-                <h2>Título</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure voluptatem nostrum voluptates odit ab cumque est dolorem commodi sunt fugiat ducimus repellat at, pariatur fugit? Sit iusto perspiciatis officia maxime?</p>
-                <p>R$0,00</p>
-                <div class="imgContainer">
-                    <img src="../imgs/comida2.jpg" alt="img">
-                </div>
+                <h2>Yakisoba vegetariano ( P )</h2>
+                <p>O Yakisoba Vegetariano (P) é uma deliciosa reinterpretação dos tradicionais Yakisobas. Este prato é composto por macarrão oriental meticulosamente cozido e frito, apresentando uma textura irresistível. Ele é enriquecido com um mix de legumes frescos, que incluem acelga, brócolis, couve-flor, repolho, cenoura e cebola, o que confere ao prato uma explosão de cores e sabores. Acrescentamos a essência da casa: um molho especial feito com legumes frescos e shoyu. Para finalizar, regamos com óleo de gergelim torrado, e coroamos com um mix de gergelim em grãos. Este prato é uma verdadeira celebração de sabores e texturas!</p>
+                <p>Valor R$45,42</p>
+                <button class="botao-adicionar">Adicionar</button>
+            </div>
+            <div class="imgContainer">
+                <img src="../imgs/yakisoba-vegetariano-1.jpeg" alt="Yakisoba Vegetariano">
             </div>
         </article>
         <article class="itensContainer">
             <div class="itens">
-                <h2>Título</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure voluptatem nostrum voluptates odit ab cumque est dolorem commodi sunt fugiat ducimus repellat at, pariatur fugit? Sit iusto perspiciatis officia maxime?</p>
-                <p>R$0,00</p>
-                <div class="imgContainer">
-                    <img src="../imgs/comida2.jpg" alt="img">
-                </div>
+                <h2>Yakisoba vegetariano ( M )</h2>
+                <p>Delicie-se com nosso Yakisoba Vegetariano (M), uma opção sublime da nossa categoria de Yakisobas Tradicionais! Este prato consiste em um macarrão cuidadosamente cozido e frito, misturado com uma variedade de legumes frescos, que inclui acelga, repolho, couve-flor, brócolis, cenoura e cebola, todos salteados em óleo de gergelim. Para intensificar ainda mais os sabores, adicionamos um irresistível molho especial caseiro, elaborado com legumes frescos e shoyu. A finalização fica por conta de um mix de gergelim em grãos, que adiciona um toque crocante e único ao prato. Uma verdadeira explosão de sabor e frescor!
+                    obs. Agora com mais brócolis e couve-flôr dispensando ter que colocar adicional.</p>
+                <p>Valor R$54,88</p>
+            </div>
+            <div class="imgContainer">
+                <img src="../imgs/yakisoba-vegetariano-1.jpeg" alt="Yakisoba Vegetariano">
             </div>
         </article>
     </main>
+    <div id="carrinho">
+        <span class="material-symbols-outlined">
+            shopping_cart
+            </span>
+    </div>
     <footer>
         <div id="logos">
             <a href="https://www.instagram.com/yakinbox1/" target="_blank"><img src="../imgs/logo-instagram.png" alt="Instagram" id="logo-insta"></a>
