@@ -66,6 +66,37 @@ span#burguer{
 }
 img#logo-yaki{width: 48px;}
 img#logo-yaki:hover{filter: grayscale(40%);}
+span#user-ativo{
+    position: relative;
+    top: 4px;
+    font-size: 30px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+div#user-perfil {
+    position: absolute;
+    top: 50px; /* Ajuste conforme necessário */
+    right: 10px;
+    background-color: var(--cor-branco);
+    border-radius: 5px;
+    z-index: 100;
+    padding: 10px;
+}
+div#user-perfil ul {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+div#user-perfil ul li {
+    padding: 5px 10px;
+}
+div#user-perfil ul li a {
+    text-decoration: none;
+    color: var(--preto2);
+}
+li#email-usuario{color: var(--amarelo);}
 
 /* Adicionando um estilo para centralizar o conteúdo */
 #login-container {

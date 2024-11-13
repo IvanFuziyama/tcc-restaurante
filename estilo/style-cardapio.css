@@ -27,59 +27,79 @@ body {
     line-height: 1.6;
 }
 
-header {
-    background-color: var(--preto2);
-    padding: 15px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-}
-
-nav#navbar {
-    display: flex;
+nav#navbar{
     justify-content: space-between;
-    align-items: center;
-}
-
-#logo a {
     display: flex;
     align-items: center;
-}
+    padding: 10px;
+    background-color: var(--preto2);
 
-#logo img {
-    width: 48px;
-    height: auto;
 }
-
-#burguer {
-    cursor: pointer;
-    display: none;
-    font-size: 32px;
-    color: var(--cor-branco);
-}
-
-menu#menu {
-    display: flex;
-}
-
-menu#menu ul {
-    display: flex;
-    list-style: none;
-    padding: 0;
-}
-
-menu#menu li {
-    margin-left: 20px;
-}
-
-menu#menu a {
+nav#navbar a{
     text-decoration: none;
     color: var(--cor-branco);
-    font-weight: 500;
+}
+menu#menu a{
+    position: relative;
     transition: color 0.3s ease;
 }
-
-menu#menu a:hover {
-    color: var(--amarelo);
+menu#menu a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--amarelo);
+    transition: width 0.3s ease;
 }
+menu#menu a:hover::after {width: 100%; }
+menu#menu a:hover {color: var(--amarelo);}
+menu#menu ul{
+    list-style: none;
+    display: flex;
+}
+menu#menu li{
+    padding: 10px;
+    margin-left: 10px;
+}
+span#burguer{
+    cursor: pointer;
+    display: none;
+}
+img#logo-yaki{width: 48px;}
+img#logo-yaki:hover{filter: grayscale(40%);}
+span#user-ativo{
+    position: relative;
+    top: 4px;
+    font-size: 30px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+div#user-perfil {
+    position: absolute;
+    top: 50px; /* Ajuste conforme necessário */
+    right: 10px;
+    background-color: var(--cor-branco);
+    border-radius: 5px;
+    z-index: 100;
+    padding: 10px;
+}
+div#user-perfil ul {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+div#user-perfil ul li {
+    padding: 5px 10px;
+}
+div#user-perfil ul li a {
+    text-decoration: none;
+    color: var(--preto2);
+}
+li#email-usuario{color: var(--amarelo);}
 
 main#container {
     display: flex;
