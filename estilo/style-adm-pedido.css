@@ -7,11 +7,12 @@
     font-family: var(--fonte);
 }
 
-body {
+main{
     background-color: var(--cor-fundo);
     min-height: 100vh;
     flex-direction: column;
     text-align: center; /* Centraliza o texto dentro do body */
+    margin: auto;
 }
 
 h1 {
