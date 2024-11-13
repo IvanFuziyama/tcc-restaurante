@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../estilo/style-pedido.css">
+    <link rel="stylesheet" href="../estilo/style-apagar.css">
     <link rel="shortcut icon" href="../imgs/logo-semfundo.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
@@ -27,39 +27,44 @@
                     <li><a href="#link-contato">Contato</a></li>
                     <li><a href="pedido.html">Retirada</a></li>
                     <li><a href="https://www.ifood.com.br/delivery/atibaia-sp/yakin-box-jardim-alvinopolis/ae237a80-9fa8-4bc2-bec3-847cd60aae52?UTM_Medium=share"
-                    target="_blank">Delivery</a></li>
-                    <li id="login-usu"><a href="login-usuario.html">Login</a></li>
-                    <li id="cadastro-usu"><a href="cadastro-usuario.html">Cadastro</a></li>
+                    target="_blank">Delivery</a></li>   
                     
-                    <!-- <span class="material-symbols-outlined" id="user-ativo" onclick="abrirPerfil()">account_circle</span>
+                    <span class="material-symbols-outlined" id="user-ativo" onclick="abrirPerfil()">account_circle</span>
                     <div id="user-perfil" style="display: none;">
                         <ul>
                             <li id="email-usuario"></li>
                             <li><a href="perfil.html">Perfil</a></li>
                             <li><a href="#" onclick="sair()">Sair</a></li>
                         </ul>
-                    </div> -->
+                    </div>
                 </ul>
                 </div>
             </menu>
         </nav>
     </header>
     <main id="pedido">
-        <div id="login-container">
-            <!-- Se o usuário estiver logado, exibimos os pedidos; caso contrário, mostramos o botão de login -->
-            <div id="conteudo-pedido">
-                <h2>Faça o Login para fazer e ver os seus pedidos para retirar</h2>
-                <button id="botao-login" onclick="fazerLogin()">Login</button>
+      
+        <h2>Meus Pedidos</h2>
+        <div id="box-pedidos">
+            <div class="pedido-item">
+                <div class="nome-prato">Yakisoba de frango c/bacon (P)</div>
+                <div class="valor-prato">R$ 53,10</div>
             </div>
-            <!-- Se o usuário estiver logado, mostraremos os pedidos -->
-            <div id="pedidos-container" style="display: none;">
-                <h2>Seus Pedidos</h2>
-                <div id="pedidos-lista">
-                    <!-- Aqui serão listados os pedidos -->
-                </div>
-                <button id="confirmar-pedido" onclick="confirmarPedido()">Confirmar Pedido</button>
+            <div class="pedido-item">
+                <div class="nome-prato">Macarrão oriental Carne (M)</div>
+                <div class="valor-prato">R$ 59,98</div>
             </div>
-        </div>
+
+            <!-- Total do pedido -->
+            <div id="total-container">
+                <div>Total</div>
+                <div>R$ 73,50</div>
+            </div>
+
+            <!-- Botão de confirmar pedido -->
+            <button id="botao-confirmar" onclick="confirmarPedido()">Confirmar Pedido</button>
+</div>
+
     </main>
 </body>
 </html>

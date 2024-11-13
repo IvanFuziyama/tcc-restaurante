@@ -67,7 +67,15 @@ span#burguer{
 img#logo-yaki{width: 48px;}
 img#logo-yaki:hover{filter: grayscale(40%);}
 
-/* Adicionando um estilo para centralizar o conteúdo */
+main#pedido {
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* Isso vai centralizar horizontalmente */
+    justify-content: center; /* Isso vai centralizar verticalmente */
+    text-align: center; /* Garante que o texto dentro do h2 esteja centralizado */
+    margin-top: 50px;
+}
+
 #login-container {
     display: flex;
     justify-content: center;
@@ -109,6 +117,95 @@ img#logo-yaki:hover{filter: grayscale(40%);}
     color: var(--cor-branco);
     transition: background-color 0.3s ease;
 }
+span#user-ativo{
+    position: relative;
+    top: 4px;
+    font-size: 30px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+div#user-perfil {
+    position: absolute;
+    top: 50px; /* Ajuste conforme necessário */
+    right: 10px;
+    background-color: var(--cor-branco);
+    border-radius: 5px;
+    z-index: 100;
+    padding: 10px;
+}
+div#user-perfil ul {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+div#user-perfil ul li {
+    padding: 5px 10px;
+}
+div#user-perfil ul li a {
+    text-decoration: none;
+    color: var(--preto2);
+}
+/* Estilo para o box de pedidos */
+#box-pedidos {
+    background-color: var(--preto2);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    max-width: 600px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pedido-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--preto1);
+}
+
+.pedido-item:last-child {
+    border-bottom: none;
+}
+
+.pedido-item .nome-prato {
+    font-size: 16px;
+}
+
+.pedido-item .valor-prato {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#total-container {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    padding-top: 10px;
+    font-weight: bold;
+}
+
+#botao-confirmar {
+    padding: 15px 30px;
+    background-color: var(--amarelo);
+    color: var(--preto1);
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    display: block;
+    margin-top: 20px;
+    width: 100%;
+}
+
+#botao-confirmar:hover {
+    background-color: var(--vermelho);
+    color: var(--cor-branco);
+    transition: background-color 0.3s ease;
+}
+
 @media screen and (max-width:768px) {
     *{
         transition: 0.5s;
