@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../estilo/style-adm-contato.css">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>    
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>  
     <script type="module" src="../scripts/adm-sidebar.js" defer></script>
     <script src="../scripts/adm-contato.js" defer></script>
     <title>Administrador</title>
@@ -68,39 +68,17 @@
         </div>
     </nav>
     <main>
+        <!-- Exemplo de mensagem -->
         <h1>Mensagens de Contato</h1>
-        <div class="mensagem">
-            <p><strong>Nome:</strong> João Silva</p>
-            <p><strong>Email:</strong> joao.silva@email.com</p>
-            <p><strong>Mensagem:</strong> Olá, gostaria de saber mais sobre o horário de funcionamento.</p>
-            <div class="resposta">
-                <textarea id="resposta1" placeholder="Digite sua resposta aqui..."></textarea>
-                <button onclick="alert('Resposta enviada para João Silva!')">Enviar Resposta</button>
-            </div>
+        <div id="contatos-container">
+            <!-- As mensagens serão listadas aqui -->
         </div>
     
-        <!-- Exemplo de mensagem 2 -->
-        <div class="mensagem">
-            <p><strong>Nome:</strong> Maria Oliveira</p>
-            <p><strong>Email:</strong> maria.oliveira@email.com</p>
-            <p><strong>Mensagem:</strong> Vocês têm opções vegetarianas no cardápio?</p>
-            <div class="resposta">
-                <label for="resposta2">Responder:</label>
-                <textarea id="resposta2" placeholder="Digite sua resposta aqui..."></textarea>
-                <button onclick="alert('Resposta enviada para Maria Oliveira!')">Enviar Resposta</button>
-            </div>
+        <div id="resposta-form" style="display: none;">
+            <h2>Responder ao Contato</h2>
+            <textarea id="resposta" placeholder="Digite sua resposta..." required></textarea>
+            <button type="submit">Enviar Resposta</button>
         </div>
     
-        <!-- Exemplo de mensagem 3 -->
-        <div class="mensagem">
-            <p><strong>Nome:</strong> Pedro Santos</p>
-            <p><strong>Email:</strong> pedro.santos@email.com</p>
-            <p><strong>Mensagem:</strong> Qual é o prazo de entrega para pedidos de entrega?</p>
-            <div class="resposta">
-                <label for="resposta3">Responder:</label>
-                <textarea id="resposta3" placeholder="Digite sua resposta aqui..."></textarea>
-                <button onclick="alert('Resposta enviada para Pedro Santos!')">Enviar Resposta</button>
-            </div>
-        </div>
     </body>
     </html>

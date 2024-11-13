@@ -1,55 +1,72 @@
-// Configurações Firebase e inicialização
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-app.js';
+import { getFirestore, collection, addDoc, getDocs, query, orderBy, serverTimestamp } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js';
+
 const firebaseConfig = {
     apiKey: "AIzaSyCbgUdVBog-R0DmIZi0mG51_uuhDfnWj4c",
     authDomain: "yaki-bb90f.firebaseapp.com",
     projectId: "yaki-bb90f",
-    storageBucket: "yaki-bb90f.appspot.com",
+    storageBucket: "yaki-bb90f.firebasestorage.app",
     messagingSenderId: "1025023938370",
     appId: "1:1025023938370:web:de4f3190bd0d76d36102db",
     measurementId: "G-Y3NNNQ1004"
 };
 
+// Firebase já configurado no seu projeto
 const db = firebase.firestore();
+const contatosContainer = document.getElementById('contatos-container');
 
-// Função para carregar mensagens de contato
-async function carregarMensagens() {
-    const mensagensContainer = document.getElementById('mensagens-container');
-    mensagensContainer.innerHTML = ''; // Limpa o conteúdo atual
-
-    const mensagensSnapshot = await db.collection('mensagens').get();
-    mensagensSnapshot.forEach(doc => {
-        const dados = doc.data();
+// Função para buscar os contatos do Firestore
+async function listarContatos() {
+    const contatosSnapshot = await db.collection('contatos').orderBy('timestamp', 'desc').get();
+    
+    contatosSnapshot.forEach((doc) => {
+        const contatoData = doc.data();
+        const contatoDiv = document.createElement('div');
+        contatoDiv.classList.add('contato');
         
-        const mensagemDiv = document.createElement('div');
-        mensagemDiv.classList.add('mensagem');
-
-        mensagemDiv.innerHTML = `
-            <p><strong>Nome:</strong> ${dados.nome}</p>
-            <p><strong>Email:</strong> ${dados.email}</p>
-            <p><strong>Mensagem:</strong> ${dados.mensagem}</p>
-            <textarea placeholder="Responder..."></textarea>
-            <button class="enviar-resposta" data-id="${doc.id}">Enviar Resposta</button>
+        contatoDiv.innerHTML = `
+            <p><strong>Nome:</strong> ${contatoData.nome}</p>
+            <p><strong>E-mail:</strong> ${contatoData.email}</p>
+            <p><strong>Mensagem:</strong> ${contatoData.mensagem}</p>
+            <button onclick="responderMensagem('${doc.id}')">Responder</button>
         `;
         
-        mensagensContainer.appendChild(mensagemDiv);
+        contatosContainer.appendChild(contatoDiv);
     });
 }
 
-// Função para enviar a resposta
-document.addEventListener('click', async (event) => {
-    if (event.target.classList.contains('enviar-resposta')) {
-        const docId = event.target.getAttribute('data-id');
-        const resposta = event.target.previousElementSibling.value;
+// Função para mostrar o formulário de resposta
+function responderMensagem(contatoId) {
+    const respostaForm = document.getElementById('resposta-form');
+    respostaForm.style.display = 'block';  // Exibe o formulário de resposta
+    
+    // Configura o campo para enviar a resposta ao contato
+    respostaForm.onsubmit = (event) => {
+        event.preventDefault();
+        const resposta = document.getElementById('resposta').value;
+        enviarResposta(contatoId, resposta);
+    };
+}
 
-        if (resposta.trim()) {
-            await db.collection('mensagens').doc(docId).update({ resposta });
-            alert('Resposta enviada com sucesso!');
-            carregarMensagens(); // Recarrega para mostrar a resposta
-        } else {
-            alert('Por favor, escreva uma resposta.');
-        }
+// Função para enviar a resposta ao Firestore
+async function enviarResposta(contatoId, resposta) {
+    try {
+        // Adiciona a resposta ao Firestore
+        await db.collection('respostas').add({
+            contatoId: contatoId,
+            resposta: resposta,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        });
+        alert('Resposta enviada com sucesso!');
+        
+        // Oculta o formulário de resposta e limpa o campo
+        document.getElementById('resposta').value = '';
+        document.getElementById('resposta-form').style.display = 'none';
+    } catch (error) {
+        console.error("Erro ao enviar resposta: ", error);
+        alert('Erro ao enviar a resposta. Tente novamente.');
     }
-});
+}
 
-// Carregar as mensagens ao iniciar a página
-document.addEventListener('DOMContentLoaded', carregarMensagens);
+// Chama a função para listar os contatos quando a página carregar
+listarContatos();

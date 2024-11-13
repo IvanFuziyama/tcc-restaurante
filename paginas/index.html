@@ -7,11 +7,12 @@
     <link rel="stylesheet" href="../estilo/style-index.css" media="all">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="shortcut icon" href="../imgs/logo-semfundo.png" type="image/x-icon">
-    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
-    <script src="../scripts/index.js" defer></script>
+    <script src="../scripts/index.js" defer ></script>
     <script src="../scripts/menu.js" defer></script>
-
+    <script src="../scripts/contato.js" defer></script>
     <title>Yaki'n Box</title>
 </head>
 <!--
@@ -25,7 +26,6 @@
  • Fazer o cardápio integrado com a pagina do adm de cadastro de prato com a página do usuario (HOJE)
  • Adicionar um Model para quando clicar no icone -> perfil (HOJE)
  • Adicionar o campo nome no cadastro (HOJE)
- • Ver o cursinho do Anglo (HOJE)
     artigo:
  • Atualizar as funcionalidades
  • Atualizar o diagrama de casos de uso e o fluxo de processo
@@ -125,29 +125,11 @@
         <section id="c3">
             <div id="contato">
                 <h2>Contato</h2>
-                <form action="contato.php" method="post" autocomplete="on">
-                    <p>
-                        <label for="nome"></label>
-                        <input type="text" name="nome" id="nome" placeholder="Nome" required minlength="4"
-                            maxlength="30">
-                    </p>
-                    <!-- <p>
-                        <label for="tel"></label>
-                        <input type="tel" name="telefone" id="telefone" placeholder="Telefone: (xx)xxxxx-xxxx" required
-                            autocomplete="off" pattern="^\(\d{2}\)\d{4,5}-\d{4}$">
-                    </p> -->
-                    <p>
-                        <label for="email"></label>
-                        <input type="email" name="email" id="email" placeholder="E-mail:" required>
-                    </p>
-                    <p>
-                        <label for="msg"></label>
-                        <textarea name="msg" id="msg" cols="30" rows="10" placeholder="Digite uma sugestão ou dúvida..."
-                            required autocomplete="off"></textarea>
-                    </p>
-                    <p>
-                        <input type="submit" value="Enviar" id="enviar">
-                    </p>
+                <form id="form-contato">
+                    <p><input type="text" name="nome" id="nome" placeholder="Nome" required minlength="4" maxlength="30"></p>
+                    <p><input type="email" name="email" id="email" placeholder="E-mail:" required></p>
+                    <p><textarea name="msg" id="msg" cols="30" rows="10" placeholder="Digite uma sugestão ou dúvida..." required></textarea></p>
+                    <p><input type="submit" value="Enviar" id="enviar"></p>
                 </form>
             </div>
         </section>
