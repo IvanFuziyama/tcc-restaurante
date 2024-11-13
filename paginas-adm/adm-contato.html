@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../imgs/logo-semfundo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../estilo/style-adm-inicio.css">
+    <link rel="stylesheet" href="../estilo/style-adm-contato.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>    
+    <script type="module" src="../scripts/adm-sidebar.js" defer></script>
+    <script src="../scripts/adm-contato.js" defer></script>
+    <title>Administrador</title>
+</head>
+<body>
+    <nav id="sidebar">
+        <div id="sidebar_content">
+            <div id="user">
+                <img src="../imgs/logo-semfundo.png" alt="yaki" id="logo-yaki">
+            </div>
+            <ul id="side_itens">
+                <li class="side_item">
+                    <a href="adm.html">
+                        <span class="material-symbols-outlined">
+                            home
+                            </span>
+                            <span class="item_descricao">Página Inicial</span>
+                    </a>
+                </li>
+                <li class="side_item">
+                    <a href="adm-cardapio.html">
+                        <span class="material-symbols-outlined">
+                            import_contacts
+                            </span>
+                            <span class="item_descricao">Cardápio</span>
+                    </a>
+                </li>
+                <li class="side_item">
+                    <a href="adm-contato.html">
+                        <span class="material-symbols-outlined">
+                            account_circle
+                            </span>
+                            <span class="item_descricao">Contato</span>
+                    </a>
+                </li>
+                <li class="side_item">
+                    <a href="adm-pedido.html">
+                        <span class="material-symbols-outlined">
+                            list_alt
+                            </span>
+                            <span class="item_descricao">Pedido</span>
+                    </a>
+                </li>    
+            </ul>
+            <button id="side_botao">
+                <span class="material-symbols-outlined">
+                    chevron_right</span>
+            </button>
+        </div>
+        <div id="saida">
+            <button id="saida_botao">
+                <p><span class="material-symbols-outlined">
+                        logout
+                        </span>Sair
+                </p>
+            </button>
+        </div>
+    </nav>
+    <main>
+        <h1>Mensagens de Contato</h1>
+        <div class="mensagem">
+            <p><strong>Nome:</strong> João Silva</p>
+            <p><strong>Email:</strong> joao.silva@email.com</p>
+            <p><strong>Mensagem:</strong> Olá, gostaria de saber mais sobre o horário de funcionamento.</p>
+            <div class="resposta">
+                <textarea id="resposta1" placeholder="Digite sua resposta aqui..."></textarea>
+                <button onclick="alert('Resposta enviada para João Silva!')">Enviar Resposta</button>
+            </div>
+        </div>
+    
+        <!-- Exemplo de mensagem 2 -->
+        <div class="mensagem">
+            <p><strong>Nome:</strong> Maria Oliveira</p>
+            <p><strong>Email:</strong> maria.oliveira@email.com</p>
+            <p><strong>Mensagem:</strong> Vocês têm opções vegetarianas no cardápio?</p>
+            <div class="resposta">
+                <label for="resposta2">Responder:</label>
+                <textarea id="resposta2" placeholder="Digite sua resposta aqui..."></textarea>
+                <button onclick="alert('Resposta enviada para Maria Oliveira!')">Enviar Resposta</button>
+            </div>
+        </div>
+    
+        <!-- Exemplo de mensagem 3 -->
+        <div class="mensagem">
+            <p><strong>Nome:</strong> Pedro Santos</p>
+            <p><strong>Email:</strong> pedro.santos@email.com</p>
+            <p><strong>Mensagem:</strong> Qual é o prazo de entrega para pedidos de entrega?</p>
+            <div class="resposta">
+                <label for="resposta3">Responder:</label>
+                <textarea id="resposta3" placeholder="Digite sua resposta aqui..."></textarea>
+                <button onclick="alert('Resposta enviada para Pedro Santos!')">Enviar Resposta</button>
+            </div>
+        </div>
+    </body>
+    </html>

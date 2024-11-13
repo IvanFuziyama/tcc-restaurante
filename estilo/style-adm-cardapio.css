@@ -80,26 +80,42 @@ button#gerenciar-categorias-btn{
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4); /* Cor de fundo com opacidade */
 }
-
 .modal-content {
-    background-color: #fefefe;
+    background-color: var(--cor-branco);
     margin: 15% auto;
     padding: 20px;
-    border: 1px solid #888;
+    border: 1px solid var(--cor-fundo);
     width: 80%;
     max-width: 400px;
 }
-
 .fechar {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
-
 .fechar:hover,
 .fechar:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+.modal-content button {
+    background-color: var(--vermelho); /* Cor do botão principal */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%; /* Botões com largura total */
+}
+.modal-content button:hover {
+    background-color: var(--botao-hover);
+}
+.modal-content input,
+.modal-content select {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
