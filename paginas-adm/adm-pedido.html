@@ -11,6 +11,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
     <script type="module" src="../scripts/adm-sidebar.js" defer></script>
     <script src="../scripts/adm-inicio.js" defer></script>
+    <script src="../scripts/adm-pedido.js"></script>
     <title>Administrador</title>
 </head>
 <body>
@@ -68,7 +69,93 @@
         </div>
     </nav>
     <main>
-            <h1>Pedidos</h1>
+        <h1>Pedidos</h1>
+        <div class="pedido-lista">
+            <!-- Pedido 1 -->
+            <div class="pedido-card">
+                <h3>Pedido #001</h3>
+                <p><strong>Cliente:</strong> João da Silva</p>
+                <p><strong>Itens:</strong> Yakisoba de frango c/bacon (P), Macarrão oriental Carne (M)</p>
+                <p><strong>Status:</strong> Em preparo</p>
+                <p><strong>Valor total:</strong> R$ 113,08</p>
+                <button class="btn-status">Alterar Status</button>
+            </div>
+
+            <!-- Pedido 2 -->
+            <div class="pedido-card">
+                <h3>Pedido #002</h3>
+                <p><strong>Cliente:</strong> Maria Oliveira</p>
+                <p><strong>Itens:</strong> Macarrão oriental Carne (G)</p>
+                <p><strong>Status:</strong> Pendente</p>
+                <p><strong>Valor total:</strong> R$ 70,19</p>
+                <button class="btn-status">Alterar Status</button>
+            </div>
+
+            <!-- Pedido 3 -->
+            <div class="pedido-card">
+                <h3>Pedido #003</h3>
+                <p><strong>Cliente:</strong> Carlos Pereira</p>
+                <p><strong>Itens:</strong> Macarrão oriental carne/bacon (M)</p>
+                <p><strong>Status:</strong> Concluído</p>
+                <p><strong>Valor total:</strong> R$ 62,65</p>
+                <button class="btn-status">Alterar Status</button>
+            </div>
+
+             <!-- Pedido 4 -->
+             <div class="pedido-card">
+                <h3>Pedido #004</h3>
+                <p><strong>Cliente:</strong> Thiago</p>
+                <p><strong>Itens:</strong> Yakisoba Misto (M)</p>
+                <p><strong>Status:</strong> Concluído</p>
+                <p><strong>Valor total:</strong> R$ 58,83</p>
+                <button class="btn-status">Alterar Status</button>
+            </div>
+
+            <div class="pedido-card">
+                <h3>Pedido #005</h3>
+                <p><strong>Cliente:</strong> Laura</p>
+                <p><strong>Itens:</strong> Yakisoba Vegetariano (G)</p>
+                <p><strong>Status:</strong> Pendente</p>
+                <p><strong>Valor total:</strong> R$ 63,99</p>
+                <button class="btn-status">Alterar Status</button>
+            </div>
+
+            <div class="pedido-card">
+                <h3>Pedido #006</h3>
+                <p><strong>Cliente:</strong> William</p>
+                <p><strong>Itens:</strong> Yakisoba vegetariano (M), Yakisoba de Carne bovina (M)</p>
+                <p><strong>Status:</strong> Concluído</p>
+                <p><strong>Valor total:</strong> R$ 115,72</p>
+                <button class="btn-status">Alterar Status</button>
+            </div>
+
+            <div class="pedido-card">
+                <h3>Pedido #007</h3>
+                <p><strong>Cliente:</strong> Thiago</p>
+                <p><strong>Itens:</strong> Yakisoba Misto (M)</p>
+                <p><strong>Status:</strong> Concluído</p>
+                <p><strong>Valor total:</strong> R$ 58,83</p>
+                <button class="btn-status">Alterar Status</button>
+            </div>
+
+            <div class="pedido-card">
+                <h3>Pedido #008</h3>
+                <p><strong>Cliente:</strong> Thiago</p>
+                <p><strong>Itens:</strong> Yakisoba da casa 1(M)(frango/bacon/queijo coalho)</p>
+                <p><strong>Status:</strong> Concluído</p>
+                <p><strong>Valor total:</strong> R$ 62,22</p>
+                <button class="btn-status">Alterar Status</button>
+            </div>
+
+            <div class="pedido-card">
+                <h3>Pedido #009</h3>
+                <p><strong>Cliente:</strong> Thiago</p>
+                <p><strong>Itens:</strong> Yakisoba Da Casa 3 (G)(frango/carne/bacon/queijo coalho)</p>
+                <p><strong>Status:</strong> Em preparo</p>
+                <p><strong>Valor total:</strong> R$ 82,90</p>
+                <button class="btn-status">Alterar Status</button>
+            </div>
+        </div>
     </main>
 </body>
 </html>
