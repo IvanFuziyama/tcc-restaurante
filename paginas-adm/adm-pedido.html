@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../imgs/logo-semfundo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../estilo/style-adm-inicio.css">
+    <link rel="stylesheet" href="../estilo/style-adm-pedido.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>    
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+    <script type="module" src="../scripts/adm-sidebar.js" defer></script>
+    <script src="../scripts/adm-inicio.js" defer></script>
+    <title>Administrador</title>
+</head>
+<body>
+    <nav id="sidebar">
+        <div id="sidebar_content">
+            <div id="user">
+                <img src="../imgs/logo-semfundo.png" alt="yaki" id="logo-yaki">
+            </div>
+            <ul id="side_itens">
+                <li class="side_item">
+                    <a href="adm.html">
+                        <span class="material-symbols-outlined">
+                            home
+                            </span>
+                            <span class="item_descricao">Página Inicial</span>
+                    </a>
+                </li>
+                <li class="side_item">
+                    <a href="adm-cardapio.html">
+                        <span class="material-symbols-outlined">
+                            import_contacts
+                            </span>
+                            <span class="item_descricao">Cardápio</span>
+                    </a>
+                </li>
+                <li class="side_item">
+                    <a href="adm-contato.html">
+                        <span class="material-symbols-outlined">
+                            account_circle
+                            </span>
+                            <span class="item_descricao">Contato</span>
+                    </a>
+                </li>
+                <li class="side_item">
+                    <a href="adm-pedido.html">
+                        <span class="material-symbols-outlined">
+                            list_alt
+                            </span>
+                            <span class="item_descricao">Pedido</span>
+                    </a>
+                </li>    
+            </ul>
+            <button id="side_botao">
+                <span class="material-symbols-outlined">
+                    chevron_right</span>
+            </button>
+        </div>
+        <div id="saida">
+            <button id="saida_botao">
+                <p><span class="material-symbols-outlined">
+                        logout
+                        </span>Sair
+                </p>
+            </button>
+        </div>
+    </nav>
+    <main>
+            <h1>Pedidos</h1>
+    </main>
+</body>
+</html>
