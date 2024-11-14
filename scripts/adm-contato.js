@@ -24,21 +24,26 @@ async function listarContatos() {
 }
 
 // Função para enviar a resposta ao Firestore
-async function enviarResposta(contatoId) {
-    const resposta = document.getElementById(`resposta-${contatoId}`).value;
+// Função para enviar a resposta do administrador para o e-mail do usuário
+async function enviarResposta(email, resposta) {
     try {
-        await db.collection('respostas').add({
-            contatoId: contatoId,
-            resposta: resposta,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        const response = await fetch('http://localhost:3000/enviar-resposta', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, resposta })
         });
-        alert('Resposta enviada com sucesso!');
-        document.getElementById(`resposta-${contatoId}`).value = ''; // Limpa o campo de resposta após enviar
+
+        if (response.ok) {
+            alert('Resposta enviada com sucesso!');
+        } else {
+            alert('Erro ao enviar a resposta.');
+        }
     } catch (error) {
-        console.error("Erro ao enviar resposta: ", error);
-        alert('Erro ao enviar a resposta. Tente novamente.');
+        console.error('Erro:', error);
+        alert('Erro ao enviar a resposta.');
     }
 }
+
 
 // Chama a função para listar os contatos quando a página carregar
 listarContatos();

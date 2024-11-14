@@ -78,7 +78,8 @@
         <div id="resposta-form" style="display: none;">
             <h2>Responder ao Contato</h2>
             <textarea id="resposta" placeholder="Digite sua resposta..." required></textarea>
-            <button type="submit">Enviar Resposta</button>
+            <button onclick="enviarResposta(document.getElementById('email-usuario').textContent, document.getElementById('resposta').value)">Enviar</button>
+        </div>
         </div>
         
     
