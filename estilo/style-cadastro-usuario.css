@@ -32,7 +32,7 @@ main#box{
     width: 280px;
     text-align: center;
     background-color: var(--cor-box);
-    padding: 50px;
+    padding: 40px;
     border-radius: 5px;
     border: 2px solid var(--amarelo);
     position: relative;
@@ -53,9 +53,9 @@ main#box hr{
 }
 main#box label{
     display: flex;
-    margin-top: 10px;
 }
 input{margin:5px 0;}
+input#nome,
 input#email,
 input#senha,
 input#confirmar-senha{
@@ -70,6 +70,7 @@ div.input-text{
     align-items: center;
     position: relative;
 }
+span#usu-nome,  
 span#usu-email,
 span#usu-senha{
     border-right: 1px solid var(--cor-preto);

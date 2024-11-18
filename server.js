@@ -10,8 +10,8 @@ app.use(express.json());
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'seu-email@gmail.com',
-        pass: 'sua-senha-app'
+        user: 'ivanseiji21@gmail.com',
+        pass: 'demh nuue clxc zvp'
     }
 });
 
@@ -35,6 +35,7 @@ app.post('/enviar-resposta', (req, res) => {
             res.status(200).send('E-mail enviado com sucesso!');
         }
     });
+    
 });
 
 app.listen(3000, () => {

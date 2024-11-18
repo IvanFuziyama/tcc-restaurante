@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../estilo/style-cadastro-usuario.css">
     <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script> 
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore-compat.js"></script>
     <script src="../scripts/cadastro-usuario.js" defer></script>
     <title>Cadastro</title>
 </head>
@@ -21,9 +22,14 @@
         <img src="../imgs/logo-semfundo.png" alt="yaki" id="logo-yaki">
         <h1>Cadastro</h1>
         <hr>
+        <label for="nome">Nome</label>
+        <div class="input-text">
+            <span class="material-symbols-outlined" id="usu-nome">account_circle</span>
+            <input type="text" name="nome" id="nome" required>
+        </div>
         <label for="email">E-mail</label>
         <div class="input-text">
-            <span class="material-symbols-outlined" id="usu-email">account_circle</span>
+            <span class="material-symbols-outlined" id="usu-email">mail</span>
             <input type="email" name="email" id="email" required>
         </div>
         <label for="senha">Senha</label>
