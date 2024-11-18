@@ -32,7 +32,7 @@ main#box{
     width: 280px;
     text-align: center;
     background-color: var(--cor-box);
-    padding: 50px;
+    padding: 40px;
     border-radius: 5px;
     border-color: var(--amarelo);
     border: 2px solid var(--amarelo);
@@ -54,7 +54,6 @@ main#box hr{
 }
 main#box label{
     display: flex;
-    margin-top: 10px;
 }
 input{margin:5px 0;}
 input#email,
