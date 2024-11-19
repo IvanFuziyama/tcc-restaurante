@@ -120,6 +120,7 @@ document.getElementById("form-perfil").addEventListener("submit", async (event) 
     }
 });
 
+
 // Função para sair da conta
 function sair() {
     auth.signOut()

@@ -46,7 +46,7 @@ function cadastrar() {
                 // Salvar no Firestore
                 db.collection('usuarios').doc(user.uid).set({
                     nome: nome,
-                    email: email,
+                    email: email,   
                 }).then(() => {
                     alert('Seus dados foram cadastrados com sucesso!');
                     // Limpar os campos
@@ -55,7 +55,7 @@ function cadastrar() {
                     document.querySelector('input#senha').value = '';
                     document.querySelector('input#confirmar-senha').value = '';
                     // Redirecionar para a página de login
-                    window.location.href = "login-usuario.html";
+                    window.location.href = "index.html";
                 }).catch((error) => {
                     msgErro.innerHTML = 'Erro ao salvar os dados no Firestore: ' + error.message;
                 });
