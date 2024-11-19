@@ -135,6 +135,7 @@ li#email-usuario{color: var(--amarelo);}
     border-radius: 5px 0 0 5px;
     color: var(--cor-branco);
     font-size: 16px;
+    background-color: var(--preto2);
 }
 .input-container {
     display: flex;

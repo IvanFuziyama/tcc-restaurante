@@ -23,13 +23,6 @@ function abrirPerfil() {
 function abrirModalPerfil() {
     const modal = document.getElementById("modal-perfil");
     modal.style.display = "block";
-
-    // Preencher os campos do modal com os dados do usuário atual
-    const user = firebase.auth().currentUser;
-    if (user) {
-        document.getElementById("nome-perfil").value = user.displayName || "";
-        document.getElementById("email-perfil").value = user.email || "";
-    }
 }
 
 // Função para fechar o modal
@@ -38,13 +31,45 @@ function fecharModal() {
     modal.style.display = "none";
 }
 
-// Função para salvar as alterações no perfil
+// Função para exibir as informações do usuário no modal
+firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+        document.getElementById("nome").value = user.displayName || "";
+        document.getElementById("email").value = user.email || "";
+    } 
+});
+
+// Função para habilitar edição nos campos de nome e email
+function habilitarEdicao(campo) {
+    const input = document.getElementById(campo);
+    input.disabled = false;
+    input.focus();
+}
+
+// Função para enviar email de redefinição de senha
+function redefinirSenha() {
+    const user = firebase.auth().currentUser;
+    if (user) {
+        auth.sendPasswordResetEmail(user.email)
+            .then(() => {
+                alert("Email para redefinição de senha enviado!");
+            })
+            .catch((error) => {
+                console.error("Erro ao enviar email de redefinição de senha:", error);
+                alert(`Erro: ${error.message}`);
+            });
+    } else {
+        alert("Nenhum usuário logado!");
+    }
+}
+
+
+// Função para salvar alterações no perfil
 document.getElementById("form-perfil").addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    const nome = document.getElementById("nome-perfil").value;
-    const email = document.getElementById("email-perfil").value;
-    const senha = document.getElementById("senha-perfil").value;
+    const nome = document.getElementById("nome").value.trim();
+    const email = document.getElementById("email").value.trim();
 
     if (!nome || !email) {
         alert("Por favor, preencha todos os campos.");
@@ -55,20 +80,37 @@ document.getElementById("form-perfil").addEventListener("submit", async (event) 
 
     if (user) {
         try {
-            if (nome) await user.updateProfile({ displayName: nome });
-            if (email && email !== user.email) await user.updateEmail(email);
-            if (senha) await user.updatePassword(senha);
+            // Atualizar nome no Firebase Authentication
+            if (nome !== user.displayName) {
+                await user.updateProfile({ displayName: nome });
+                console.log("Nome atualizado no Firebase Authentication.");
+            }
 
-            alert("Informações atualizadas com sucesso!");
+            // Atualizar email no Firebase Authentication
+            if (email !== user.email) {
+                await user.updateEmail(email);
+                console.log("Email atualizado no Firebase Authentication.");
+            }
+
+            // Atualizar dados no Firestore
+            const userDocRef = db.collection("usuarios").doc(user.uid);
+            await userDocRef.update({
+                nome: nome,
+                email: email
+            });
+            console.log("Nome e email atualizados no Firestore.");
+
+            alert("Perfil atualizado com sucesso!");
             fecharModal();
         } catch (error) {
-            console.error("Erro ao atualizar o perfil:", error.message);
-            alert(`Erro: ${error.message}`);
+            console.error("Erro ao atualizar o perfil:", error);
+            alert(`Erro ao atualizar perfil: ${error.message}`);
         }
     } else {
-        alert("Nenhum usuário logado. Faça login para atualizar o perfil.");
+        alert("Nenhum usuário logado.");
     }
 });
+
 
 // Função para sair da conta
 function sair() {
