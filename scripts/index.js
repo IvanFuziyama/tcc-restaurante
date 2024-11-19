@@ -86,10 +86,16 @@ document.getElementById("form-perfil").addEventListener("submit", async (event) 
                 console.log("Nome atualizado no Firebase Authentication.");
             }
 
-            // Atualizar email no Firebase Authentication
-            if (email !== user.email) {
+            // Verificar email antes de alterar
+            if (!user.emailVerified) {
+                alert("Por favor, verifique seu email antes de alterar o endereço.");
+                user.sendEmailVerification();
+                return;
+            }   
+
+            // Atualizar email
+            if (email && email !== user.email) {
                 await user.updateEmail(email);
-                console.log("Email atualizado no Firebase Authentication.");
             }
 
             // Atualizar dados no Firestore
