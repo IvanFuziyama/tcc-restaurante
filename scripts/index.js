@@ -8,14 +8,13 @@ const firebaseConfig = {
     appId: "1:1025023938370:web:de4f3190bd0d76d36102db",
     measurementId: "G-Y3NNNQ1004"
 };
-
+// Inicializar Firebase
 const app = firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
 // Função para abrir o menu de perfil ao clicar no ícone
 function abrirPerfil() {
     const perfilMenu = document.getElementById("user-perfil");
-    // Toggle para mostrar/esconder o menu de opções
     perfilMenu.style.display = (perfilMenu.style.display === "block") ? "none" : "block";
 }
 
@@ -32,23 +31,24 @@ function fecharModal() {
 }
 
 // Função para exibir as informações do usuário no modal
-firebase.auth().onAuthStateChanged((user) => {
+auth.onAuthStateChanged((user) => {
     if (user) {
         document.getElementById("nome").value = user.displayName || "";
         document.getElementById("email").value = user.email || "";
-    } 
+    }
 });
 
 // Função para habilitar edição nos campos de nome e email
 function habilitarEdicao(campo) {
     const input = document.getElementById(campo);
     input.disabled = false;
+    input.style.backgroundColor = "#272727";
     input.focus();
 }
 
 // Função para enviar email de redefinição de senha
 function redefinirSenha() {
-    const user = firebase.auth().currentUser;
+    const user = auth.currentUser;
     if (user) {
         auth.sendPasswordResetEmail(user.email)
             .then(() => {
@@ -63,7 +63,6 @@ function redefinirSenha() {
     }
 }
 
-
 // Função para salvar alterações no perfil
 document.getElementById("form-perfil").addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -76,7 +75,7 @@ document.getElementById("form-perfil").addEventListener("submit", async (event) 
         return;
     }
 
-    const user = firebase.auth().currentUser;
+    const user = auth.currentUser;
 
     if (user) {
         try {
@@ -86,23 +85,27 @@ document.getElementById("form-perfil").addEventListener("submit", async (event) 
                 console.log("Nome atualizado no Firebase Authentication.");
             }
 
-            // Verificar email antes de alterar
-            if (!user.emailVerified) {
-                alert("Por favor, verifique seu email antes de alterar o endereço.");
-                user.sendEmailVerification();
-                return;
-            }   
-
-            // Atualizar email
+            // Verificar se o email foi alterado
             if (email && email !== user.email) {
-                await user.updateEmail(email);
+                alert(
+                    "Para alterar seu email, precisamos verificar o novo endereço. Um email de verificação será enviado."
+                );
+
+                // Enviar email de verificação para o novo endereço
+                await user.verifyBeforeUpdateEmail(email);
+
+                alert(
+                    "Email de verificação enviado para o novo endereço. Verifique sua caixa de entrada para confirmar."
+                );
+                return; // Aguarda a confirmação para completar o processo
             }
 
-            // Atualizar dados no Firestore
+            // Atualizar dados no Firestore (somente se o email já foi verificado)
             const userDocRef = db.collection("usuarios").doc(user.uid);
+
             await userDocRef.update({
                 nome: nome,
-                email: email
+                email: email, // Opcional, mas útil se o email foi alterado
             });
             console.log("Nome e email atualizados no Firestore.");
 
@@ -117,10 +120,9 @@ document.getElementById("form-perfil").addEventListener("submit", async (event) 
     }
 });
 
-
 // Função para sair da conta
 function sair() {
-    firebase.auth().signOut()
+    auth.signOut()
         .then(() => {
             alert("Você saiu com sucesso!");
             location.reload();
@@ -136,7 +138,7 @@ auth.onAuthStateChanged((user) => {
     const loginUsu = document.getElementById("login-usu");
     const cadastroUsu = document.getElementById("cadastro-usu");
     const userIcon = document.getElementById("user-ativo");
-    const userPerfil = document.getElementById("user-perfil"); 
+    const userPerfil = document.getElementById("user-perfil");
     const emailUsuario = document.getElementById("email-usuario");
 
     if (user) {
@@ -147,6 +149,19 @@ auth.onAuthStateChanged((user) => {
         if (emailUsuario) {
             emailUsuario.textContent = user.email; // Exibe o email como texto, não como link
         }
+
+        // Sincronizar dados do Authentication com o Firestore
+        const userDocRef = db.collection("usuarios").doc(user.uid);
+        userDocRef.set({
+            nome: user.displayName,
+            email: user.email
+        }, { merge: true })
+            .then(() => {
+                console.log("Dados sincronizados no Firestore.");
+            })
+            .catch((error) => {
+                console.error("Erro ao sincronizar com o Firestore:", error);
+            });
     } else {
         // não logado
         loginUsu.style.display = "inline-block";
@@ -155,3 +170,4 @@ auth.onAuthStateChanged((user) => {
         userPerfil.style.display = "none"; // Garante que o menu do usuário está oculto
     }
 });
+
