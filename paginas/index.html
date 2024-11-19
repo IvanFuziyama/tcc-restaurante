@@ -15,7 +15,6 @@
     <script src="../scripts/contato.js" defer></script>
     <title>Yaki'n Box</title>
 </head>
-
 <!--
     Dúvidas:
     • Enviar no email contato
@@ -57,34 +56,31 @@
                             <li id="email-usuario"></li>
                             <li><a href="#" onclick="abrirModalPerfil()">Perfil</a></li>
                             <li><a href="#" onclick="sair()">Sair</a></li>
-                            <!-- Modal de Perfil -->
-                                <div id="modal-perfil" class="modal">
-                                    <div class="modal-content">
-                                        <span class="close" onclick="fecharModal()">&times;</span>
-                                        <h2>Perfil</h2>
-                                        <form id="form-perfil">
-                                            <label for="nome">Nome:</label>
-                                            <div class="input-container">
-                                                <input type="text" id="nome" name="nome" disabled>
-                                                <button type="button" onclick="habilitarEdicao('nome')">Editar</button>
-                                            </div>
-                                            <br>
-                                            <label for="email">E-mail:</label>
-                                            <div class="input-container">
-                                                <input type="email" id="email" name="email" disabled>
-                                                <button type="button" onclick="habilitarEdicao('email')">Editar</button>
-                                            </div>
-                                            <br>
-                                            <label for="senha">Senha:</label>
-                                            <div class="input-container">
-                                                <input type="password" id="senha" name="senha" value="******" disabled>
-                                                <button type="button" onclick="window.location.href='esqueceu-senha.html'">Redefinir</button>
-                                            </div>
-                                            <br>
-                                        </form>
-                                    </div>
+                           <!-- Modal de Perfil -->
+                            <div id="modal-perfil" class="modal">
+                                <div class="modal-content">
+                                    <span class="close" onclick="fecharModal()">&times;</span>
+                                    <h2>Perfil</h2>
+                                    <form id="form-perfil">
+                                        <label for="nome">Nome:</label>
+                                        <div class="input-container">
+                                            <input type="text" id="nome" name="nome" disabled>
+                                            <button type="button" onclick="habilitarEdicao('nome')">Editar</button>
+                                        </div>
+                                        <label for="email">E-mail:</label>
+                                        <div class="input-container">
+                                            <input type="email" id="email" name="email" disabled>
+                                            <button type="button" onclick="habilitarEdicao('email')">Editar</button>
+                                        </div>
+                                        <label for="senha">Senha:</label>
+                                        <div class="input-container">
+                                            <input type="password" id="senha" name="senha" value="******" disabled>
+                                            <button type="button" onclick="redefinirSenha()">Redefinir</button>
+                                        </div>
+                                        <button type="submit">Salvar</button>
+                                    </form>
                                 </div>
-                                                    
+                            </div>                                
                         </ul>
                     </div>
                 </ul>
