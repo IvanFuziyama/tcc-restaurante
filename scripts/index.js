@@ -1,4 +1,3 @@
-
 const firebaseConfig = {
     apiKey: "AIzaSyCbgUdVBog-R0DmIZi0mG51_uuhDfnWj4c",
     authDomain: "yaki-bb90f.firebaseapp.com",
@@ -171,4 +170,3 @@ auth.onAuthStateChanged((user) => {
         userPerfil.style.display = "none"; // Garante que o menu do usuário está oculto
     }
 });
-

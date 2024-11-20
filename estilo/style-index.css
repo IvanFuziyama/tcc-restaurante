@@ -143,8 +143,7 @@ li#email-usuario{color: var(--amarelo);}
     align-items: center;
     margin-bottom: 10px;
 }
-.input-container button,
-button#but-salvar {
+.input-container button {
     background-color: var(--amarelo); /* Cor vibrante para o botão */
     color: #fff;
     border: none;
@@ -153,8 +152,7 @@ button#but-salvar {
     font-size: 14px;
     transition: background-color 0.3s ease;
 }
-.input-container button:hover,
-button#but-salvar:hover{background-color: var(--amarelo-hover); }
+.input-container button:hover {background-color: var(--amarelo-hover); }
 .close {
     color: var(--cor-branco);
     font-size: 30px;
