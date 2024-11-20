@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="../estilo/style-cardapio.css" media="all">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="shortcut icon" href="../imgs/logo-semfundo.png" type="image/x-icon">
-    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
     <script src="../scripts/menu.js" defer></script>
     <script src="../scripts/itens.js" defer></script>
@@ -23,8 +24,8 @@
             <menu id="menu">
                 <ul>
                     <li><a href="cardapio.html">Cardápio</a></li>
-                    <li><a href="index.html#link-sobre">Sobre</a></li>
-                    <li><a href="index.html#link-contato">Contato</a></li>
+                    <li><a href="#link-sobre">Sobre</a></li>
+                    <li><a href="#link-contato">Contato</a></li>
                     <li><a href="pedido.html">Retirada</a></li>
                     <li><a href="https://www.ifood.com.br/delivery/atibaia-sp/yakin-box-jardim-alvinopolis/ae237a80-9fa8-4bc2-bec3-847cd60aae52?UTM_Medium=share"
                     target="_blank">Delivery</a></li>
@@ -35,8 +36,33 @@
                     <div id="user-perfil" style="display: none;">
                         <ul>
                             <li id="email-usuario"></li>
-                            <li><a href="perfil.html">Perfil</a></li>
+                            <li><a href="#" onclick="abrirModalPerfil()">Perfil</a></li>
                             <li><a href="#" onclick="sair()">Sair</a></li>
+                           <!-- Modal de Perfil -->
+                            <div id="modal-perfil" class="modal">
+                                <div class="modal-content">
+                                    <span class="close" onclick="fecharModal()">&times;</span>
+                                    <h2>Perfil</h2>
+                                    <form id="form-perfil">
+                                        <label for="nome">Nome:</label>
+                                        <div class="input-container">
+                                            <input type="text" id="nome" name="nome" disabled>
+                                            <button type="button" onclick="habilitarEdicao('nome')">Editar</button>
+                                        </div>
+                                        <label for="email">E-mail:</label>
+                                        <div class="input-container">
+                                            <input type="email" id="email" name="email" disabled>
+                                            <button type="button" onclick="habilitarEdicao('email')">Editar</button>
+                                        </div>
+                                        <label for="senha">Senha:</label>
+                                        <div class="input-container">
+                                            <input type="password" id="senha" name="senha" value="******" disabled>
+                                            <button type="button" onclick="redefinirSenha()">Redefinir</button>
+                                        </div>
+                                        <button type="submit" id="but-perfil-salvar">Salvar</button>
+                                    </form>
+                                </div>
+                            </div>                                
                         </ul>
                     </div>
                 </ul>

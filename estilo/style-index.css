@@ -152,7 +152,8 @@ li#email-usuario{color: var(--amarelo);}
     font-size: 14px;
     transition: background-color 0.3s ease;
 }
-.input-container button:hover {background-color: var(--amarelo-hover); }
+.input-container button:hover,
+button#but-perfil-salvar:hover {background-color: var(--amarelo-hover); }
 .close {
     color: var(--cor-branco);
     font-size: 30px;
@@ -165,6 +166,16 @@ li#email-usuario{color: var(--amarelo);}
 .close:focus {
     color: var(--amarelo-hover); 
     text-decoration: none;
+}
+button#but-perfil-salvar{
+    background-color: var(--amarelo);
+    padding: 10px;
+    color: var(--cor-branco);
+    border: none;
+    cursor: pointer;
+}
+span#user-ativo{
+    display: none;/*quando estiver logado tira o login e cadastro e aparece o icone no lugar*/
 }
 
 /* Início - título e o img de fundo */
@@ -181,9 +192,6 @@ div#inicio h1{
     font-size: 13vw;
     font-weight: bolder;
     color: var(--amarelo);
-}
-span#user-ativo{
-    display: none;/*quando estiver logado tira o login e cadastro e aparece o icone no lugar*/
 }
 
 /* Pedidos */

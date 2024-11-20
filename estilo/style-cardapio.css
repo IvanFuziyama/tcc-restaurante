@@ -2,6 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Actor&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 
 :root {
+     /* modal perfil*/
+    --amarelo-hover: #c77802;
+    --close-hover: #ffffffb7;
+
     --vermelho: #B31E22;
     --amarelo: #E99E1E;
     --marrom: #C0925E;
@@ -26,7 +30,7 @@ body {
     font-family: var(--fonte-padrao);
     line-height: 1.6;
 }
-
+/* nav */
 nav#navbar{
     justify-content: space-between;
     display: flex;
@@ -69,12 +73,13 @@ span#burguer{
 }
 img#logo-yaki{width: 48px;}
 img#logo-yaki:hover{filter: grayscale(40%);}
-span#user-ativo{
+span#user-ativo {
     position: relative;
-    top: 4px;
     font-size: 30px;
     cursor: pointer;
     margin-left: 10px;
+    display: inline-block; /* Garante que o ícone fique ao lado dos outros itens */
+    align-self: center; /* Garante que o ícone fique alinhado verticalmente */
 }
 div#user-perfil {
     position: absolute;
@@ -100,6 +105,82 @@ div#user-perfil ul li a {
     color: var(--preto2);
 }
 li#email-usuario{color: var(--amarelo);}
+/* Estilos para o modal */
+.modal {
+    display: none; /* O modal começa escondido */
+    position: fixed;
+    z-index: 1; /* Fica sobre outros elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+}
+
+.modal-content {
+    background-color: var(--preto1);
+    padding: 20px;
+    margin: 10% auto;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+}
+.modal-content h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+.modal-content input{
+    width: 80%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 5px 0 0 5px;
+    color: var(--cor-branco);
+    font-size: 16px;
+    background-color: var(--preto2);
+}
+.input-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.input-container button {
+    background-color: var(--amarelo); /* Cor vibrante para o botão */
+    color: #fff;
+    border: none;
+    padding: 12.8px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+.input-container button:hover,
+button#but-perfil-salvar:hover {background-color: var(--amarelo-hover); }
+.close {
+    color: var(--cor-branco);
+    font-size: 30px;
+    font-weight: bold;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+}
+.close:hover,
+.close:focus {
+    color: var(--amarelo-hover); 
+    text-decoration: none;
+}
+button#but-perfil-salvar{
+    background-color: var(--amarelo);
+    padding: 10px;
+    color: var(--cor-branco);
+    border: none;
+    cursor: pointer;
+}
+span#user-ativo{
+    display: none;/*quando estiver logado tira o login e cadastro e aparece o icone no lugar*/
+}
 
 main#container {
     display: flex;
