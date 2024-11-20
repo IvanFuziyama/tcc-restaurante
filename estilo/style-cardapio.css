@@ -195,69 +195,6 @@ h1 {
     font-family: var(--fonte-titulo);
     font-size: 2.5rem;
     color: var(--cor-branco);
-    margin-bottom: 30px;
-}
-
-.itensContainer {
-    display: flex;
-    flex-direction: row;  /* Exibe os itens em linha */
-    width: 100%;
-    margin-bottom: 50px;
-    border-radius: 8px;
-    background-color: var(--cinza);
-    padding: 20px;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.itensContainer .itens {
-    display: flex;
-    flex-direction: column;
-    width: 60%;  /* Ajuste a largura do texto */
-    align-items: flex-start;
-}
-
-.itensContainer .imgContainer {
-    width: 35%;  /* Ajusta a largura da imagem */
-    margin-left: 20px;  /* Espaço entre o texto e a imagem */
-}
-
-.itensContainer h2 {
-    font-family: var(--fonte-titulo);
-    color: var(--preto2);
-    margin-bottom: 10px;
-    font-size: 1.8rem;
-    text-align: left;
-}
-
-.itensContainer p {
-    color: var(--preto1);
-    font-size: 1rem;
-    text-align: left;
-    margin-bottom: 15px;
-}
-
-.itensContainer .imgContainer img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-}
-.botao-adicionar {
-    background-color: var(--amarelo);
-    color: var(--cor-preto);
-    font-size: 1.2rem;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    text-align: center;
-}
-
-.botao-adicionar:hover {
-    background-color: var(--preto2);
-    color: var(--cor-branco);
 }
 
 #carrinho {

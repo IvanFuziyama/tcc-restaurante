@@ -1,3 +1,4 @@
+
 const firebaseConfig = {
     apiKey: "AIzaSyCbgUdVBog-R0DmIZi0mG51_uuhDfnWj4c",
     authDomain: "yaki-bb90f.firebaseapp.com",

@@ -10,8 +10,8 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
     <script src="../scripts/menu.js" defer></script>
-    <script src="../scripts/itens.js" defer></script>
-    <script src="../scripts/index.js" defer></script>
+    <script type="module" src="../scripts/cardapio.js" defer></script>
+    <script type="module" src="../scripts/index.js" defer></script>
     <title>Cardápio</title>
 </head>
 <body onresize="mudouTamanho()">
@@ -72,28 +72,11 @@
     </header>
     <main id="container">
         <h1>Cardápio</h1>
-        <article class="itensContainer">
-            <div class="itens">
-                <h2>Yakisoba vegetariano ( P )</h2>
-                <p>O Yakisoba Vegetariano (P) é uma deliciosa reinterpretação dos tradicionais Yakisobas. Este prato é composto por macarrão oriental meticulosamente cozido e frito, apresentando uma textura irresistível. Ele é enriquecido com um mix de legumes frescos, que incluem acelga, brócolis, couve-flor, repolho, cenoura e cebola, o que confere ao prato uma explosão de cores e sabores. Acrescentamos a essência da casa: um molho especial feito com legumes frescos e shoyu. Para finalizar, regamos com óleo de gergelim torrado, e coroamos com um mix de gergelim em grãos. Este prato é uma verdadeira celebração de sabores e texturas!</p>
-                <p>Valor R$45,42</p>
-                <button class="botao-adicionar">Adicionar</button>
-            </div>
-            <div class="imgContainer">
-                <img src="../imgs/yakisoba-vegetariano-1.jpeg" alt="Yakisoba Vegetariano">
-            </div>
-        </article>
-        <article class="itensContainer">
-            <div class="itens">
-                <h2>Yakisoba vegetariano ( M )</h2>
-                <p>Delicie-se com nosso Yakisoba Vegetariano (M), uma opção sublime da nossa categoria de Yakisobas Tradicionais! Este prato consiste em um macarrão cuidadosamente cozido e frito, misturado com uma variedade de legumes frescos, que inclui acelga, repolho, couve-flor, brócolis, cenoura e cebola, todos salteados em óleo de gergelim. Para intensificar ainda mais os sabores, adicionamos um irresistível molho especial caseiro, elaborado com legumes frescos e shoyu. A finalização fica por conta de um mix de gergelim em grãos, que adiciona um toque crocante e único ao prato. Uma verdadeira explosão de sabor e frescor!
-                    obs. Agora com mais brócolis e couve-flôr dispensando ter que colocar adicional.</p>
-                <p>Valor R$54,88</p>
-            </div>
-            <div class="imgContainer">
-                <img src="../imgs/yakisoba-vegetariano-1.jpeg" alt="Yakisoba Vegetariano">
-            </div>
-        </article>
+        <label for="categoria">Filtrar por categoria:</label>
+        <select name="categoria" id="categoria" required>
+            <!-- As categorias serão carregadas aqui -->
+        </select>
+        
     </main>
     <div id="carrinho">
         <span class="material-symbols-outlined">
