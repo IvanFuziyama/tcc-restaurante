@@ -76,13 +76,43 @@
         <select name="categoria" id="categoria" required>
             <!-- As categorias serão carregadas aqui -->
         </select>
+
+            <div id="pratos-container">
+        <!-- Os pratos serão carregados aqui -->
+    </div>
+    <!-- Modal para mostrar informações completas do prato -->
+    <div id="modal-prato" class="modal">
+        <div class="modal-content">
+            <span id="fechar-modal" class="fechar">&times;</span>
+            <h3 id="modal-nome"></h3>
+            <p id="modal-descricao"></p>
+            <p id="modal-preco"></p>
+            <img id="modal-imagem" src="" alt="">
+            <button id="modal-adicionar">Adicionar ao Carrinho</button>
+        </div>
+    </div>  
         
     </main>
     <div id="carrinho">
-        <span class="material-symbols-outlined">
+        <span id="icone-carrinho" class="material-symbols-outlined">
             shopping_cart
             </span>
+            <div id="itens-carrinho">
+                <!-- Aqui aparecerão os itens do carrinho -->
+        </div>
     </div>
+     <!-- Modal do Carrinho -->
+     <div id="modal-carrinho" class="modal">
+        <div class="modal-content">
+            <span id="fechar-modal-carrinho" class="fechar">&times;</span>
+            <h3>Itens no Carrinho</h3>
+            <div id="carrinho-itens">
+                <!-- Os itens do carrinho aparecerão aqui -->
+            </div>
+            <button id="finalizar-compra">Finalizar Compra</button>
+        </div>
+    </div>
+    
     <footer>
         <div id="logos">
             <a href="https://www.instagram.com/yakinbox1/" target="_blank"><img src="../imgs/logo-instagram.png" alt="Instagram" id="logo-insta"></a>
