@@ -90,27 +90,34 @@ async function carregarPratos() {
     }
 }
 
+
 // Carregar os pratos assim que o script for executado
 carregarPratos();
 
 // Função para adicionar ao carrinho
+// Função para adicionar ao carrinho
 function adicionarAoCarrinho(nome, preco, imagem) {
-    const quantidade = document.getElementById(`quantidade-${nome}`) ? document.getElementById(`quantidade-${nome}`).value : 1;
-    const item = carrinho.find(prato => prato.nome === nome);
+    // Obtemos a quantidade do input
+    const quantidade = document.getElementById(`quantidade-${nome}`) ? parseInt(document.getElementById(`quantidade-${nome}`).value) : 1;
 
-    if (item) {
-        item.quantidade += parseInt(quantidade);
+    // Verifica se o prato já está no carrinho
+    const itemExistente = carrinho.find(item => item.nome === nome);
+
+    if (itemExistente) {
+        itemExistente.quantidade += quantidade; // Se existir, incrementa a quantidade
     } else {
-        carrinho.push({ nome, preco, quantidade: parseInt(quantidade), imagem });
+        // Caso contrário, adiciona o novo item ao carrinho
+        carrinho.push({ nome, preco, quantidade, imagem });
     }
 
+    // Exibe os itens do carrinho
     exibirCarrinho();
 }
 
-// Função para exibir os itens no carrinho
+// Função para exibir o carrinho
 function exibirCarrinho() {
     const carrinhoContainer = document.getElementById("carrinho-itens");
-    carrinhoContainer.innerHTML = ""; // Limpar antes de exibir novamente
+    carrinhoContainer.innerHTML = ""; // Limpa os itens do carrinho antes de exibir
 
     if (carrinho.length === 0) {
         carrinhoContainer.innerHTML = "<p>Seu carrinho está vazio.</p>";
