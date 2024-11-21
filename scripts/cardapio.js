@@ -71,6 +71,7 @@ async function carregarPratos() {
                 <div class="info-cardapio">
                     <h3>${prato.nome}</h3>
                     <p>${prato.descricao}</p>
+                    <button class="mais-informacoes" onclick="mostrarModal('${prato.nome}', '${prato.descricao}', ${prato.valor}, '${prato.imagem}')">Mais informações</button>
                     <p><strong>R$ ${prato.valor}</strong></p>
                     <div class="input-container">
                     <label for="quantidade-${prato.nome}">Quantidade:</label>
@@ -81,7 +82,7 @@ async function carregarPratos() {
             `;
 
             // Ao clicar no prato, mostrar o modal
-            pratoDiv.querySelector('img').addEventListener('click', () => {
+            pratoDiv.querySelector('button').addEventListener('click', () => {
                 mostrarModal(prato.nome, prato.descricao, prato.valor, prato.imagem);
             });
 
@@ -180,4 +181,3 @@ document.getElementById("icone-carrinho").addEventListener("click", () => {
 document.getElementById("fechar-modal-carrinho").addEventListener("click", () => {
     document.getElementById("modal-carrinho").style.display = "none";
 });
-

@@ -202,7 +202,7 @@ p {
 .input-container button {
     background-color: #4CAF50; /* Cor de fundo do botão */
     color: white; /* Cor do texto */
-    padding: 10px 20px; /* Espaçamento interno */
+    padding: 10px 8px; /* Espaçamento interno */
     border: none; /* Remove borda */
     border-radius: 5px; /* Bordas arredondadas */
     cursor: pointer; /* Muda o cursor ao passar o mouse */
@@ -285,6 +285,7 @@ select#categoria{
     background-color: #fff; /* Fundo branco para destacar os pratos */
     border-radius: 10px; /* Bordas arredondadas */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombras sutis */
+    border: 2px solid var(--cinza);
     overflow: hidden;
     transition: transform 0.3s ease-in-out;
 }
@@ -294,10 +295,10 @@ select#categoria{
 }
 
 .prato img {
-    width: 150px; /* Defina um tamanho fixo para a imagem */
-    height: 150px; /* Tamanho fixo para a imagem */
-    object-fit: cover;
-    border-radius: 10px 0 0 10px; /* Bordas arredondadas à esquerda da imagem */
+    width: 200px; /* Defina um tamanho fixo para a imagem */
+    height: 200px; /* Tamanho fixo para a imagem */ 
+    border-radius: 10px; /* Bordas arredondadas à esquerda da imagem */
+    padding: 10px;
 }
 
 .prato .info {
