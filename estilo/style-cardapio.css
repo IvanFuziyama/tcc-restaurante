@@ -28,7 +28,7 @@
 }
 
 body {
-    background-color: var(--cor-branco);
+    background-color: var(--cinza);
     color: var(--cor-preto);
     font-family: var(--fonte-padrao);
     line-height: 1.6;
@@ -83,6 +83,7 @@ span#user-ativo {
     margin-left: 10px;
     display: inline-block; /* Garante que o ícone fique ao lado dos outros itens */
     align-self: center; /* Garante que o ícone fique alinhado verticalmente */
+    color: var(--cor-branco);
 }
 div#user-perfil {
     position: absolute;
@@ -108,6 +109,16 @@ div#user-perfil ul li a {
     color: var(--preto2);
 }
 li#email-usuario{color: var(--amarelo);}
+button#but-perfil-salvar{
+    background-color: var(--amarelo);
+    padding: 10px;
+    color: var(--cor-branco);
+    border: none;
+    cursor: pointer;
+}
+span#user-ativo{
+    display: none;/*quando estiver logado tira o login e cadastro e aparece o icone no lugar*/
+}
 /* Estilo para o modal */
 .modal {
     display: none; /* O modal começa escondido */
@@ -123,6 +134,49 @@ li#email-usuario{color: var(--amarelo);}
 
 /* Estilo do conteúdo do modal */
 .modal-content {
+    background-color: var(--preto1);
+    padding: 20px;
+    margin: 10% auto;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    color: var(--cor-branco);
+}
+.modal-content h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+.modal-content input{
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 5px 0 0 5px;
+    color: var(--cor-branco);
+    font-size: 16px;
+    background-color: var(--preto2);
+}
+.input-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.input-container button {
+    background-color: var(--amarelo); /* Cor vibrante para o botão */
+    color: #fff;
+    border: none;
+    padding: 12px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+.input-container button:hover,
+button#but-perfil-salvar:hover {background-color: var(--amarelo-hover); }
+.modal-content-prato,
+.modal-content-carrinho {
     background-color: #fff; /* Fundo branco */
     margin: auto; /* Centraliza o modal na tela */
     padding: 30px; /* Aumente o preenchimento */
@@ -136,7 +190,7 @@ li#email-usuario{color: var(--amarelo);}
 
 /* Estilo para o campo de quantidade */
 #modal-quantidade,
-.input-container input {
+.input-container-prato input {
     padding: 5px; /* Preenchimento interno */
     border-radius: 5px; /* Bordas arredondadas */
     color: var(--cor-preto);
@@ -181,30 +235,17 @@ p {
     border-radius: 8px; /* Bordas arredondadas na imagem */
     margin: 15px 0; /* Margem acima e abaixo da imagem */
 }
-.input-container {
+.input-container-prato {
     display: flex; /* Usar flexbox para alinhar os itens horizontalmente */
     align-items: center; /* Alinha verticalmente os itens ao centro */
 }
-
-.input-container button:hover {
-    background-color: var(--botao-hover); /* Cor ao passar o mouse */
-}
-
-.input-container label {
+.input-container-prato label {
     margin-right: 5px; /* Espaçamento entre o label e o input */
-}
-
-/* Estilo para o rótulo da quantidade no modal */
-.modal-content label {
-    color: var(--cor-preto); /* Define a cor do texto como preto */
-}
-.input-container button{
-    margin-left: 10px;
 }
 
 /* Estilo do botão "Adicionar ao Carrinho" */
 #modal-adicionar,
-.input-container button {
+.input-container-prato button {
     background-color: #4CAF50; /* Cor de fundo do botão */
     color: white; /* Cor do texto */
     padding: 10px 8px; /* Espaçamento interno */
@@ -214,16 +255,11 @@ p {
     font-size: 16px; /* Tamanho do texto */
     transition: background-color 0.3s; /* Transição suave para a cor de fundo */
 }
+.input-container-prato button{margin-left: 10px;}
 
 #modal-adicionar:hover,
-.input-container button:hover {
+.input-container-prato button:hover {
     background-color: var(--botao-adicionar-hover); /* Cor ao passar o mouse */
-}
-.modal-content h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-    font-weight: bold;
-    text-align: center;
 }
 .close {
     color: var(--cor-branco);
@@ -246,18 +282,6 @@ p {
     cursor: pointer; /* Muda o cursor ao passar o mouse */
     font-size: 14px; /* Tamanho da fonte */
 }
-
-button#but-perfil-salvar{
-    background-color: var(--amarelo);
-    padding: 10px;
-    color: var(--cor-branco);
-    border: none;
-    cursor: pointer;
-}
-span#user-ativo{
-    display: none;/*quando estiver logado tira o login e cadastro e aparece o icone no lugar*/
-}
-
 main#container {
     display: flex;
     flex-direction: column;
@@ -357,7 +381,18 @@ div.info-cardapio{
     font-size: 30px;
     color: var(--cor-branco);
 }
-
+button#finalizar-compra{
+    background-color: var(--botao-adicionar);
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    color: var(--cor-branco);
+    font-size: 16px;
+    font-weight: bold;
+}
+button#finalizar-compra:hover{
+    background-color: var(--botao-adicionar-hover);
+}
 
 footer {
     background-color: var(--preto2);

@@ -101,7 +101,7 @@ async function carregarPratos(categoria = "") {
                     <p>${prato.descricao}</p>
                     <button class="mais-informacoes" onclick="mostrarModal('${prato.nome}', '${prato.descricao}', ${prato.valor}, '${prato.imagem}')">Mais informações</button>
                     <p><strong>R$ ${prato.valor}</strong></p>
-                    <div class="input-container">
+                    <div class="input-container-prato   ">
                         <label for="quantidade-${prato.nome}">Quantidade:</label>
                         <input type="number" value="1" min="1" id="quantidade-${prato.nome}" class="quantidade">
                         <button onclick="adicionarAoCarrinho('${prato.nome}', ${prato.valor}, '${prato.imagem}', document.getElementById('quantidade-${prato .nome}').value)">Adicionar ao Carrinho</button>

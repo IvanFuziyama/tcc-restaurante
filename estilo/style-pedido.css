@@ -72,10 +72,12 @@ img#logo-yaki{width: 48px;}
 img#logo-yaki:hover{filter: grayscale(40%);}
 span#user-ativo{
     position: relative;
-    top: 4px;
     font-size: 30px;
     cursor: pointer;
     margin-left: 10px;
+    display: inline-block; /* Garante que o ícone fique ao lado dos outros itens */
+    align-self: center; /* Garante que o ícone fique alinhado verticalmente */
+    color: var(--cor-branco);
 }
 div#user-perfil {
     position: absolute;
@@ -129,7 +131,7 @@ li#email-usuario{color: var(--amarelo);}
     text-align: center;
 }
 .modal-content input{
-    width: 80%;
+    width: 100%;
     padding: 10px;
     margin: 8px 0;
     border-radius: 5px 0 0 5px;
@@ -147,7 +149,7 @@ li#email-usuario{color: var(--amarelo);}
     background-color: var(--amarelo); /* Cor vibrante para o botão */
     color: #fff;
     border: none;
-    padding: 12.8px 15px;
+    padding: 12px 15px;
     cursor: pointer;
     font-size: 14px;
     transition: background-color 0.3s ease;

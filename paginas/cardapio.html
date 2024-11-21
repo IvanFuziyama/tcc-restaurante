@@ -11,7 +11,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
     <script src="../scripts/menu.js" defer></script>
     <script type="module" src="../scripts/cardapio.js" defer></script>
-    <script type="module" src="../scripts/index.js" defer></script>
+    <script src="../scripts/index.js" defer></script>
     <title>Cardápio</title>
 </head>
 <body onresize="mudouTamanho()">
@@ -26,7 +26,7 @@
                     <li><a href="cardapio.html">Cardápio</a></li>
                     <li><a href="#link-sobre">Sobre</a></li>
                     <li><a href="#link-contato">Contato</a></li>
-                    <li><a href="pedido.html">Retirada</a></li>
+                      <li><a href="pedido.html">Retirada</a></li>
                     <li><a href="https://www.ifood.com.br/delivery/atibaia-sp/yakin-box-jardim-alvinopolis/ae237a80-9fa8-4bc2-bec3-847cd60aae52?UTM_Medium=share"
                     target="_blank">Delivery</a></li>
                     <li id="login-usu"><a href="login-usuario.html">Login</a></li>
@@ -82,7 +82,7 @@
     </div>
     <!-- Modal para mostrar informações completas do prato -->
 <div id="modal-prato" class="modal">
-    <div class="modal-content">
+    <div class="modal-content-prato">
         <span id="fechar-modal" class="fechar">&times;</span>
         <h3 id="modal-nome"></h3>
         <p id="modal-descricao"></p>
@@ -91,7 +91,7 @@
 
         <!-- Adicionando o campo de quantidade e o botão dentro de um contêiner flexível -->
          <hr>
-        <div class="input-container">
+        <div class="input-container-prato">
             <label for="modal-quantidade">Quantidade:</label>
             <input type="number" id="modal-quantidade" value="1" min="1">
         </div>
@@ -110,7 +110,7 @@
     </div>
      <!-- Modal do Carrinho -->
      <div id="modal-carrinho" class="modal">
-        <div class="modal-content">
+        <div class="modal-content-carrinho">
             <span id="fechar-modal-carrinho" class="fechar">&times;</span>
             <h3>Itens no Carrinho</h3>
             <div id="carrinho-itens">
