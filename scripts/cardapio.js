@@ -19,6 +19,20 @@ const app = initializeApp(firebaseConfig);
 // Inicializa o Firestore
 const db = getFirestore(app);
 
+const ordemCategorias = [
+    "Yakisoba Tradicional", 
+    "Yakisoba Especial", 
+    "Mistura", 
+    "Combo individual (simples)", 
+    "Combo individual ( Completo)", 
+    "Combo para Compartilhar",
+    "Combo Família", 
+    "Molhos em Sachês", 
+    "Sobremesa", 
+    "Refrigerante", 
+    "Lojinha yaki'n box"
+];
+
 let carrinho = [];
 
 let categoriasMap = {}; // Defina categoriasMap no escopo global
@@ -26,35 +40,37 @@ let categoriasMap = {}; // Defina categoriasMap no escopo global
 // Função para carregar categorias do Firestore
 async function carregarCategorias() {
     const categoriasRef = collection(db, "categorias");
+    const snapshot = await getDocs(categoriasRef);
+    const categorias = [];
+
+    snapshot.forEach(doc => {
+        categorias.push({ id: doc.id, nome: doc.data().nome });
+    });
+
+    // Ordena as categorias com base na ordem desejada
+    categorias.sort((a, b) => {
+        return ordemCategorias.indexOf(a.nome) - ordemCategorias.indexOf(b.nome);
+    });
+
     const categoriasSelect = document.getElementById("categoria");
+    categoriasSelect.innerHTML = ''; // Limpa as opções existentes
 
-    try {
-        const categoriaSnapshot = await getDocs(categoriasRef);
-        categoriasSelect.innerHTML = ''; // Limpa as opções existentes
+    // Adiciona uma opção vazia ao select
+    const optionDefault = document.createElement('option');
+    optionDefault.value = '';
+    optionDefault.textContent = 'Selecione uma Categoria';
+    categoriasSelect.appendChild(optionDefault);
 
-        // Adiciona uma opção vazia ao select
-        const optionDefault = document.createElement('option');
-        optionDefault.value = '';
-        optionDefault.textContent = 'Selecione uma Categoria';
-        categoriasSelect.appendChild(optionDefault);
-
-        categoriaSnapshot.forEach(doc => {
-            const data = doc.data();
-            categoriasMap[data.nome] = doc.id; // Mapeia o nome da categoria para seu ID
-            const option = document.createElement('option');
-            option.value = doc.id; // Armazena o ID do documento
-            option.textContent = data.nome; // Exibe o nome da categoria
-
-            categoriasSelect.appendChild(option);
-        });
-
-        console.log("Categorias carregadas:", categoriaSnapshot.docs.map(doc => doc.data()));
-    } catch (error) {
-        console.error("Erro ao carregar categorias: ", error);
-    }
+    // Adiciona as categorias ordenadas ao select
+    categorias.forEach(categoria => {
+        const option = document.createElement('option');
+        option.value = categoria.id;
+        option.textContent = categoria.nome;
+        categoriasSelect.appendChild(option);
+    });
 }
 
-// Carregar categorias ao carregar a página
+// Carregar categorias ao iniciar
 document.addEventListener('DOMContentLoaded', carregarCategorias);
 
 // Adiciona um evento ao select de categoria
@@ -66,24 +82,18 @@ document.getElementById("categoria").addEventListener("change", async (event) =>
 });
 
 // Função para carregar pratos do Firestore
-async function carregarPratos(categoria = "") {
+async function carregarPratos(categoriaId = "") {
     const pratosRef = collection(db, "pratos");
     let pratosSnapshot;
 
     try {
-        if (categoria) {
-            console.log(`Carregando pratos da categoria: ${categoria}`);
-            pratosSnapshot = await getDocs(query(pratosRef, where("categoria", "==", categoria)));
+        if (categoriaId) {
+            pratosSnapshot = await getDocs(query(pratosRef, where("categoria", "==", categoriaId)));
         } else {
-            console.log("Carregando todos os pratos");
             pratosSnapshot = await getDocs(pratosRef);
         }
 
         const pratosList = pratosSnapshot.docs.map(doc => doc.data());
-        console.log("Dados dos pratos encontrados:", pratosList);
-
-        // Log para verificar quantos pratos foram encontrados
-        console.log(`Pratos encontrados: ${pratosList.length}`);
 
         // Seleciona o container onde os pratos serão exibidos
         const pratosContainer = document.getElementById("pratos-container");
@@ -112,6 +122,12 @@ async function carregarPratos(categoria = "") {
             // Ao clicar no prato, mostrar o modal
             pratoDiv.querySelector('button').addEventListener('click', () => {
                 mostrarModal(prato.nome, prato.descricao, prato.valor, prato.imagem);
+            });
+
+            // Adiciona um evento ao select de categoria
+            document.getElementById("categoria").addEventListener("change", async (event) => {
+                const categoriaSelecionada = event.target.value; // Obtém o ID da categoria selecionada
+                await carregarPratos(categoriaSelecionada); // Carrega pratos com base no ID da categoria selecionada
             });
 
             // Adiciona o prato ao container
