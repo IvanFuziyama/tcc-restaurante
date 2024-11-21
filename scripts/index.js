@@ -11,6 +11,8 @@ const firebaseConfig = {
 // Inicializar Firebase
 const app = firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
+const db = firebase.firestore();
+
 
 // Função para abrir o menu de perfil ao clicar no ícone
 function abrirPerfil() {

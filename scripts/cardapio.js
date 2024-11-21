@@ -34,8 +34,7 @@ const ordemCategorias = [
 ];
 
 let carrinho = [];
-
-let categoriasMap = {}; // Defina categoriasMap no escopo global
+let categoriasMap = {}; // Mapeia o nome da categoria ao seu ID
 
 // Função para carregar categorias do Firestore
 async function carregarCategorias() {
@@ -44,7 +43,9 @@ async function carregarCategorias() {
     const categorias = [];
 
     snapshot.forEach(doc => {
-        categorias.push({ id: doc.id, nome: doc.data().nome });
+        const data = doc.data();
+        categoriasMap[doc.id] = data.nome; // Mapeia o ID da categoria ao seu nome
+        categorias.push({ id: doc.id, nome: data.nome });
     });
 
     // Ordena as categorias com base na ordem desejada
@@ -70,51 +71,58 @@ async function carregarCategorias() {
     });
 }
 
-// Carregar categorias ao iniciar
-document.addEventListener('DOMContentLoaded', carregarCategorias);
-
-// Adiciona um evento ao select de categoria
-document.getElementById("categoria").addEventListener("change", async (event) => {
-    const categoriaSelecionada = event.target.options[event.target.selectedIndex].text; // Obtenha o texto da opção selecionada
-    const categoriaID = categoriasMap[categoriaSelecionada]; // Obtém o ID da categoria selecionada
-    console.log(`Categoria selecionada: ${categoriaSelecionada}, ID: ${categoriaID}`); // Mostra o ID
-    await carregarPratos(categoriaID); // Carrega pratos com base no ID da categoria selecionada
-});
-
 // Função para carregar pratos do Firestore
 async function carregarPratos(categoriaId = "") {
     const pratosRef = collection(db, "pratos");
     let pratosSnapshot;
 
-    try {
-        if (categoriaId) {
-            pratosSnapshot = await getDocs(query(pratosRef, where("categoria", "==", categoriaId)));
-        } else {
-            pratosSnapshot = await getDocs(pratosRef);
+    if (categoriaId) {
+        pratosSnapshot = await getDocs(query(pratosRef, where("categoria", "==", categoriaId)));
+    } else {
+        pratosSnapshot = await getDocs(pratosRef);
+    }
+
+    const pratosList = pratosSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+    // Agrupa pratos por categoria
+    const pratosPorCategoria = {};
+
+    pratosList.forEach(prato => {
+        const categoriaNome = categoriasMap[prato.categoria]; // Usa o mapa para obter o nome da categoria
+        if (!pratosPorCategoria[categoriaNome]) {
+            pratosPorCategoria[categoriaNome] = [];
         }
+        pratosPorCategoria[categoriaNome].push(prato);
+    });
 
-        const pratosList = pratosSnapshot.docs.map(doc => doc.data());
+    // Seleciona o container onde os pratos serão exibidos
+    const pratosContainer = document.getElementById("pratos-container");
+    pratosContainer.innerHTML = ""; // Limpa o conteúdo atual
 
-        // Seleciona o container onde os pratos serão exibidos
-        const pratosContainer = document.getElementById("pratos-container");
-        pratosContainer.innerHTML = ""; // Limpa o conteúdo atual
+    // Cria tópicos para cada categoria e lista os pratos
+    for (const categoria in pratosPorCategoria) {
+        const categoriaDiv = document.createElement("div");
+        const categoriaTitulo = document.createElement("h2");
+        categoriaTitulo.textContent = categoria; // Nome da categoria
+        categoriaDiv.appendChild(categoriaTitulo);
 
-        pratosList.forEach(prato => {
+        const pratosDaCategoria = pratosPorCategoria[categoria];
+        pratosDaCategoria.forEach(prato => {
             const pratoDiv = document.createElement("div");
             pratoDiv.classList.add("prato");
 
             // Criação do conteúdo do prato
-            pratoDiv.innerHTML = `
+                    pratoDiv.innerHTML = `
                 <img src="${prato.imagem}" alt="${prato.nome}" class="prato-imagem">
                 <div class="info-cardapio">
                     <h3>${prato.nome}</h3>
                     <p>${prato.descricao}</p>
-                    <button class="mais-informacoes" onclick="mostrarModal('${prato.nome}', '${prato.descricao}', ${prato.valor}, '${prato.imagem}')">Mais informações</button>
                     <p><strong>R$ ${prato.valor}</strong></p>
-                    <div class="input-container-prato   ">
+                    <button class="mais-informacoes" onclick="mostrarModal('${prato.nome}', '${prato.descricao}', ${prato.valor}, '${prato.imagem}')">Mais informações</button>
+                    <div class="input-container-prato">
                         <label for="quantidade-${prato.nome}">Quantidade:</label>
                         <input type="number" value="1" min="1" id="quantidade-${prato.nome}" class="quantidade">
-                        <button onclick="adicionarAoCarrinho('${prato.nome}', ${prato.valor}, '${prato.imagem}', document.getElementById('quantidade-${prato .nome}').value)">Adicionar ao Carrinho</button>
+                        <button onclick="adicionarAoCarrinho('${prato.nome}', ${prato.valor}, '${prato.imagem}', document.getElementById('quantidade-${prato.nome}').value)">Adicionar ao Carrinho</button>
                     </div>
                 </div>
             `;
@@ -124,24 +132,27 @@ async function carregarPratos(categoriaId = "") {
                 mostrarModal(prato.nome, prato.descricao, prato.valor, prato.imagem);
             });
 
-            // Adiciona um evento ao select de categoria
-            document.getElementById("categoria").addEventListener("change", async (event) => {
-                const categoriaSelecionada = event.target.value; // Obtém o ID da categoria selecionada
-                await carregarPratos(categoriaSelecionada); // Carrega pratos com base no ID da categoria selecionada
-            });
 
-            // Adiciona o prato ao container
-            pratosContainer.appendChild(pratoDiv);
+            // Adiciona o prato ao contêiner de pratos
+            categoriaDiv.appendChild(pratoDiv);
         });
-    } catch (error) {
-        console.error("Erro ao carregar pratos: ", error);
+
+        // Adiciona a seção da categoria ao contêiner principal
+        pratosContainer.appendChild(categoriaDiv);
     }
 }
 
-// Carregar pratos ao iniciar
-carregarPratos();
+// Carregar categorias ao iniciar
+document.addEventListener('DOMContentLoaded', async () => {
+    await carregarCategorias();
+    await carregarPratos(); // Carrega todos os pratos ao iniciar
+});
 
-
+// Adiciona um evento ao select de categoria
+document.getElementById("categoria").addEventListener("change", async (event) => {
+    const categoriaID = event.target.value; // Obtém o ID da categoria selecionada
+    await carregarPratos(categoriaID); // Carrega pratos com base no ID da categoria selecionada
+});
 
 // Função para adicionar ao carrinho
 window.adicionarAoCarrinho = function(nome, preco, imagem, quantidade) {
@@ -217,4 +228,3 @@ document.getElementById("icone-carrinho").addEventListener("click", () => {
 document.getElementById("fechar-modal-carrinho").addEventListener("click", () => {
     document.getElementById("modal-carrinho").style.display = "none";
 });
-
