@@ -299,15 +299,14 @@ h1 {
 select#categoria{
     margin-bottom: 40px;
 }
-#pratos-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px; /* Espaço entre os pratos */
-    justify-content: space-between;
+.pratos-grid {
+    display: grid; /* Usar grid para layout */
+    grid-template-columns: repeat(2, 1fr); /* Duas colunas de igual largura */
+    gap: 20px; /* Espaçamento entre os pratos */
 }
 
 .prato {
-    width: 48%; /* Dois pratos por linha em telas grandes */
+    width: 100%; /* Dois pratos por linha em telas grandes */
     box-sizing: border-box;
     margin-bottom: 20px;
     display: flex;
