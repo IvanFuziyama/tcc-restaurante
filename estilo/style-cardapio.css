@@ -16,6 +16,7 @@
     --cinza: #eeeeee;
     --cor-branco: #ffffff;
     --cor-preto: #000000;
+    --fonte-text: rial, Helvetica, sans-serif;
     --fonte-padrao: "Actor", sans-serif;
     --fonte-titulo: "Josefin Sans", sans-serif;
 }
@@ -138,13 +139,17 @@ li#email-usuario{color: var(--amarelo);}
 .input-container input {
     padding: 5px; /* Preenchimento interno */
     border-radius: 5px; /* Bordas arredondadas */
-    border: 1px solid #ccc; /* Borda */
+    color: var(--cor-preto);
+    border: 1px solid var(--cor-preto);
+    font-size: 16px;
+    background-color: var(--cor-branco);
     width: 50px; 
+    margin: 8px 0;
 }
 
 /* Estilo para o botão de fechar */
 .fechar {
-    color: #aaa; /* Cor do botão de fechar */
+    color: var(--preto1); /* Cor do botão de fechar */
     float: right; /* Alinha à direita */
     font-size: 28px;
     font-weight: bold;
@@ -153,19 +158,19 @@ li#email-usuario{color: var(--amarelo);}
 
 .fechar:hover,
 .fechar:focus {
-    color: #000; /* Muda a cor ao passar o mouse */
+    color: var(--cor-preto); /* Muda a cor ao passar o mouse */
     text-decoration: none; /* Remove sublinhado */
 }
 
 /* Estilo dos títulos e textos do modal */
 h3 {
     font-size: 24px; /* Tamanho do título */
-    color: #333; /* Cor do texto */
+    color: var(--cor-preto); /* Cor do texto */
 }
 
 p {
     font-size: 16px; /* Tamanho do texto */
-    color: #666; /* Cor do texto */
+    color: var(--preto1); /* Cor do texto */
     margin: 10px 0; /* Margem entre os parágrafos */
 }
 
@@ -209,6 +214,7 @@ p {
     font-size: 16px; /* Tamanho do texto */
     transition: background-color 0.3s; /* Transição suave para a cor de fundo */
 }
+
 #modal-adicionar:hover,
 .input-container button:hover {
     background-color: var(--botao-adicionar-hover); /* Cor ao passar o mouse */
@@ -218,15 +224,6 @@ p {
     margin-bottom: 10px;
     font-weight: bold;
     text-align: center;
-}
-.modal-content input{
-    width: 80%;
-    padding: 10px;
-    margin: 8px 0;
-    border-radius: 5px 0 0 5px;
-    color: var(--cor-branco);
-    font-size: 16px;
-    background-color: var(--preto2);
 }
 .close {
     color: var(--cor-branco);
@@ -241,6 +238,15 @@ p {
     color: var(--amarelo-hover); 
     text-decoration: none;
 }
+.mais-informacoes {
+    background-color: var(--cor-branco);
+    color: var(--botao-adicionar); /* Cor do texto */
+    text-decoration: underline;
+    border: none;
+    cursor: pointer; /* Muda o cursor ao passar o mouse */
+    font-size: 14px; /* Tamanho da fonte */
+}
+
 button#but-perfil-salvar{
     background-color: var(--amarelo);
     padding: 10px;
@@ -259,6 +265,7 @@ main#container {
     padding: 30px;
     max-width: 1200px;
     margin: 0 auto;
+    font-family: var(--fonte-text);
 }
 
 h1 {
