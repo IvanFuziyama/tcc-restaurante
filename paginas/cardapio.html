@@ -81,17 +81,24 @@
         <!-- Os pratos serão carregados aqui -->
     </div>
     <!-- Modal para mostrar informações completas do prato -->
-    <div id="modal-prato" class="modal">
-        <div class="modal-content">
-            <span id="fechar-modal" class="fechar">&times;</span>
-            <h3 id="modal-nome"></h3>
-            <p id="modal-descricao"></p>
-            <p id="modal-preco"></p>
-            <img id="modal-imagem" src="" alt="">
-            <button id="modal-adicionar">Adicionar ao Carrinho</button>
+<div id="modal-prato" class="modal">
+    <div class="modal-content">
+        <span id="fechar-modal" class="fechar">&times;</span>
+        <h3 id="modal-nome"></h3>
+        <p id="modal-descricao"></p>
+        <p id="modal-preco"></p>
+        <img id="modal-imagem" src="" alt="">
+
+        <!-- Adicionando o campo de quantidade e o botão dentro de um contêiner flexível -->
+         <hr>
+        <div class="input-container">
+            <label for="modal-quantidade">Quantidade:</label>
+            <input type="number" id="modal-quantidade" value="1" min="1">
         </div>
-    </div>  
-        
+            <button id="modal-adicionar">Adicionar ao Carrinho</button>
+    </div>
+</div>
+
     </main>
     <div id="carrinho">
         <span id="icone-carrinho" class="material-symbols-outlined">

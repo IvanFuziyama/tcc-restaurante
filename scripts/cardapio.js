@@ -66,15 +66,18 @@ async function carregarPratos() {
             pratoDiv.classList.add("prato");
 
             // Criação do conteúdo do prato
-            pratoDiv.innerHTML = `
+                pratoDiv.innerHTML = `
                 <img src="${prato.imagem}" alt="${prato.nome}" class="prato-imagem">
                 <div class="info-cardapio">
                     <h3>${prato.nome}</h3>
                     <p>${prato.descricao}</p>
                     <p><strong>R$ ${prato.valor}</strong></p>
-                    <button onclick="adicionarAoCarrinho('${prato.nome}', ${prato.valor}, '${prato.imagem}')">Adicionar ao Carrinho</button>
+                    <div class="input-container">
+                    <label for="quantidade-${prato.nome}">Quantidade:</label>
                     <input type="number" value="1" min="1" id="quantidade-${prato.nome}" class="quantidade">
+                    <button onclick="adicionarAoCarrinho('${prato.nome}', ${prato.valor}, '${prato.imagem}', document.getElementById('quantidade-${prato.nome}').value)">Adicionar ao Carrinho</button>
                 </div>
+            </div>
             `;
 
             // Ao clicar no prato, mostrar o modal
@@ -95,24 +98,19 @@ async function carregarPratos() {
 carregarPratos();
 
 // Função para adicionar ao carrinho
-// Função para adicionar ao carrinho
-function adicionarAoCarrinho(nome, preco, imagem) {
-    // Obtemos a quantidade do input
-    const quantidade = document.getElementById(`quantidade-${nome}`) ? parseInt(document.getElementById(`quantidade-${nome}`).value) : 1;
+window.adicionarAoCarrinho = function(nome, preco, imagem, quantidade) {
+    quantidade = parseInt(quantidade); // Converte a quantidade para um número inteiro
 
-    // Verifica se o prato já está no carrinho
     const itemExistente = carrinho.find(item => item.nome === nome);
 
     if (itemExistente) {
-        itemExistente.quantidade += quantidade; // Se existir, incrementa a quantidade
+        itemExistente.quantidade += quantidade; // Adiciona à quantidade existente
     } else {
-        // Caso contrário, adiciona o novo item ao carrinho
-        carrinho.push({ nome, preco, quantidade, imagem });
+        carrinho.push({ nome, preco, quantidade, imagem }); // Adiciona novo item ao carrinho
     }
 
-    // Exibe os itens do carrinho
-    exibirCarrinho();
-}
+    exibirCarrinho(); // Atualiza a exibição do carrinho
+};
 
 // Função para exibir o carrinho
 function exibirCarrinho() {
@@ -141,6 +139,7 @@ function mostrarModal(nome, descricao, preco, imagem) {
     const descricaoElement = document.getElementById("modal-descricao");
     const precoElement = document.getElementById("modal-preco");
     const imagemElement = document.getElementById("modal-imagem");
+    const quantidadeElement = document.getElementById("modal-quantidade"); // Campo de quantidade
 
     nomeElement.textContent = nome;
     descricaoElement.textContent = descricao;
@@ -151,7 +150,8 @@ function mostrarModal(nome, descricao, preco, imagem) {
 
     // Adicionar ao carrinho dentro do modal
     document.getElementById("modal-adicionar").onclick = function() {
-        adicionarAoCarrinho(nome, preco, imagem);
+        const quantidade = parseInt(quantidadeElement.value); // Captura a quantidade do input
+        adicionarAoCarrinho(nome, preco, imagem, quantidade); // Passa a quantidade para a função
         modal.style.display = "none"; // Fechar modal ao adicionar
     };
 }
