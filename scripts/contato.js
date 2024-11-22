@@ -1,5 +1,4 @@
-// Inicializar o Firebase
-  const db = firebase.firestore();
+
   
   // Função de envio do formulário
   const form = document.getElementById('form-contato');

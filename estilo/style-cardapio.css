@@ -31,7 +31,6 @@ body {
     background-color: var(--cinza);
     color: var(--cor-preto);
     font-family: var(--fonte-padrao);
-    line-height: 1.6;
 }
 /* nav */
 nav#navbar{
@@ -217,12 +216,12 @@ button#but-perfil-salvar:hover {background-color: var(--amarelo-hover); }
 }
 
 /* Estilo dos títulos e textos do modal */
-h3 {
+.modal h3 {
     font-size: 20px; /* Tamanho do título */
     color: var(--cor-preto); /* Cor do texto */
 }
 
-p {
+.modal p {
     font-size: 16px; /* Tamanho do texto */
     color: var(--preto1); /* Cor do texto */
     margin: 10px 0; /* Margem entre os parágrafos */
@@ -393,39 +392,32 @@ button#finalizar-compra:hover{
     background-color: var(--botao-adicionar-hover);
 }
 
-footer {
+/* Rodapé */
+footer{
     background-color: var(--preto2);
-    height: 150px;
-    display: flex;
+    height: 15vh;
+    display:flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     flex-direction: column;
 }
-
-footer div#logos {
+footer div#logos{
     display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
 }
-
-footer a {
-    margin: 0 15px;
+footer a{margin: 0 5px;}
+img#logo-insta:hover,
+img#logo-whats:hover{
+    background-color: var(--cor-preto);
+    border-radius: 10px;
 }
-
-footer img {
-    width: 35px;
-    height: auto;
-    transition: transform 0.3s ease;
-}
-
-footer img:hover {
-    transform: scale(1.1);
-}
-
-footer p {
-    font-size: 0.9rem;
-    color: var(--cor-branco);
+footer p{
     text-align: center;
+    font-family: var(--fonte-padrao);
+    padding: 10px;
+    color: var(--cor-branco);
+}
+footer img{
+    width: 30px;
 }
 
 @media screen and (max-width: 768px) {

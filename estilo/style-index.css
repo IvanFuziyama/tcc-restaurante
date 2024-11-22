@@ -232,7 +232,7 @@ a#botao-delivery:hover{
     filter: opacity(70%);
     transition: 0.5s;
 }
-#icarrinho{
+#icone-opcoes-pedido{
     background-color: var(--cor-branco);
     border-radius: 50%;
     color: #000000;
@@ -430,20 +430,20 @@ iframe#endereco-mapa{
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: var(--amarelo); /* Cor de fundo do carrinho */
-    padding: 10px;
+    background-color: var(--amarelo);
+    padding: 15px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     cursor: pointer;
-    z-index: 1000; /* Garante que o carrinho fique visível sobre outros elementos */
+    z-index: 1000;
 }
 
 #carrinho span {
-    font-size: 24px;
-    color: white;
+    font-size: 30px;
+    color: var(--cor-branco);
 }
 
 /* Rodapé */
