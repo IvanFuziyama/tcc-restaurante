@@ -25,7 +25,7 @@ export function exibirCarrinho() {
 }
 
 // Mostrar/ocultar o carrinho ao clicar no ícone do carrinho
-document.getElementById("icone-carrinho").addEventListener("click", () => {
+document.getElementById("carrinho").addEventListener("click", () => {
     const modalCarrinho = document.getElementById("modal-carrinho");
     modalCarrinho.style.display = modalCarrinho.style.display === "flex" ? "none" : "flex";
 });
