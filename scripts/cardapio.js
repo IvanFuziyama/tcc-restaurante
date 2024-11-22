@@ -21,21 +21,21 @@ const db = getFirestore(app);
 
 import { exibirCarrinho } from './carrinho.js';
 
-const ordemCategorias = [
-    "Yakisoba Tradicional", 
-    "Yakisoba Especial", 
-    "Mistura", 
-    "Combo individual (simples)", 
-    "Combo individual ( Completo)", 
-    "Combo para Compartilhar",
-    "Combo Família", 
-    "Molhos em Sachês", 
-    "Sobremesa", 
-    "Refrigerante", 
-    "Lojinha yaki'n box"
-];
+// const ordemCategorias = [
+//     "Yakisoba Tradicional", 
+//     "Yakisoba Especial", 
+//     "Mistura", 
+//     "Combo individual (simples)", 
+//     "Combo individual ( Completo)", 
+//     "Combo para Compartilhar",  
+//     "Combo Família", 
+//     "Molhos em Sachês", 
+//     "Sobremesa", 
+//     "Refrigerante", 
+//     "Lojinha yaki'n box"
+// ];
 
-let carrinho = [];
+// let carrinho = [];
 let categoriasMap = {}; // Mapeia o nome da categoria ao seu ID
 
 // Função para carregar categorias do Firestore
@@ -227,15 +227,4 @@ function mostrarModal(nome, descricao, preco, imagem) {
 // Fechar o modal
 document.getElementById("fechar-modal").addEventListener("click", () => {
     document.getElementById("modal-prato").style.display = "none";
-});
-
-// Mostrar/ocultar o carrinho ao clicar no ícone do carrinho
-document.getElementById("icone-carrinho").addEventListener("click", () => {
-    const modalCarrinho = document.getElementById("modal-carrinho");
-    modalCarrinho.style.display = modalCarrinho.style.display === "flex" ? "none" : "flex";
-});
-
-// Fechar o modal do carrinho
-document.getElementById("fechar-modal-carrinho").addEventListener("click", () => {
-    document.getElementById("modal-carrinho").style.display = "none";
 });

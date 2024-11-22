@@ -5,6 +5,8 @@
      /* modal perfil*/
     --amarelo-hover: #c77802;
     --close-hover: #ffffffb7;
+
+    /*modal carrinho*/
     --botao-adicionar: #4CAF50;
     --botao-adicionar-hover: #438d47;
 
@@ -16,7 +18,7 @@
     --cinza: #eeeeee;
     --cor-branco: #ffffff;
     --cor-preto: #000000;
-    --fonte-text: rial, Helvetica, sans-serif;
+    --fonte-text: arial, Helvetica, sans-serif;
     --fonte-padrao: "Actor", sans-serif;
     --fonte-titulo: "Josefin Sans", sans-serif;
 }
@@ -185,6 +187,7 @@ button#but-perfil-salvar:hover {background-color: var(--amarelo-hover); }
     max-width: 700px; /* Aumente a largura máxima do modal */
     max-height: 80%; /* Limite a altura máxima do modal */
     overflow-y: auto; /* Adiciona rolagem vertical se necessário */
+    font-family: var(--fonte-text);
 }
 
 /* Estilo para o campo de quantidade */

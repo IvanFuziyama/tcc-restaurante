@@ -5,6 +5,10 @@
     --amarelo-hover: #c77802;
     --close-hover: #ffffffb7;
 
+    /*modal carrinho*/
+    --botao-adicionar: #4CAF50;
+    --botao-adicionar-hover: #438d47;
+
     --vermelho:#B31E22;
     --amarelo:#E99E1E;
     --marrom:#C0925E;
@@ -13,6 +17,7 @@
     --branco-botao: #ffffff;
     --cor-branco:#ffffff;
     --cor-preto: #000000;
+    --fonte-text: arial, Helvetica, sans-serif;
     --fonte-padrao: "Actor",sans-serif;
     --fonte-titulo: "Josefin Sans", sans-serif; 
 }
@@ -154,18 +159,19 @@ li#email-usuario{color: var(--amarelo);}
 }
 .input-container button:hover,
 button#but-perfil-salvar:hover {background-color: var(--amarelo-hover); }
-.close {
-    color: var(--cor-branco);
-    font-size: 30px;
+/* Estilo para o botão de fechar */
+.fechar {
+    color: var(--preto1); /* Cor do botão de fechar */
+    float: right; /* Alinha à direita */
+    font-size: 28px;
     font-weight: bold;
-    top: 10px;
-    right: 15px;
-    cursor: pointer;
+    cursor: pointer; /* Muda o cursor ao passar o mouse */
 }
-.close:hover,
-.close:focus {
-    color: var(--amarelo-hover); 
-    text-decoration: none;
+
+.fechar:hover,
+.fechar:focus {
+    color: var(--cor-preto); /* Muda a cor ao passar o mouse */
+    text-decoration: none; /* Remove sublinhado */
 }
 button#but-perfil-salvar{
     background-color: var(--amarelo);
@@ -444,6 +450,96 @@ iframe#endereco-mapa{
 #carrinho span {
     font-size: 30px;
     color: var(--cor-branco);
+}
+.modal-content-carrinho {
+    background-color: #fff; /* Fundo branco */
+    margin: auto; /* Centraliza o modal na tela */
+    padding: 30px; /* Aumente o preenchimento */
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    width: 90%; /* Largura do modal */
+    max-width: 700px; /* Aumente a largura máxima do modal */
+    max-height: 80%; /* Limite a altura máxima do modal */
+    overflow-y: auto; /* Adiciona rolagem vertical se necessário */
+    font-family: var(--fonte-text);
+}
+/* Estilo do conteúdo do modal */
+.modal-content {
+    background-color: var(--preto1);
+    padding: 20px;
+    margin: 10% auto;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    color: var(--cor-branco);
+}
+.modal-content h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+.modal-content input{
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 5px 0 0 5px;
+    color: var(--cor-branco);
+    font-size: 16px;
+    background-color: var(--preto2);
+}
+/* Estilo dos títulos e textos do modal */
+.modal h3 {
+    font-size: 20px; /* Tamanho do título */
+    color: var(--cor-preto); /* Cor do texto */
+}
+
+.modal p {
+    font-size: 16px; /* Tamanho do texto */
+    color: var(--preto1); /* Cor do texto */
+    margin: 10px 0; /* Margem entre os parágrafos */
+}
+#modal-adicionar{
+    background-color: #4CAF50; /* Cor de fundo do botão */
+    color: white; /* Cor do texto */
+    padding: 10px 8px; /* Espaçamento interno */
+    border: none; /* Remove borda */
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer; /* Muda o cursor ao passar o mouse */
+    font-size: 16px; /* Tamanho do texto */
+    transition: background-color 0.3s; /* Transição suave para a cor de fundo */
+}
+.input-container-prato button{margin-left: 10px;}
+
+#modal-adicionar:hover,
+.input-container-prato button:hover {
+    background-color: var(--botao-adicionar-hover); /* Cor ao passar o mouse */
+}
+.close {
+    color: var(--cor-branco);
+    font-size: 30px;
+    font-weight: bold;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+}
+.close:hover,
+.close:focus {
+    color: var(--amarelo-hover); 
+    text-decoration: none;
+}
+button#finalizar-compra{
+    background-color: var(--botao-adicionar);
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    color: var(--cor-branco);
+    font-size: 16px;
+    font-weight: bold;
+}
+button#finalizar-compra:hover{
+    background-color: var(--botao-adicionar-hover);
 }
 
 /* Rodapé */

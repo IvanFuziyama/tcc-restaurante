@@ -13,6 +13,15 @@
     <script src="../scripts/index.js" defer ></script>
     <script src="../scripts/menu.js" defer></script>
     <script src="../scripts/contato.js" defer></script>
+    <script src="../scripts/cardapio.js" defer></script>
+    <script type="module">
+        import { exibirCarrinho } from "../scripts/carrinho.js";
+    
+        document.addEventListener("DOMContentLoaded", function() {
+            // Chama a função automaticamente
+            exibirCarrinho();
+        });
+    </script>
     <title>Yaki'n Box</title>
 </head>
 <!--
@@ -200,9 +209,20 @@
         </section>
     </main>
     <div id="carrinho">
-        <span class="material-symbols-outlined">
+        <span id="icone-carrinho" class="material-symbols-outlined">
             shopping_cart
             </span>
+    </div>
+     <!-- Modal do Carrinho -->
+     <div id="modal-carrinho" class="modal">
+        <div class="modal-content-carrinho">
+            <span id="fechar-modal-carrinho" class="fechar">&times;</span>
+            <h3>Itens no Carrinho</h3>
+            <div id="carrinho-itens">
+                <!-- Os itens do carrinho aparecerão aqui -->
+            </div>
+            <button id="finalizar-compra">Finalizar Compra</button>
+        </div>
     </div>
 
     <footer>
