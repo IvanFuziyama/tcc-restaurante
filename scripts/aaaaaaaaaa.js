@@ -72,9 +72,16 @@ async function carregarCategorias() {
 }
 
 // Função para carregar pratos do Firestore
-async function carregarPratos() {
+async function carregarPratos(categoriaId = "") {
     const pratosRef = collection(db, "pratos");
-    const pratosSnapshot = await getDocs(pratosRef);
+    let pratosSnapshot;
+
+    if (categoriaId) {
+        pratosSnapshot = await getDocs(query(pratosRef, where("categoria", "==", categoriaId)));
+    } else {
+        pratosSnapshot = await getDocs(pratosRef);
+    }
+
     const pratosList = pratosSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
     // Agrupa pratos por categoria
@@ -92,21 +99,20 @@ async function carregarPratos() {
     const pratosContainer = document.getElementById("pratos-container");
     pratosContainer.innerHTML = ""; // Limpa o conteúdo atual
 
-    // Cria um contêiner para cada categoria e lista os pratos
+    // Cria tópicos para cada categoria e lista os pratos
     for (const categoria in pratosPorCategoria) {
         const categoriaDiv = document.createElement("div");
         const categoriaTitulo = document.createElement("h2");
         categoriaTitulo.textContent = categoria; // Nome da categoria
         categoriaDiv.appendChild(categoriaTitulo);
 
-        // Cria um contêiner para os pratos da categoria
-        const pratosGrid = document.createElement("div");
-        pratosGrid.classList.add("pratos-grid");
-
-        pratosPorCategoria[categoria].forEach(prato => {
+        const pratosDaCategoria = pratosPorCategoria[categoria];
+        pratosDaCategoria.forEach(prato => {
             const pratoDiv = document.createElement("div");
             pratoDiv.classList.add("prato");
-            pratoDiv.innerHTML = `
+
+            // Criação do conteúdo do prato
+                    pratoDiv.innerHTML = `
                 <img src="${prato.imagem}" alt="${prato.nome}" class="prato-imagem">
                 <div class="info-cardapio">
                     <h3>${prato.nome}</h3>
@@ -120,14 +126,19 @@ async function carregarPratos() {
                     </div>
                 </div>
             `;
-            pratosGrid.appendChild(pratoDiv);
+
             // Ao clicar no prato, mostrar o modal
             pratoDiv.querySelector('button').addEventListener('click', () => {
                 mostrarModal(prato.nome, prato.descricao, prato.valor, prato.imagem);
             });
+
+
+            // Adiciona o prato ao contêiner de pratos
+            categoriaDiv.appendChild(pratoDiv);
         });
-        categoriaDiv.appendChild(pratosGrid);
-        pratosContainer.appendChild(categoriaDiv)
+
+        // Adiciona a seção da categoria ao contêiner principal
+        pratosContainer.appendChild(categoriaDiv);
     }
 }
 
