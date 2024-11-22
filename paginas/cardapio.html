@@ -12,6 +12,14 @@
     <script src="../scripts/menu.js" defer></script>
     <script type="module" src="../scripts/cardapio.js" defer></script>
     <script src="../scripts/index.js" defer></script>
+    <script type="module">
+        import { exibirCarrinho } from "../scripts/carrinho.js";
+    
+        document.addEventListener("DOMContentLoaded", function() {
+            // Chama a função automaticamente
+            exibirCarrinho();
+        });
+    </script>
     <title>Cardápio</title>
 </head>
 <body onresize="mudouTamanho()">

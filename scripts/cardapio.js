@@ -19,6 +19,8 @@ const app = initializeApp(firebaseConfig);
 // Inicializa o Firestore
 const db = getFirestore(app);
 
+import { exibirCarrinho } from './carrinho.js';
+
 const ordemCategorias = [
     "Yakisoba Tradicional", 
     "Yakisoba Especial", 
@@ -49,9 +51,9 @@ async function carregarCategorias() {
     });
 
     // Ordena as categorias com base na ordem desejada
-    categorias.sort((a, b) => {
-        return ordemCategorias.indexOf(a.nome) - ordemCategorias.indexOf(b.nome);
-    });
+    // categorias.sort((a, b) => {
+    //     return ordemCategorias.indexOf(a.nome) - ordemCategorias.indexOf(b.nome);
+    // });
 
     const categoriasSelect = document.getElementById("categoria");
     categoriasSelect.innerHTML = ''; // Limpa as opções existentes
@@ -72,9 +74,17 @@ async function carregarCategorias() {
 }
 
 // Função para carregar pratos do Firestore
-async function carregarPratos() {
+async function carregarPratos(categoriaId = "") {
     const pratosRef = collection(db, "pratos");
-    const pratosSnapshot = await getDocs(pratosRef);
+    // const pratosSnapshot = await getDocs(pratosRef);
+    let pratosSnapshot;
+
+    if (categoriaId) {
+        pratosSnapshot = await getDocs(query(pratosRef, where("categoria", "==", categoriaId)));
+    } else {
+        pratosSnapshot = await getDocs(pratosRef);
+    }
+
     const pratosList = pratosSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
     // Agrupa pratos por categoria
@@ -147,6 +157,11 @@ document.getElementById("categoria").addEventListener("change", async (event) =>
 window.adicionarAoCarrinho = function(nome, preco, imagem, quantidade) {
     quantidade = parseInt(quantidade); // Converte a quantidade para um número inteiro
 
+    let carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || [];
+    // carrinho.forEach(item => {
+    //     item.nome = JSON.stringify(item.nome);
+    // });
+
     const itemExistente = carrinho.find(item => item.nome === nome);
 
     if (itemExistente) {
@@ -155,28 +170,35 @@ window.adicionarAoCarrinho = function(nome, preco, imagem, quantidade) {
         carrinho.push({ nome, preco, quantidade, imagem }); // Adiciona novo item ao carrinho
     }
 
+    sessionStorage.setItem('carrinho', JSON.stringify(carrinho));
+
     exibirCarrinho(); // Atualiza a exibição do carrinho
 };
 
-// Função para exibir o carrinho
-function exibirCarrinho() {
-    const carrinhoContainer = document.getElementById("carrinho-itens");
-    carrinhoContainer.innerHTML = ""; // Limpa os itens do carrinho antes de exibir
+// // Função para exibir o carrinho
+// export function exibirCarrinho() {
+//     const carrinhoContainer = document.getElementById("carrinho-itens");
+//     carrinhoContainer.innerHTML = ""; // Limpa os itens do carrinho antes de exibir
+    
+//     let carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || [];
+//     // carrinho.forEach(item => {
+//     //     item.nome = JSON.stringify(item.nome);
+//     // });
 
-    if (carrinho.length === 0) {
-        carrinhoContainer.innerHTML = "<p>Seu carrinho está vazio.</p>";
-    } else {
-        carrinho.forEach(item => {
-            const itemDiv = document.createElement("div");
-            itemDiv.classList.add("item-carrinho");
-            itemDiv.innerHTML = `
-                <p>${item.nome} - Quantidade: ${item.quantidade}</p>
-                <p>R$ ${(item.preco * item.quantidade).toFixed(2)}</p>
-            `;
-            carrinhoContainer.appendChild(itemDiv);
-        });
-    }
-}
+//     if (carrinho.length === 0) {
+//         carrinhoContainer.innerHTML = "<p>Seu carrinho está vazio.</p>";
+//     } else {
+//         carrinho.forEach(item => {
+//             const itemDiv = document.createElement("div");
+//             itemDiv.classList.add("item-carrinho");
+//             itemDiv.innerHTML = `
+//                 <p>${item.nome} - Quantidade: ${item.quantidade}</p>
+//                 <p>R$ ${(item.preco * item.quantidade).toFixed(2)}</p>
+//             `;
+//             carrinhoContainer.appendChild(itemDiv);
+//         });
+//     }
+// }
 
 // Função para mostrar o modal com detalhes do prato
 function mostrarModal(nome, descricao, preco, imagem) {
