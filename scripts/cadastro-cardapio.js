@@ -90,7 +90,6 @@ formCardapio.addEventListener('submit', async (event) => {
     const nome = document.getElementById('nome').value;
     const descricao = document.getElementById('descricao').value;
     const valor = parseFloat(document.getElementById('valor').value);
-    const disponibilidade = document.getElementById('disponibilidade').value;
     const categoria = document.getElementById('categoria').value;
     const imgInput = document.getElementById('img');
     
@@ -107,7 +106,6 @@ formCardapio.addEventListener('submit', async (event) => {
         nome,
         descricao,
         valor,
-        disponibilidade,
         categoria,
         imagem: imagemBase64, // Armazena a imagem em base64
     };

@@ -54,7 +54,6 @@ async function carregarPratos() {
             <h2>${prato.nome}</h2>
             <p><strong>Descrição:</strong> ${prato.descricao}</p>
             <p><strong>Valor:</strong> R$ ${prato.valor.toFixed(2)}</p>
-            <p><strong>Disponibilidade:</strong> ${prato.disponibilidade}</p>
             <p><strong>Categoria:</strong> ${categoriasMap[prato.categoria] || 'Categoria não encontrada'}</p>
         `;
 
@@ -112,7 +111,6 @@ function editarPrato(id, prato) {
     document.getElementById('edit-nome').value = prato.nome;
     document.getElementById('edit-descricao').value = prato.descricao;
     document.getElementById('edit-valor').value = prato.valor;
-    document.getElementById('edit-disponibilidade').value = prato.disponibilidade;
     document.getElementById('edit-categoria').value = prato.categoria;
 
     // Não exibir a imagem atual, então não adicionamos nada no preview.
@@ -127,7 +125,6 @@ function editarPrato(id, prato) {
             nome: document.getElementById('edit-nome').value,
             descricao: document.getElementById('edit-descricao').value,
             valor: parseFloat(document.getElementById('edit-valor').value),
-            disponibilidade: document.getElementById('edit-disponibilidade').value,
             categoria: document.getElementById('edit-categoria').value,
             imagem: null // Inicialmente sem imagem
         };
