@@ -181,47 +181,7 @@ span#user-ativo{
 }
 
 /* Adicionando um estilo para centralizar o conteúdo */
-#login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
 
-#conteudo-pedido {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
-    margin-top: 150px;
-    background-color: var(--cinza);
-    width: 400px;
-    border-radius: 10px;
-    padding: 10px 0 10px 0;
-}
-
-#conteudo-pedido h2 {
-    margin-bottom: 16px;
-    color: var(--cor-preto);
-    font-weight: 700;
-}
-
-#botao-login {
-    padding: 10px 20px;
-    background-color: var(--amarelo);
-    color: var(--preto1);
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-#botao-login:hover {
-    background-color: var(--vermelho);
-    color: var(--cor-branco);
-    transition: background-color 0.3s ease;
-}
 @media screen and (max-width:768px) {
     *{
         transition: 0.5s;
