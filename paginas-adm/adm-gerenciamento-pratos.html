@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +8,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
-    <script src="../scripts/exibir-pratos.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>   
+    <script src="../scripts/exibir-pratos.js" defer></script>
+    <script src="../scripts/adm-sidebar.js" defer></script>
+    <script src="../scripts/adm-seguranca.js" defer></script> <!--Se não estiver logado vai para a página de login do adm-->
     <title>Gerenciamento de Pratos</title>
 </head>
 <body>
@@ -37,7 +41,6 @@
             <!-- As opções de categorias serão carregadas dinamicamente -->
         </select>
     
-        <!-- O campo de imagem já está bem posicionado e não precisa de alteração no HTML. -->
         <!-- Adiciona o campo para nova imagem sem mostrar a imagem atual -->
         <label for="edit-imagem">Imagem:</label>
         <input type="file" id="edit-imagem" accept="image/*">

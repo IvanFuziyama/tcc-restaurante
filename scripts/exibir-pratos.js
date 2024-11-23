@@ -2,10 +2,24 @@ const firebaseConfig = {
     apiKey: "AIzaSyCbgUdVBog-R0DmIZi0mG51_uuhDfnWj4c",
     authDomain: "yaki-bb90f.firebaseapp.com",
     projectId: "yaki-bb90f",
+    storageBucket: "yaki-bb90f.firebasestorage.app",
+    messagingSenderId: "1025023938370",
+    appId: "1:1025023938370:web:de4f3190bd0d76d36102db",
+    measurementId: "G-Y3NNNQ1004"
 };
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
+
+// Função para converter a imagem para base64
+function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
+}
 
 // Função para carregar as categorias e mapeá-las pelo ID
 async function obterCategorias() {
@@ -103,7 +117,7 @@ async function excluirPrato(id) {
 }
 
 // Função para editar o prato
-function editarPrato(id, prato) {
+async function editarPrato(id, prato) {
     // Exibe o formulário de edição
     document.getElementById('formulario-edicao').style.display = 'block';
 
@@ -133,9 +147,8 @@ function editarPrato(id, prato) {
         const imagemFile = imagemInput.files[0];
 
         if (imagemFile) {
-            // Se houver uma nova imagem selecionada, cria a URL da imagem
-            const imagemURL = URL.createObjectURL(imagemFile);
-            updatedPrato.imagem = imagemURL;
+            // Se houver uma nova imagem selecionada, converte para base64
+            updatedPrato.imagem = await fileToBase64(imagemFile);
         } else {
             // Caso não haja nova imagem, manter sem alteração de imagem
             updatedPrato.imagem = prato.imagem; // Não muda a imagem se não for selecionada uma nova
