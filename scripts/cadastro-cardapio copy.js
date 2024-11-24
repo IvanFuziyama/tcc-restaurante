@@ -97,17 +97,15 @@ async function salvar_opcao(opcao) {
 
 let list_questionarios = [];
 let nomes_campos_questionario = {
-    questionario: "questionario-",
-    descricao: "questionario_descricao-",
+    descricao: "questionario-",
     checkbox_incremental: "checkbox_incremental-",
     botao_excluir: "botao_excluir_questionario-",
 };
 let list_itens = [];
 let nomes_campos_opcao = {
-    opcao: "opcao-",
-    descricao_opcao: "opcao_descricao-",
+    descricao_opcao: "opcao-",
     preco: "opcao_preco-",
-    botao_excluir: "botao_excluir_opcao-",
+    botao_excluir: "botao_exlcuir_opcao-",
 };
 // Lidar com o envio do formulário de cadastro de prato
 const formCardapio = document.getElementById('form-cardapio');
@@ -140,11 +138,7 @@ formCardapio.addEventListener('submit', async (event) => {
 
     let id_prato = await salvarPrato(prato);
 
-    alert("questionarios: "+JSON.stringify(list_questionarios));
-    alert("itens: "+JSON.stringify(list_itens));
-
     list_questionarios.forEach(async function(count_questionario){
-        alert("count_questionario="+count_questionario);
         const descricao = document.getElementById(
             nomes_campos_questionario.descricao
             + count_questionario
@@ -244,70 +238,6 @@ let itensCount = 0
 const addQuestionarioButton = document.getElementById('add-questionario');
 
 export function addQuestionario() {
-    const questionariosContainer = document.getElementById('questionarios-container');
-    questionariosCount++;
-    
-    const questionariosId_html = questionariosCount;
-
-    alert("Adcionado questionario "+questionariosId_html);
-
-    // Cria um div para o questionário
-    const questionarioBox = document.createElement('div');
-    questionarioBox.className = 'questionario-box';
-
-    // Adiciona a pergunta ao contador de questionários
-    list_questionarios.push(questionariosId_html);
-
-    // Define o conteúdo HTML do questionário
-    questionarioBox.innerHTML = `
-        <div id="${nomes_campos_questionario.questionario}${questionariosId_html}">
-            <div>
-                <label for="descricao">Descrição:</label>
-                <input type="text" name="descricao" id="${nomes_campos_questionario.descricao}${questionariosId_html}" required>
-            </div>
-            <br>
-
-            <div style="display: flex; align-items: center; gap: 1px;">
-                <label style="margin: 0;">
-                    É do tipo incremental? Sim
-                </label>
-                <input type="checkbox" name="" id="${nomes_campos_questionario.checkbox_incremental}${questionariosId_html}" style="margin: 0;">
-            </div>
-            <br>
-
-            <div id="opcoes-${questionariosId_html}">
-            </div>
-
-            <button 
-                id="botao-${questionariosId_html}" 
-                type="button"
-            >
-                Adicione uma opção
-            </button>
-            <br>
-
-            <button 
-                id="${nomes_campos_questionario.botao_excluir}${questionariosId_html}"
-                type="button" 
-            >
-                Excluir questionário
-            </button>
-        </div>
-    `;
-
-    // Adiciona os event listeners diretamente aos botões criados
-    const botaoAddOpcao = questionarioBox.querySelector(`#botao-${questionariosId_html}`);
-    botaoAddOpcao.addEventListener('click', () => add_opcao(questionariosId_html));
-
-    const botaoExcluir = questionarioBox.querySelector(`#${nomes_campos_questionario.botao_excluir}${questionariosId_html}`);
-    botaoExcluir.addEventListener('click', () => excluir_questionario(questionariosId_html));
-
-    // Adiciona o contêiner do questionário ao contêiner principal
-    questionariosContainer.appendChild(questionarioBox);
-
-}
-
-function mostrar_questionario(){
     // alert("Ola");
     const questionariosContainer = document.getElementById('questionarios-container');
     questionariosCount++;
@@ -317,144 +247,108 @@ function mostrar_questionario(){
     questionarioBox.className = 'questionario-box';
 
     // Cria uma div para o questionario
-    const div = document.createElement('div');
-    div.textContent = `Pergunta ${questionariosCount}:`;
+    const label = document.createElement('div');
+    label.textContent = `Pergunta ${questionariosCount}:`;
     // label.setAttribute('for', `question-${questionariosCount}`);
     list_questionarios.push(questionariosCount);
 
-    div.innerHTML = `
-        <div>
-            <label for="descricao">Descrição:</label>
-            <input type="text" name="descricao" id=${nomes_campos_questionario.descricao}${questionariosCount} required>
-        </div>
-        </br>
+    // Cria uma caixa de texto (input) para a pergunta
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.id = `${nomes_campos_questionario.descricao}${questionariosCount}`;
+    input.name = `${nomes_campos_questionario.descricao}${questionariosCount}`;
+    input.placeholder = `Digite o titulo aqui...`;
+    // alert(`${nomes_campos_questionario.descricao}-${questionariosCount}`);
 
-        <div>
-        <label>É do tipo incremental? Sim</label>
-        <input type="checkbox" name="" id=${nomes_campos_questionario.checkbox_incremental}${questionariosCount} required>
-        </div>
-        </br>
+    // Cria o botao de add opcoes
+    const botao = document.createElement('button');
+    botao.type = 'button';
+    botao.id = `botao-${questionariosCount}`;
+    botao.name = `botao-${questionariosCount}`;
+    botao.textContent = 'Adcione uma opcao';
+    botao.onclick = () => add_opcao(questionariosCount);
 
-        <div id="opcoes-"${questionariosCount}>
-        </div>
+    // Cria uma checkbox
+    const checkbox_incremental = document.createElement('input');
+    checkbox_incremental.type = 'checkbox';
+    checkbox_incremental.id = `${nomes_campos_questionario.checkbox_incremental}${questionariosCount}`;
+    checkbox_incremental.name = `${nomes_campos_questionario.checkbox_incremental}${questionariosCount}`;
 
-        <button 
-            id="botao-${questionariosCount}" 
-            onclick="add_opcao(${questionariosCount})">
-            Adicione uma opção
-        </button>
-        <br>
+    // Cria um rótulo para a checkbox
+    const checkboxLabel_incremental = document.createElement('label');
+    checkboxLabel_incremental.textContent = ' É do tipo incremental? Sim';
+    checkboxLabel_incremental.setAttribute('for', `checkbox_incremental-${questionariosCount}`);
 
-        <button 
-            id="${nomes_campos_questionario.botao_excluir}${questionariosCount}" 
-            onclick="excluir_opcao(${questionariosCount})">
-            Excluir questionário
-        </button>
+    const botao_excluir = document.createElement('button');
+    botao_excluir.type = 'button';
+    botao_excluir.id = `${nomes_campos_questionario.botao_excluir}${questionariosCount}`;
+    botao_excluir.name = `botao-${questionariosCount}`;
+    botao_excluir.textContent = 'Excluir questionario';
+    botao.onclick = () => excluir_opcao(questionariosCount);
 
-    `;
+    // Cria uma div para os itens
+    const itens_div = document.createElement('div');
+    itens_div.id = `opcoes-${questionariosCount}`;
 
     // Adiciona o label e o input ao contêiner da pergunta
-    questionarioBox.appendChild(div);
+    questionarioBox.appendChild(label);
+    // questionarioBox.appendChild(document.createElement('br')); // Quebra de linha
+    questionarioBox.appendChild(input);
+    questionarioBox.appendChild(checkboxLabel_incremental);
+    questionarioBox.appendChild(checkbox_incremental);
+    questionarioBox.appendChild(itens_div);
+    questionarioBox.appendChild(botao);
+    questionarioBox.appendChild(botao_excluir);
 
     // Adiciona o contêiner da pergunta ao contêiner principal
     questionariosContainer.appendChild(questionarioBox);
 }
 
-export function add_opcao(questionario_count) {
-    alert(`Ação para a Pergunta ${questionario_count}!`);
-    itensCount++;
-    const itemId_html = itensCount;
+function mostrar_questionario(){
+    
+}
 
-    const itens_container = document.getElementById(
+export function add_opcao(questionario_count) {
+    // alert(`Ação para a Pergunta ${questionarioId}!`);
+    itensCount++;
+
+    const itens_div = document.getElementById(
         `opcoes-${questionario_count}`
     );
 
-    list_itens.push([itemId_html, questionario_count]);
+    list_itens.push([itensCount, questionario_count]);
     // alert(JSON.stringify(list_itens));
 
     // Cria um div para a nova item
     const itens_box = document.createElement('div');
-    itens_box.className = 'item-box';
+    itens_box.className = 'questionario-box';
+    
+    const label = document.createElement('div');
+    label.textContent = `Opcao:`;
 
-    itens_box.innerHTML = `
-        <div id="${nomes_campos_opcao.opcao}${itemId_html}">
-            <div>Opção</div>
+    const descricao = document.createElement('input');
+    descricao.type = 'text';
+    descricao.id = `${nomes_campos_opcao.descricao_opcao}${itensCount}`;
+    descricao.name = `${nomes_campos_opcao.descricao_opcao}${itensCount}`;
+    descricao.placeholder = `Digite a descricao do item...`;
 
-            <label>Digite a descricao do item</label>
-            <input id=${nomes_campos_opcao.descricao_opcao}${itemId_html} type="text"></input>
+    const preco = document.createElement('input');
+    preco.type = 'text';
+    preco.name = `${nomes_campos_opcao.preco}${itensCount}`
+    preco.id = `${nomes_campos_opcao.preco}${itensCount}`;
+    preco.placeholder = `Digite o preço do item...`;
 
-            <label>Digite o preço do item</label>
-            <input id=${nomes_campos_opcao.preco}${itemId_html} text="text"></input>
+    itens_box.appendChild(label);
+    itens_box.appendChild(descricao);
+    itens_box.appendChild(preco);
 
-            <button 
-                id="${nomes_campos_opcao.botao_excluir}${itemId_html}"
-                type="button" 
-            >
-                Excluir opção
-            </button>
-        </div>
-    `;
-
-    const botaoExcluirOpcao = itens_box.querySelector(`#${nomes_campos_opcao.botao_excluir}${itemId_html}`);
-    botaoExcluirOpcao.addEventListener('click', () => excluir_opcao(itemId_html));
-
-    itens_container.appendChild(itens_box);
+    itens_div.appendChild(itens_box);
 
 }
 
-export function excluir_questionario(questionario_count_excluir){
-    alert(`Ação de excluir ${questionario_count_excluir}!`);
+export function excluir_questionario(questionario_count){
 
-    const questionario = document.getElementById(
-        `${nomes_campos_questionario.questionario}${questionario_count_excluir}`
-    );
-    if (questionario) {
-        // questionario.style.display = 'none'; // Esconde o questionário
-        questionario.remove();
-        
-        let list_questionarios_novo = []
-        list_questionarios.forEach(async function(count_questionario){
-            if(questionario_count_excluir !== count_questionario){
-                list_questionarios_novo.push(count_questionario);    
-            }
-        });
-        
-        let list_itens_novo = []
-        list_itens.forEach(async function(opcao_vals){
-            const count_opcao = opcao_vals[0];
-            const count_seu_questionario = opcao_vals[1];
-            if(questionario_count_excluir !== count_seu_questionario){
-                list_itens_novo.push([count_opcao, count_seu_questionario]);
-            }
-        });
 
-        list_questionarios = list_questionarios_novo
-        list_itens = list_itens_novo
-
-    }
-
-}
-
-export function excluir_opcao(opcao_count_excluir){
-
-    const opcao = document.getElementById(
-        `${nomes_campos_opcao.opcao}${opcao_count_excluir}`
-    );
-    if (opcao) {
-        opcao.style.display = 'none'; // Esconde o questionário
-        
-        let list_itens_novo = []
-        list_itens.forEach(async function(opcao_vals){
-            const count_opcao = opcao_vals[0];
-            const count_seu_questionario = opcao_vals[1];
-            if(opcao_count_excluir !== count_opcao){
-                list_itens_novo.push([count_opcao, count_seu_questionario]);
-            }
-        });
-
-        list_itens = list_itens_novo
-
-    }
 
 }
 
