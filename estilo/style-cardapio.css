@@ -420,6 +420,31 @@ button#finalizar-compra:hover{
 .item-adicional li {
     font-size: 14px;
 }
+/* styles.css */
+#carrinho-itens {
+    max-width: 400px; /* Largura máxima do carrinho */
+    padding: 20px; /* Preenchimento interno */
+}
+
+.item-carrinho {
+    border-bottom: 1px solid #ddd; /* Linha de separação entre itens */
+    padding: 10px 0; /* Preenchimento vertical */
+}
+
+.item-carrinho p {
+    margin: 5px 0; /* Margem entre parágrafos */
+}
+
+.item-carrinho ul {
+    list-style-type: none; /* Remove os marcadores da lista */
+    padding-left: 0; /* Remove o preenchimento da lista */
+}
+
+.item-carrinho ul li {
+    margin: 5px 0; /* Margem entre opções */
+    font-size: 14px; /* Tamanho da fonte */
+    color: #555; /* Cor do texto */
+}
 
 /* Rodapé */
 footer{
