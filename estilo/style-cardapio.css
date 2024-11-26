@@ -319,7 +319,7 @@ select#categoria{
     box-sizing: border-box;
     margin-bottom: 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: flex-start;
     background-color: #fff; /* Fundo branco para destacar os pratos */
     border-radius: 10px; /* Bordas arredondadas */
@@ -367,8 +367,10 @@ select#categoria{
     margin-top: 10px;
 }
 div.info-cardapio{
-    margin: 10px;
-    color: var(--cor-preto);
+    flex: 1; /* Isso permite que o .info-cardapio ocupe o espaço restante */
+    text-align: left; /* Alinha o texto à esquerda */
+    padding: 10px; /* Adiciona um pouco de preenchimento, se necessário */
+    margin: auto;
 }
 #carrinho {
     position: fixed;

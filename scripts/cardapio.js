@@ -21,21 +21,6 @@ const db = getFirestore(app);
 
 import { exibirCarrinho } from './carrinho.js';
 
-// const ordemCategorias = [
-//     "Yakisoba Tradicional", 
-//     "Yakisoba Especial", 
-//     "Mistura", 
-//     "Combo individual (simples)", 
-//     "Combo individual ( Completo)", 
-//     "Combo para Compartilhar",  
-//     "Combo Família", 
-//     "Molhos em Sachês", 
-//     "Sobremesa", 
-//     "Refrigerante", 
-//     "Lojinha yaki'n box"
-// ];
-
-// let carrinho = [];
 let categoriasMap = {}; // Mapeia o nome da categoria ao seu ID
 
 // Função para carregar categorias do Firestore
@@ -50,10 +35,6 @@ async function carregarCategorias() {
         categorias.push({ id: doc.id, nome: data.nome });
     });
 
-    // Ordena as categorias com base na ordem desejada
-    // categorias.sort((a, b) => {
-    //     return ordemCategorias.indexOf(a.nome) - ordemCategorias.indexOf(b.nome);
-    // });
 
     const categoriasSelect = document.getElementById("categoria");
     categoriasSelect.innerHTML = ''; // Limpa as opções existentes
@@ -123,11 +104,6 @@ async function carregarPratos(categoriaId = "") {
                     <p>${prato.descricao}</p>
                     <p><strong>R$ ${prato.valor}</strong></p>
                     <button class="mais-informacoes" onclick="mostrarModal('${prato.nome}', '${prato.descricao}', ${prato.valor}, '${prato.imagem}')">Mais informações</button>
-                    <div class="input-container-prato">
-                        <label for="quantidade-${prato.nome}">Quantidade:</label>
-                        <input type="number" value="1" min="1" id="quantidade-${prato.nome}" class="quantidade">
-                        <button onclick="adicionarAoCarrinho('${prato.nome}', ${prato.valor}, '${prato.imagem}', document.getElementById('quantidade-${prato.nome}').value)">Adicionar ao Carrinho</button>
-                    </div>
                 </div>
             `;
             pratosGrid.appendChild(pratoDiv);
@@ -175,30 +151,6 @@ window.adicionarAoCarrinho = function(nome, preco, imagem, quantidade) {
     exibirCarrinho(); // Atualiza a exibição do carrinho
 };
 
-// // Função para exibir o carrinho
-// export function exibirCarrinho() {
-//     const carrinhoContainer = document.getElementById("carrinho-itens");
-//     carrinhoContainer.innerHTML = ""; // Limpa os itens do carrinho antes de exibir
-    
-//     let carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || [];
-//     // carrinho.forEach(item => {
-//     //     item.nome = JSON.stringify(item.nome);
-//     // });
-
-//     if (carrinho.length === 0) {
-//         carrinhoContainer.innerHTML = "<p>Seu carrinho está vazio.</p>";
-//     } else {
-//         carrinho.forEach(item => {
-//             const itemDiv = document.createElement("div");
-//             itemDiv.classList.add("item-carrinho");
-//             itemDiv.innerHTML = `
-//                 <p>${item.nome} - Quantidade: ${item.quantidade}</p>
-//                 <p>R$ ${(item.preco * item.quantidade).toFixed(2)}</p>
-//             `;
-//             carrinhoContainer.appendChild(itemDiv);
-//         });
-//     }
-// }
 
 // Função para mostrar o modal com detalhes do prato
 function mostrarModal(nome, descricao, preco, imagem) {
