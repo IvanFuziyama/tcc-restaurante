@@ -179,6 +179,46 @@ button#but-perfil-salvar{
 span#user-ativo{
     display: none;/*quando estiver logado tira o login e cadastro e aparece o icone no lugar*/
 }
+main#pedido{
+    background-color: var(--cor-fundo);
+    min-height: 100vh;
+    flex-direction: column;
+    text-align: center; /* Centraliza o texto dentro do body */
+    margin: auto;
+}
+main#pedido h1{
+    margin: 10px 0;
+}
+.pedido-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));  
+    gap: 20px;  
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    
+}
+
+.pedido-card {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    
+}
+
+.pedido-card h3 {
+    font-size: 20px;
+    color: var(--preto1);
+}
+
+.pedido-card p {
+    font-size: 16px;
+    color: var(--preto2);
+    margin-bottom: 8px;
+    font-family: var(--fonte);
+}
 
 /* Adicionando um estilo para centralizar o conteúdo */
 

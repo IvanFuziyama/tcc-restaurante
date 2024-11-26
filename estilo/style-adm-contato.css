@@ -1,9 +1,13 @@
 :root{
-    /*cores da pagina cardapio*/
+    /*cores da pagina contato*/
     --cor-fundo: #eeeeee;
-    --botao-salvar: #16af10;
-    --botao-salvar-hover: #17ec10;
+    --botao-enviar: #16af10;
+    --botao-enviar-hover: #17ec10;
+    --botao-excluir-hover: #e6131a;
 
+    --caixas:#f9f9f9;
+    --msg-usu:#f1f1f1;
+    --msg-adm: #ccc;
     /* cores da pagina principal */
     --vermelho:#B31E22;
     --amarelo:#E99E1E;
@@ -22,13 +26,13 @@ h1 {text-align: center;}
     border-radius: 8px;
     padding: 16px;
     margin-bottom: 16px;
-    background-color: #f9f9f9;
+    background-color: var(--caixas);
 }
 /* Estilo dos campos de texto */
 .contato p {
     font-size: 14px;
     margin: 4px 0;
-    color: #333;
+    color: var(--cor-preto);
 }
 /* Estilo do campo de mensagem com limite de altura e rolagem */
 #mensagem {
@@ -37,7 +41,7 @@ h1 {text-align: center;}
     word-wrap: break-word; /* Quebra de linha para palavras longas */
     margin-top: 8px;
     padding: 8px;
-    background-color: #f1f1f1;
+    background-color: var(--msg-usu);
     border-radius: 4px;
 }
 /* Estilo do textarea de resposta */
@@ -46,20 +50,34 @@ h1 {text-align: center;}
     height: 80px;
     margin-top: 8px;
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--msg-adm);
     border-radius: 4px;
     resize: none;
 }
 /* Botão de enviar resposta */
-.contato button {
+.but-enviar-resposta {
     margin-top: 8px;
     padding: 8px 12px;
     border: none;
-    background-color: #4CAF50;
+    background-color: var(--botao-enviar);
     color: white;
     border-radius: 4px;
     cursor: pointer;
 }
-.contato button:hover {
-    background-color: #45a049;
+.but-enviar-resposta:hover {
+    background-color: var(--botao-enviar-hover);
 }   
+
+/* Botão excluir resposta*/
+.but-excluir-resposta {
+    margin-top: 8px;
+    padding: 8px 12px;
+    border: none;
+    background-color: var(--vermelho);
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.but-excluir-resposta:hover{
+    background-color: var(--botao-excluir-hover);
+}

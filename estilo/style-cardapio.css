@@ -132,6 +132,13 @@ span#user-ativo{
     background-color: rgba(0, 0, 0, 0.7); /* Fundo semitransparente */
     overflow: auto; /* Adiciona rolagem se necessário */
 }
+#cardapio-text-aviso{
+    color: var(--vermelho);
+    font-size: 20px;
+    margin: 5px 0;
+    text-align: center;
+}
+
 
 /* Estilo do conteúdo do modal */
 .modal-content {
