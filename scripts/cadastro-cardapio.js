@@ -162,28 +162,29 @@ formCardapio.addEventListener('submit', async (event) => {
         
         alert("questionario_id="+questionario_id);
 
-        list_itens.forEach(async function(opcao_vals){
+        list_itens.forEach(async function(opcao_vals) {
             const count_opcao = opcao_vals[0];
             const count_seu_questionario = opcao_vals[1];
-            if(count_questionario === count_seu_questionario){
-                
+            if (count_questionario === count_seu_questionario) {
                 const descricao_opcao = document.getElementById(
                     `${nomes_campos_opcao.descricao_opcao}${count_opcao}`
                 ).value;
-                const preco = document.getElementById(
+                const preco = parseFloat(document.getElementById(
                     `${nomes_campos_opcao.preco}${count_opcao}`
-                ).value;
-                
+                ).value); // Converte para número
+        
                 const opcao = {
-                    descricao_opcao, preco, questionario_id
+                    descricao_opcao,
+                    preco, // Agora é garantido ser um número
+                    questionario_id
                 };
-
-                alert("opcao: "+JSON.stringify(opcao));
-
+        
+                alert("opcao: " + JSON.stringify(opcao));
+        
                 await salvar_opcao(opcao);
-
             }
         });
+        
 
     });
 
