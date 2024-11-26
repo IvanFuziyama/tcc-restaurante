@@ -136,12 +136,12 @@ document.getElementById("categoria").addEventListener("change", async (event) =>
 // Função para adicionar ao carrinho
 window.adicionarAoCarrinho = function(nome, preco, imagem) {
     let carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || [];    
-    
+
     // Coletar opções adicionais selecionadas
     const opcoesSelecionadas = {};
     let totalComplementos = 0; // Variável para somar o total dos complementos
     const inputsAdicionais = document.querySelectorAll('input[name^="opcao-"]');
-    
+
     inputsAdicionais.forEach(input => {
         const descricaoOpcao = input.parentElement.textContent.trim(); // Pega a descrição da opção
         if (input.type === "radio" && input.checked) {
@@ -151,18 +151,26 @@ window.adicionarAoCarrinho = function(nome, preco, imagem) {
         } else if (input.type === "number" && parseInt(input.value) > 0) {
             // Para opções incrementais (ex: Molhos)
             const precoOpcao = parseFloat(input.dataset.preco); // Preço do item incremental
-            opcoesSelecionadas[descricaoOpcao] = precoOpcao * parseInt(input.value); // Armazena a quantidade
+            opcoesSelecionadas[descricaoOpcao] = `${input.value}x (R$ ${precoOpcao})`;
             totalComplementos += precoOpcao * parseInt(input.value); // Soma o valor total do complemento
         }
     });
 
-    // Adiciona um novo item ao carrinho, incluindo o valor total do prato + complementos
-    const totalPreco = preco + totalComplementos;
-    carrinho.push({ nome, preco: totalPreco, imagem, opcoes: opcoesSelecionadas });
+    // Calcula o preço total do prato com os complementos
+    const totalPreco = parseFloat(preco) + totalComplementos;
+
+    // Adiciona o prato e os complementos selecionados ao carrinho
+    carrinho.push({ 
+        nome, 
+        preco: totalPreco, 
+        imagem, 
+        opcoes: opcoesSelecionadas 
+    });
 
     sessionStorage.setItem('carrinho', JSON.stringify(carrinho));
     exibirCarrinho(); // Atualiza a exibição do carrinho
 };
+
 
 
 

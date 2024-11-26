@@ -307,58 +307,7 @@ export function addQuestionario() {
 
 }
 
-function mostrar_questionario(){
-    // alert("Ola");
-    const questionariosContainer = document.getElementById('questionarios-container');
-    questionariosCount++;
 
-    // Cria um div para a nova pergunta
-    const questionarioBox = document.createElement('div');
-    questionarioBox.className = 'questionario-box';
-
-    // Cria uma div para o questionario
-    const div = document.createElement('div');
-    div.textContent = `Pergunta ${questionariosCount}:`;
-    // label.setAttribute('for', `question-${questionariosCount}`);
-    list_questionarios.push(questionariosCount);
-
-    div.innerHTML = `
-        <div>
-            <label for="descricao">Descrição:</label>
-            <input type="text" name="descricao" id=${nomes_campos_questionario.descricao}${questionariosCount} required>
-        </div>
-        </br>
-
-        <div>
-        <label>É do tipo incremental? Sim</label>
-        <input type="checkbox" name="" id=${nomes_campos_questionario.checkbox_incremental}${questionariosCount} required>
-        </div>
-        </br>
-
-        <div id="opcoes-"${questionariosCount}>
-        </div>
-
-        <button 
-            id="botao-${questionariosCount}" 
-            onclick="add_opcao(${questionariosCount})">
-            Adicione uma opção
-        </button>
-        <br>
-
-        <button 
-            id="${nomes_campos_questionario.botao_excluir}${questionariosCount}" 
-            onclick="excluir_opcao(${questionariosCount})">
-            Excluir questionário
-        </button>
-
-    `;
-
-    // Adiciona o label e o input ao contêiner da pergunta
-    questionarioBox.appendChild(div);
-
-    // Adiciona o contêiner da pergunta ao contêiner principal
-    questionariosContainer.appendChild(questionarioBox);
-}
 
 export function add_opcao(questionario_count) {
     alert(`Ação para a Pergunta ${questionario_count}!`);
