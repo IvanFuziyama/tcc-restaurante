@@ -269,7 +269,7 @@ export function addQuestionario() {
 
             <div style="display: flex; align-items: center; gap: 1px;">
                 <label style="margin: 0;">
-                    É do tipo incremental? Sim
+                    É do tipo incremental?
                 </label>
                 <input type="checkbox" name="" id="${nomes_campos_questionario.checkbox_incremental}${questionariosId_html}" style="margin: 0;">
             </div>

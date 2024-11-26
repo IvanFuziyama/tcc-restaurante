@@ -403,6 +403,23 @@ button#finalizar-compra{
 button#finalizar-compra:hover{
     background-color: var(--botao-adicionar-hover);
 }
+.item-adicional {
+    margin-bottom: 20px;
+}
+
+.item-adicional h4 {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.item-adicional ul {
+    padding-left: 20px;
+    list-style-type: disc;
+}
+
+.item-adicional li {
+    font-size: 14px;
+}
 
 /* Rodapé */
 footer{

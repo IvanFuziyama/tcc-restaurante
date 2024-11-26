@@ -103,9 +103,13 @@ async function carregarPratos(categoriaId = "") {
                     <h3>${prato.nome}</h3>
                     <p>${prato.descricao}</p>
                     <p><strong>R$ ${prato.valor}</strong></p>
-                    <button class="mais-informacoes" onclick="mostrarModal('${prato.nome}', '${prato.descricao}', ${prato.valor}, '${prato.imagem}')">Mais informações</button>
+                    <button class="mais-informacoes">Mais informações</button>
                 </div>
             `;
+
+            pratoDiv.querySelector('button').addEventListener('click', () => {
+                mostrarModal(prato.nome, prato.descricao, prato.valor, prato.imagem, prato.id);
+            });
             pratosGrid.appendChild(pratoDiv);
             // Ao clicar no prato, mostrar o modal
             pratoDiv.querySelector('button').addEventListener('click', () => {
@@ -152,27 +156,141 @@ window.adicionarAoCarrinho = function(nome, preco, imagem, quantidade) {
 };
 
 
+
 // Função para mostrar o modal com detalhes do prato
-function mostrarModal(nome, descricao, preco, imagem) {
+// Função para mostrar o modal com detalhes do prato
+export async function mostrarModal(nome, descricao, preco, imagem, pratoId) {
     const modal = document.getElementById("modal-prato");
     const nomeElement = document.getElementById("modal-nome");
     const descricaoElement = document.getElementById("modal-descricao");
     const precoElement = document.getElementById("modal-preco");
     const imagemElement = document.getElementById("modal-imagem");
-    const quantidadeElement = document.getElementById("modal-quantidade"); // Campo de quantidade
+    const itensAdicionaisContainer = document.getElementById("modal-itens-adicionais");
 
     nomeElement.textContent = nome;
     descricaoElement.textContent = descricao;
     precoElement.textContent = `Preço: R$ ${preco}`;
     imagemElement.src = imagem;
 
+    // Limpa os itens adicionais antes de adicionar novos
+    itensAdicionaisContainer.innerHTML = '';
+
+    // Passo 1: Obter os itens adicionais relacionados ao prato
+    const itensAdicionaisQuery = query(
+        collection(db, "itens_adicionais"),
+        where("id_prato", "==", pratoId)
+    );
+    const itensSnapshot = await getDocs(itensAdicionaisQuery);
+
+    if (!itensSnapshot.empty) {
+        itensSnapshot.forEach(async (itemDoc) => {
+            const itemData = itemDoc.data();
+        
+            // Cria um contêiner para o item adicional e suas opções
+            const itemContainer = document.createElement("div");
+            itemContainer.className = "item-adicional";
+        
+            // Cria um elemento para o título do item adicional
+            const tituloItem = document.createElement("h4");
+            tituloItem.textContent = itemData.descricao;
+            itemContainer.appendChild(tituloItem);
+        
+            // Passo 2: Obter as opções relacionadas ao item adicional
+            const opcoesQuery = query(
+                collection(db, "opcao"),
+                where("questionario_id", "==", itemDoc.id)
+            );
+            const opcoesSnapshot = await getDocs(opcoesQuery);
+        
+            if (!opcoesSnapshot.empty) {
+                const opcoesLista = document.createElement("ul"); // Lista para as opções
+                let totalSelecionado = 0;  // Contador para o total de itens selecionados
+        
+                opcoesSnapshot.forEach(opcaoDoc => {
+                    const opcaoData = opcaoDoc.data();
+                    const opcaoElement = document.createElement("li");
+
+                    // Se for um item incremental, tipo ketchup ou mostarda
+                    if (itemData.incremental) {
+                        const label = document.createElement("label");
+                        label.textContent = `${opcaoData.descricao_opcao} - R$ ${opcaoData.preco}`;
+
+                        const input = document.createElement("input");
+                        input.type = "number";
+                        input.min = 0;
+                        input.max = 2;  // Limite de 2 por tipo de molho
+                        input.value = 0; // Valor inicial
+                        input.name = `opcao-${itemData.id}`;
+
+                        // Adiciona o evento de controle da quantidade
+                        input.addEventListener('input', () => {
+                            // Atualiza o total de itens selecionados
+                            totalSelecionado = 0;
+                            document.querySelectorAll(`input[name="opcao-${itemData.id}"]`).forEach(input => {
+                                totalSelecionado += parseInt(input.value) || 0;
+                            });
+
+                            // Limita a quantidade total de itens selecionados a 2
+                            if (totalSelecionado > 2) {
+                                input.value = 0; // Reverte a última seleção
+                                alert("Você pode adicionar no máximo 2 itens.");
+                            }
+                        });
+
+                        label.appendChild(input);
+                        opcaoElement.appendChild(label);
+                    } else {
+                        // Para as opções de checkbox (uma escolha única)
+                        const input = document.createElement("input");
+                        input.type = "checkbox";
+                        input.name = `opcao-${itemData.id}`;
+                        input.addEventListener('change', () => {
+                            // Verifica o total de itens selecionados
+                            totalSelecionado = 0;
+                            document.querySelectorAll(`input[name="opcao-${itemData.id}"]:checked`).forEach(() => {
+                                totalSelecionado += 1;
+                            });
+
+                            // Limita o número total de itens selecionados a 2
+                            if (totalSelecionado > 2) {
+                                input.checked = false; // Reverte a seleção
+                                alert("Você pode selecionar no máximo 2 itens.");
+                            }
+                        });
+
+                        const label = document.createElement("label");
+                        label.textContent = `${opcaoData.descricao_opcao} - R$ ${opcaoData.preco}`;
+                        opcaoElement.appendChild(input);
+                        opcaoElement.appendChild(label);
+                    }
+        
+                    opcoesLista.appendChild(opcaoElement);
+                });
+                itemContainer.appendChild(opcoesLista); // Adiciona a lista ao contêiner do item
+            } else {
+                // Caso não haja opções, exibe uma mensagem
+                const mensagemSemOpcoes = document.createElement("p");
+                mensagemSemOpcoes.textContent = "Nenhuma opção disponível.";
+                itemContainer.appendChild(mensagemSemOpcoes);
+            }
+        
+            // Adiciona o contêiner do item adicional ao modal
+            itensAdicionaisContainer.appendChild(itemContainer);
+        });
+    } else {
+        // Caso não haja itens adicionais, exibe uma mensagem
+        const mensagemSemItens = document.createElement("p");
+        mensagemSemItens.textContent = "Nenhum item adicional disponível.";
+        itensAdicionaisContainer.appendChild(mensagemSemItens);
+    }
+
+    // Exibe o modal
     modal.style.display = "flex";
 
     // Adicionar ao carrinho dentro do modal
     document.getElementById("modal-adicionar").onclick = function() {
-        const quantidade = parseInt(quantidadeElement.value); // Captura a quantidade do input
-        adicionarAoCarrinho(nome, preco, imagem, quantidade); // Passa a quantidade para a função
-        modal.style.display = "none"; // Fechar modal ao adicionar
+        adicionarAoCarrinho(nome, preco, imagem, 1); // Passa quantidade como 1 por padrão
+        modal.style.display = "none"; // Fecha o modal ao adicionar
     };
 }
 
