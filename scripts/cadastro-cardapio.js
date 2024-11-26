@@ -384,7 +384,7 @@ export function add_opcao(questionario_count) {
             <input id=${nomes_campos_opcao.descricao_opcao}${itemId_html} type="text"></input>
 
             <label>Digite o preço do item</label>
-            <input id=${nomes_campos_opcao.preco}${itemId_html} text="text"></input>
+            <input id=${nomes_campos_opcao.preco}${itemId_html} type="number" step="0.01"></input>
 
             <button 
                 id="${nomes_campos_opcao.botao_excluir}${itemId_html}"
