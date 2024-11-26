@@ -11,11 +11,32 @@ export function exibirCarrinho() {
         carrinho.forEach(item => {
             const itemDiv = document.createElement("div");
             itemDiv.classList.add("item-carrinho");
-            const precoFormatado = item.preco ? item.preco.toFixed(2) : "0.00"; // Verifica se item.preco é válido
+            const precoFormatado = item.preco.toFixed(2); // Formata o preço para 2 casas decimais
+
+            // Cria o HTML básico do item
             itemDiv.innerHTML = `
-                <p>${item.nome}</p>
+                <p><strong>${item.nome}</strong></p>
                 <p>R$ ${precoFormatado}</p>
             `;
+
+            // Verifica e adiciona as opções adicionais, se existirem
+            if (item.opcoes && Object.keys(item.opcoes).length > 0) {
+                const opcoesList = document.createElement("ul");
+                opcoesList.classList.add("opcoes-adicionais");
+            
+                for (const [descricao, quantidade] of Object.entries(item.opcoes)) {
+                    const opcaoItem = document.createElement("li");
+            
+                    // Mostra a descrição e a quantidade
+                    opcaoItem.textContent = `${descricao}: ${quantidade}x`;
+                    opcoesList.appendChild(opcaoItem);
+                }
+            
+                itemDiv.appendChild(opcoesList);
+            }
+            
+            
+
             carrinhoContainer.appendChild(itemDiv);
         });
     }
@@ -31,3 +52,4 @@ document.getElementById("carrinho").addEventListener("click", () => {
 document.getElementById("fechar-modal-carrinho").addEventListener("click", () => {
     document.getElementById("modal-carrinho").style.display = "none";
 });
+

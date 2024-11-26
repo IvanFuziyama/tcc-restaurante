@@ -147,12 +147,13 @@ window.adicionarAoCarrinho = function(nome, preco, imagem) {
         const descricaoOpcao = input.parentElement.textContent.trim(); // Pega a descrição da opção
         if (input.type === "radio" && input.checked) {
             // Para opções que são radio buttons (ex: Proteínas)
-            opcoesSelecionadas[descricaoOpcao] = parseFloat(input.dataset.preco); // Armazena a descrição com o preço
+            opcoesSelecionadas[descricaoOpcao] = (opcoesSelecionadas[descricaoOpcao] || 0) + 1;
             totalComplementos += parseFloat(input.dataset.preco); // Soma o preço da opção
         } else if (input.type === "number" && parseInt(input.value) > 0) {
             // Para opções incrementais (ex: Molhos)
             const precoOpcao = parseFloat(input.dataset.preco); // Preço do item incremental
-            opcoesSelecionadas[descricaoOpcao] = `${input.value}x (R$ ${precoOpcao})`;
+            const quantidade = parseInt(input.value);
+            opcoesSelecionadas[descricaoOpcao] = (opcoesSelecionadas[descricaoOpcao] || 0) + quantidade;;
             totalComplementos += precoOpcao * parseInt(input.value); // Soma o valor total do complemento
         }
     });
@@ -213,6 +214,19 @@ export async function mostrarModal(nome, descricao, preco, imagem, pratoId) {
                     where("questionario_id", "==", itemDoc.id)
                 );
 
+                function verificarLimiteIncrementos(inputsAdicionais, maxLimite) {
+                    let totalSelecionado = 0;
+                
+                    inputsAdicionais.forEach(input => {
+                        if (input.type === "number" && parseInt(input.value) > 0) {
+                            totalSelecionado += parseInt(input.value);
+                        }
+                    });
+                
+                    return totalSelecionado <= maxLimite;
+                }
+                
+
                 const opcoesSnapshot = await getDocs(opcoesQuery);
 
                 if (!opcoesSnapshot.empty) {
@@ -220,11 +234,8 @@ export async function mostrarModal(nome, descricao, preco, imagem, pratoId) {
 
                     opcoesSnapshot.forEach(opcaoDoc => {
                         const opcaoData = opcaoDoc.data();
-                        console.log("Dados da opção carregada:", opcaoData); // Verifica o que está sendo recebido
                     
                         const opcaoElement = document.createElement("li");
-                    
-                        // Acessa o campo correto
                         const descricaoOpcao = opcaoData.descricao_opcao || "Descrição não disponível";
                         const preco = opcaoData.preco || "Preço não definido";
                     
@@ -235,14 +246,24 @@ export async function mostrarModal(nome, descricao, preco, imagem, pratoId) {
                         input.type = itemData.incremental ? "number" : "radio";
                         input.name = `opcao-${itemData.id}`;
                         input.dataset.preco = preco;
+                        input.min = 0;
+                        input.max = 2; // Limite máximo para cada item
+                    
+                        if (itemData.incremental) {
+                            input.addEventListener("input", () => {
+                                const inputsAdicionais = document.querySelectorAll('input[name^="opcao-"][type="number"]');
+                                if (!verificarLimiteIncrementos(inputsAdicionais, 2)) {
+                                    input.value = 0; // Reseta o valor se ultrapassar o limite
+                                    alert("Você pode selecionar no máximo 2 complementos no total.");
+                                }
+                            });
+                        }
                     
                         label.appendChild(input);
                         opcaoElement.appendChild(label);
                         opcoesLista.appendChild(opcaoElement);
                     });
                     
-                    
-
                     itemContainer.appendChild(opcoesLista);
                 } else {
                     const mensagemSemOpcoes = document.createElement("p");
