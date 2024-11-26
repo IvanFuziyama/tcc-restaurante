@@ -135,12 +135,11 @@ document.getElementById("categoria").addEventListener("change", async (event) =>
 
 // Função para adicionar ao carrinho
 window.adicionarAoCarrinho = function(nome, preco, imagem) {
-    let carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || [];
+    let carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || [];    
     
     // Coletar opções adicionais selecionadas
     const opcoesSelecionadas = {};
     let totalComplementos = 0; // Variável para somar o total dos complementos
-
     const inputsAdicionais = document.querySelectorAll('input[name^="opcao-"]');
     
     inputsAdicionais.forEach(input => {
@@ -158,13 +157,17 @@ window.adicionarAoCarrinho = function(nome, preco, imagem) {
     });
 
     // Adiciona um novo item ao carrinho, incluindo o valor total do prato + complementos
-    carrinho.push({ nome, preco, imagem, opcoes: opcoesSelecionadas, total: preco + totalComplementos });
+    const totalPreco = preco + totalComplementos;
+    carrinho.push({ nome, preco: totalPreco, imagem, opcoes: opcoesSelecionadas });
 
     sessionStorage.setItem('carrinho', JSON.stringify(carrinho));
     exibirCarrinho(); // Atualiza a exibição do carrinho
 };
 
 
+
+
+// Função para mostrar o modal com detalhes do prato
 // Função para mostrar o modal com detalhes do prato
 export async function mostrarModal(nome, descricao, preco, imagem, pratoId) {
     const modal = document.getElementById("modal-prato");
@@ -183,6 +186,7 @@ export async function mostrarModal(nome, descricao, preco, imagem, pratoId) {
     // Limpa os itens adicionais antes de adicionar novos
     itensAdicionaisContainer.innerHTML = '';
 
+    // Passo 1: Obter os itens adicionais relacionados ao prato
     // Obter os itens adicionais relacionados ao prato
     const itensAdicionaisQuery = query(
         collection(db, "itens_adicionais"),
@@ -205,12 +209,13 @@ export async function mostrarModal(nome, descricao, preco, imagem, pratoId) {
                 collection(db, "opcao"),
                 where("questionario_id", "==", itemDoc.id)
             );
-            
+
             const opcoesSnapshot = await getDocs(opcoesQuery);
-        
+
             if (!opcoesSnapshot.empty) {
                 const opcoesLista = document.createElement("ul"); // Lista para as opções
-
+                let totalSelecionado = 0;  // Contador para o total de itens selecionados
+        
                 opcoesSnapshot.forEach(opcaoDoc => {
                     const opcaoData = opcaoDoc.data();
                     const opcaoElement = document.createElement("li");
@@ -219,11 +224,12 @@ export async function mostrarModal(nome, descricao, preco, imagem, pratoId) {
                     if (itemData.incremental) {
                         const label = document.createElement("label");
                         label.textContent = `${opcaoData.descricao_opcao} - R$ ${opcaoData.preco}`;
+                        
                         const input = document.createElement("input");
                         input.type = "number";
                         input.min = 0;
                         input.max = 2;  // Limite de 2 por tipo de molho
-                        input.value = 0; // Valor inicial
+                        input.value = 0; // Valor inicial   
                         input.name = `opcao-${itemData.id}-${opcaoData.id}`; // Nome do input para identificação
                         input.dataset.preco = opcaoData.preco; // Adicionando preço da opção no input
                         
@@ -234,6 +240,7 @@ export async function mostrarModal(nome, descricao, preco, imagem, pratoId) {
                         // Para as opções de checkbox (uma escolha única)
                         const input = document.createElement("input");
                         input.type = "radio";
+                        input.name = `opcao-${itemData.id}`;
                         input.name = `opcao-${itemData.id}`; // Nome do input para identificação
 
                         const label = document.createElement("label");
@@ -242,7 +249,7 @@ export async function mostrarModal(nome, descricao, preco, imagem, pratoId) {
                         opcaoElement.appendChild(input);
                         opcaoElement.appendChild(label);
                     }
-        
+
                     opcoesLista.appendChild(opcaoElement);
                 });
                 itemContainer.appendChild(opcoesLista); // Adiciona a lista ao contêiner do item
@@ -252,7 +259,7 @@ export async function mostrarModal(nome, descricao, preco, imagem, pratoId) {
                 mensagemSemOpcoes.textContent = "Nenhuma opção disponível.";
                 itemContainer.appendChild(mensagemSemOpcoes);
             }
-        
+
             // Adiciona o contêiner do item adicional ao modal
             itensAdicionaisContainer.appendChild(itemContainer);
         });
@@ -268,6 +275,7 @@ export async function mostrarModal(nome, descricao, preco, imagem, pratoId) {
 
     // Adicionar ao carrinho dentro do modal
     document.getElementById("modal-adicionar").onclick = function() {
+        adicionarAoCarrinho(nome, preco, imagem, 1); // Passa quantidade como 1 por padrão
         adicionarAoCarrinho(nome, preco, imagem); // Passa apenas os dados do prato
         modal.style.display = "none"; // Fecha o modal ao adicionar
     };
