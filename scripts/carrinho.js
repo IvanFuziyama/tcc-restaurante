@@ -4,9 +4,6 @@ export function exibirCarrinho() {
     carrinhoContainer.innerHTML = ""; // Limpa os itens do carrinho antes de exibir
 
     let carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || [];
-    // carrinho.forEach(item => {
-    //     item.nome = JSON.stringify(item.nome);
-    // });
 
     if (carrinho.length === 0) {
         carrinhoContainer.innerHTML = "<p>Seu carrinho está vazio.</p>";
@@ -14,9 +11,10 @@ export function exibirCarrinho() {
         carrinho.forEach(item => {
             const itemDiv = document.createElement("div");
             itemDiv.classList.add("item-carrinho");
+            const precoFormatado = item.preco ? item.preco.toFixed(2) : "0.00"; // Verifica se item.preco é válido
             itemDiv.innerHTML = `
                 <p>${item.nome}</p>
-                <p>R$ ${item.preco.toFixed(2)}</p>
+                <p>R$ ${precoFormatado}</p>
             `;
             carrinhoContainer.appendChild(itemDiv);
         });

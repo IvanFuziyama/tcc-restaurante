@@ -57,13 +57,17 @@ async function carregarCategorias() {
 // Função para carregar pratos do Firestore
 async function carregarPratos(categoriaId = "") {
     const pratosRef = collection(db, "pratos");
-    // const pratosSnapshot = await getDocs(pratosRef);
     let pratosSnapshot;
 
     if (categoriaId) {
-        pratosSnapshot = await getDocs(query(pratosRef, where("categoria", "==", categoriaId)));
+        if (categoriaId !== undefined && categoriaId !== "") {
+            pratosSnapshot = await getDocs(query(pratosRef, where("categoria", "==", categoriaId)));
+        } else {
+            console.error("categoriaId é inválido:", categoriaId);
+            pratosSnapshot = await getDocs(pratosRef); // Carrega todos os pratos
+        }
     } else {
-        pratosSnapshot = await getDocs(pratosRef);
+        pratosSnapshot = await getDocs(pratosRef); // Carrega todos os pratos
     }
 
     const pratosList = pratosSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
@@ -111,15 +115,12 @@ async function carregarPratos(categoriaId = "") {
                 mostrarModal(prato.nome, prato.descricao, prato.valor, prato.imagem, prato.id);
             });
             pratosGrid.appendChild(pratoDiv);
-            // Ao clicar no prato, mostrar o modal
-            pratoDiv.querySelector('button').addEventListener('click', () => {
-                mostrarModal(prato.nome, prato.descricao, prato.valor, prato.imagem);
-            });
         });
         categoriaDiv.appendChild(pratosGrid);
-        pratosContainer.appendChild(categoriaDiv)
+        pratosContainer.appendChild(categoriaDiv);
     }
 }
+
 
 // Carregar categorias ao iniciar
 document.addEventListener('DOMContentLoaded', async () => {
@@ -163,7 +164,6 @@ window.adicionarAoCarrinho = function(nome, preco, imagem) {
     carrinho.push({ 
         nome, 
         preco: totalPreco, 
-        imagem, 
         opcoes: opcoesSelecionadas 
     });
 
@@ -176,7 +176,6 @@ window.adicionarAoCarrinho = function(nome, preco, imagem) {
 
 
 // Função para mostrar o modal com detalhes do prato
-// Função para mostrar o modal com detalhes do prato
 export async function mostrarModal(nome, descricao, preco, imagem, pratoId) {
     const modal = document.getElementById("modal-prato");
     const nomeElement = document.getElementById("modal-nome");
@@ -185,109 +184,91 @@ export async function mostrarModal(nome, descricao, preco, imagem, pratoId) {
     const imagemElement = document.getElementById("modal-imagem");
     const itensAdicionaisContainer = document.getElementById("modal-itens-adicionais");
 
-    // Definindo os valores do modal
     nomeElement.textContent = nome;
     descricaoElement.textContent = descricao;
     precoElement.textContent = `Preço: R$ ${preco}`;
     imagemElement.src = imagem;
 
-    // Limpa os itens adicionais antes de adicionar novos
-    itensAdicionaisContainer.innerHTML = '';
+    itensAdicionaisContainer.innerHTML = ''; // Limpa itens adicionais
 
-    // Passo 1: Obter os itens adicionais relacionados ao prato
-    // Obter os itens adicionais relacionados ao prato
-    const itensAdicionaisQuery = query(
-        collection(db, "itens_adicionais"),
-        where("id_prato", "==", pratoId)
-    );
-    const itensSnapshot = await getDocs(itensAdicionaisQuery);
+    try {
+        const itensAdicionaisQuery = query(
+            collection(db, "itens_adicionais"),
+            where("id_prato", "==", pratoId)
+        );
+        const itensSnapshot = await getDocs(itensAdicionaisQuery);
 
-    if (!itensSnapshot.empty) {
-        itensSnapshot.forEach(async (itemDoc) => {
-            const itemData = itemDoc.data();
+        if (!itensSnapshot.empty) {
+            itensSnapshot.forEach(async (itemDoc) => {
+                const itemData = itemDoc.data();
+                const itemContainer = document.createElement("div");
+                itemContainer.className = "item-adicional";
 
-            const itemContainer = document.createElement("div");
-            itemContainer.className = "item-adicional";
+                const tituloItem = document.createElement("h4");
+                tituloItem.textContent = itemData.descricao;
+                itemContainer.appendChild(tituloItem);
 
-            const tituloItem = document.createElement("h4");
-            tituloItem.textContent = itemData.descricao;
-            itemContainer.appendChild(tituloItem);
+                const opcoesQuery = query(
+                    collection(db, "opcao"),
+                    where("questionario_id", "==", itemDoc.id)
+                );
 
-            const opcoesQuery = query(
-                collection(db, "opcao"),
-                where("questionario_id", "==", itemDoc.id)
-            );
+                const opcoesSnapshot = await getDocs(opcoesQuery);
 
-            const opcoesSnapshot = await getDocs(opcoesQuery);
+                if (!opcoesSnapshot.empty) {
+                    const opcoesLista = document.createElement("ul");
 
-            if (!opcoesSnapshot.empty) {
-                const opcoesLista = document.createElement("ul"); // Lista para as opções
-                let totalSelecionado = 0;  // Contador para o total de itens selecionados
-        
-                opcoesSnapshot.forEach(opcaoDoc => {
-                    const opcaoData = opcaoDoc.data();
-                    const opcaoElement = document.createElement("li");
-
-                    // Se for um item incremental, tipo ketchup ou mostarda
-                    if (itemData.incremental) {
+                    opcoesSnapshot.forEach(opcaoDoc => {
+                        const opcaoData = opcaoDoc.data();
+                        console.log("Dados da opção carregada:", opcaoData); // Verifica o que está sendo recebido
+                    
+                        const opcaoElement = document.createElement("li");
+                    
+                        // Acessa o campo correto
+                        const descricaoOpcao = opcaoData.descricao_opcao || "Descrição não disponível";
+                        const preco = opcaoData.preco || "Preço não definido";
+                    
                         const label = document.createElement("label");
-                        label.textContent = `${opcaoData.descricao_opcao} - R$ ${opcaoData.preco}`;
-                        
+                        label.textContent = `${descricaoOpcao} - R$ ${preco}`;
+                    
                         const input = document.createElement("input");
-                        input.type = "number";
-                        input.min = 0;
-                        input.max = 2;  // Limite de 2 por tipo de molho
-                        input.value = 0; // Valor inicial   
-                        input.name = `opcao-${itemData.id}-${opcaoData.id}`; // Nome do input para identificação
-                        input.dataset.preco = opcaoData.preco; // Adicionando preço da opção no input
-                        
+                        input.type = itemData.incremental ? "number" : "radio";
+                        input.name = `opcao-${itemData.id}`;
+                        input.dataset.preco = preco;
+                    
                         label.appendChild(input);
                         opcaoElement.appendChild(label);
-                        
-                    } else {
-                        // Para as opções de checkbox (uma escolha única)
-                        const input = document.createElement("input");
-                        input.type = "radio";
-                        input.name = `opcao-${itemData.id}`;
-                        input.name = `opcao-${itemData.id}`; // Nome do input para identificação
+                        opcoesLista.appendChild(opcaoElement);
+                    });
+                    
+                    
 
-                        const label = document.createElement("label");
-                        label.textContent = `${opcaoData.descricao_opcao} - R$ ${opcaoData.preco}`;
+                    itemContainer.appendChild(opcoesLista);
+                } else {
+                    const mensagemSemOpcoes = document.createElement("p");
+                    mensagemSemOpcoes.textContent = "Nenhuma opção disponível.";
+                    itemContainer.appendChild(mensagemSemOpcoes);
+                }
 
-                        opcaoElement.appendChild(input);
-                        opcaoElement.appendChild(label);
-                    }
-
-                    opcoesLista.appendChild(opcaoElement);
-                });
-                itemContainer.appendChild(opcoesLista); // Adiciona a lista ao contêiner do item
-            } else {
-                // Caso não haja opções, exibe uma mensagem
-                const mensagemSemOpcoes = document.createElement("p");
-                mensagemSemOpcoes.textContent = "Nenhuma opção disponível.";
-                itemContainer.appendChild(mensagemSemOpcoes);
-            }
-
-            // Adiciona o contêiner do item adicional ao modal
-            itensAdicionaisContainer.appendChild(itemContainer);
-        });
-    } else {
-        // Caso não haja itens adicionais, exibe uma mensagem
-        const mensagemSemItens = document.createElement("p");
-        mensagemSemItens.textContent = "Nenhum item adicional disponível.";
-        itensAdicionaisContainer.appendChild(mensagemSemItens);
+                itensAdicionaisContainer.appendChild(itemContainer);
+            });
+        } else {
+            const mensagemSemItens = document.createElement("p");
+            mensagemSemItens.textContent = "Nenhum item adicional disponível.";
+            itensAdicionaisContainer.appendChild(mensagemSemItens);
+        }
+    } catch (error) {
+        console.error("Erro ao carregar itens adicionais:", error);
     }
 
-    // Exibe o modal
     modal.style.display = "flex";
 
-    // Adicionar ao carrinho dentro do modal
     document.getElementById("modal-adicionar").onclick = function() {
-        adicionarAoCarrinho(nome, preco, imagem, 1); // Passa quantidade como 1 por padrão
-        adicionarAoCarrinho(nome, preco, imagem); // Passa apenas os dados do prato
-        modal.style.display = "none"; // Fecha o modal ao adicionar
+        adicionarAoCarrinho(nome, preco, imagem);
+        modal.style.display = "none";
     };
 }
+
 
 // Fechar o modal
 document.getElementById("fechar-modal").addEventListener("click", () => {
