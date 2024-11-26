@@ -5,9 +5,6 @@ export function exibirCarrinho() {
     carrinhoContainer.innerHTML = ""; // Limpa os itens do carrinho antes de exibir
     
     let carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || [];
-    // carrinho.forEach(item => {
-    //     item.nome = JSON.stringify(item.nome);
-    // });
 
     if (carrinho.length === 0) {
         carrinhoContainer.innerHTML = "<p>Seu carrinho está vazio.</p>";
@@ -16,8 +13,8 @@ export function exibirCarrinho() {
             const itemDiv = document.createElement("div");
             itemDiv.classList.add("item-carrinho");
             itemDiv.innerHTML = `
-                <p>${item.nome} - Quantidade: ${item.quantidade}</p>
-                <p>R$ ${(item.preco * item.quantidade).toFixed(2)}</p>
+                <p>${item.nome}</p>
+                <p>R$ ${item.preco.toFixed(2)}</p>
             `;
             carrinhoContainer.appendChild(itemDiv);
         });

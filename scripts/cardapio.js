@@ -185,21 +185,19 @@ export async function mostrarModal(nome, descricao, preco, imagem, pratoId) {
     if (!itensSnapshot.empty) {
         itensSnapshot.forEach(async (itemDoc) => {
             const itemData = itemDoc.data();
-        
-            // Cria um contêiner para o item adicional e suas opções
+
             const itemContainer = document.createElement("div");
             itemContainer.className = "item-adicional";
-        
-            // Cria um elemento para o título do item adicional
+
             const tituloItem = document.createElement("h4");
             tituloItem.textContent = itemData.descricao;
             itemContainer.appendChild(tituloItem);
-        
-            // Passo 2: Obter as opções relacionadas ao item adicional
+
             const opcoesQuery = query(
                 collection(db, "opcao"),
                 where("questionario_id", "==", itemDoc.id)
             );
+            
             const opcoesSnapshot = await getDocs(opcoesQuery);
         
             if (!opcoesSnapshot.empty) {
@@ -214,7 +212,7 @@ export async function mostrarModal(nome, descricao, preco, imagem, pratoId) {
                     if (itemData.incremental) {
                         const label = document.createElement("label");
                         label.textContent = `${opcaoData.descricao_opcao} - R$ ${opcaoData.preco}`;
-
+                        
                         const input = document.createElement("input");
                         input.type = "number";
                         input.min = 0;
@@ -242,26 +240,16 @@ export async function mostrarModal(nome, descricao, preco, imagem, pratoId) {
                     } else {
                         // Para as opções de checkbox (uma escolha única)
                         const input = document.createElement("input");
-                        input.type = "checkbox";
+                        input.type = "radio";
                         input.name = `opcao-${itemData.id}`;
-                        input.addEventListener('change', () => {
-                            // Verifica o total de itens selecionados
-                            totalSelecionado = 0;
-                            document.querySelectorAll(`input[name="opcao-${itemData.id}"]:checked`).forEach(() => {
-                                totalSelecionado += 1;
-                            });
-
-                            // Limita o número total de itens selecionados a 2
-                            if (totalSelecionado > 2) {
-                                input.checked = false; // Reverte a seleção
-                                alert("Você pode selecionar no máximo 2 itens.");
-                            }
-                        });
 
                         const label = document.createElement("label");
                         label.textContent = `${opcaoData.descricao_opcao} - R$ ${opcaoData.preco}`;
+
                         opcaoElement.appendChild(input);
                         opcaoElement.appendChild(label);
+
+
                     }
         
                     opcoesLista.appendChild(opcaoElement);
