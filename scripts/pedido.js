@@ -64,7 +64,7 @@ async function carregarPedidos(user) { // Agora user é um argumento passado par
                 itensHtml += `<li>
                     ${item.nome || "Sem nome"} - R$ ${item.preco ? item.preco.toFixed(2) : "0.00"}
                     ${item.opcoes ? formatarOpcoes(item.opcoes) : ""}
-                </li>`;
+                <br></li>`;
             });
         } else {
             itensHtml = "<li>Sem itens</li>";
@@ -77,12 +77,14 @@ async function carregarPedidos(user) { // Agora user é um argumento passado par
        
         // Define o conteúdo do cartão
         pedidoCard.innerHTML = `
+            <div class = "pedido-modal">
             <h3>Pedido de ${nomeUsuario}</h3>
-            <p>Total: R$ ${pedido.total.toFixed(2)}</p>
-            <p>Status: ${pedido.status}</p>
+            <p class="status-pedido">Status: ${pedido.status}</p>
             <p>Data: ${dataFormatada} às ${horaFormatada}</p>
             <p><strong>Itens:</strong></p>
             <ul>${itensHtml}</ul>
+            <p>Total: R$ ${pedido.total.toFixed(2)}</p>
+            </div>
         `;
         pedidosContainer.appendChild(pedidoCard);
     });

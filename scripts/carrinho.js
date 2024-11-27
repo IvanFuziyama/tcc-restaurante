@@ -146,7 +146,7 @@ document.getElementById("confirmar-pedido").addEventListener("click", () => {
                 mensagem += `- ${item.nome}: R$ ${item.preco.toFixed(2)}%0A`;
                 if (item.opcoes) {
                     for (const [descricao, quantidade] of Object.entries(item.opcoes)) {
-                        mensagem += `  ${descricao}: ${quantidade}x%0A`;
+                        mensagem += `${descricao}: ${quantidade}x%0A`;
                     }
                 }
             });

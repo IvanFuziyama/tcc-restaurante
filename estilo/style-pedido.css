@@ -13,6 +13,7 @@
     --preto2:#272727;
     --cor-branco:#ffffff;
     --cor-preto: #000000;
+    --fonte-text: arial, Helvetica, sans-serif;
     --fonte-padrao: "Actor",sans-serif;
     --fonte-titulo: "Josefin Sans", sans-serif; 
 }
@@ -20,6 +21,7 @@
     margin: 0;
     padding: 0;
     font-family: var(--fonte-padrao);
+
 }
 
 body{
@@ -189,36 +191,38 @@ main#pedido{
 main#pedido h1{
     margin: 10px 0;
 }
-.pedido-lista {
+#pedido-lista {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));  
     gap: 20px;  
     width: 100%;
     max-width: 1000px;
     margin: 0 auto;
-    
+}
+.pedido-modal .status-pedido{
+    color: var(--amarelo);
 }
 
-.pedido-card {
-    background-color: #fff;
+.pedido-card{
+    background-color: #ffffff;
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    
 }
 
 .pedido-card h3 {
     font-size: 20px;
-    color: var(--preto1);
+    color: var(--cor-preto);
 }
 
 .pedido-card p {
     font-size: 16px;
-    color: var(--preto2);
+    color: var(--cor-preto);
     margin-bottom: 8px;
-    font-family: var(--fonte);
+    font-family: var(--fonte-text);
 }
+.pedido-modal{color: var(--cor-preto);}
+.pedido-modal ul{list-style: none;}
 
 /* Adicionando um estilo para centralizar o conteúdo */
 
