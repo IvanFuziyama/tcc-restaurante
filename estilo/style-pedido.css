@@ -218,7 +218,8 @@ main#pedido h1{
     color: var(--cor-preto);
 }
 
-.pedido-card p {
+.pedido-card p,
+.pedido-card ul li {
     font-size: 16px;
     color: var(--cor-preto);
     margin-bottom: 8px;
