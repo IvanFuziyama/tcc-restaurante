@@ -135,7 +135,7 @@ document.getElementById("categoria").addEventListener("change", async (event) =>
 });
 
 // Função para adicionar ao carrinho
-window.adicionarAoCarrinho = function(nome, preco, imagem) {
+window.adicionarAoCarrinho = function(nome, preco) {
     let carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || [];    
 
     // Coletar opções adicionais selecionadas
@@ -285,7 +285,7 @@ export async function mostrarModal(nome, descricao, preco, imagem, pratoId) {
     modal.style.display = "flex";
 
     document.getElementById("modal-adicionar").onclick = function() {
-        adicionarAoCarrinho(nome, preco, imagem);
+        adicionarAoCarrinho(nome, preco);
         modal.style.display = "none";
     };
 }

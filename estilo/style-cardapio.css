@@ -445,7 +445,7 @@ button#finalizar-compra:hover{
     font-size: 14px; /* Tamanho da fonte */
     color: #555; /* Cor do texto */
 }
-
+.carrinho-total{color: var(--cor-preto);}
 /* Rodapé */
 footer{
     background-color: var(--preto2);
