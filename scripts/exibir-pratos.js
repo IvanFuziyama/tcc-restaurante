@@ -109,20 +109,25 @@ async function excluirPrato(id) {
     try {
         // Excluir itens adicionais associados ao prato
         const itensAdicionaisSnapshot = await db.collection('itens_adicionais').where('id_prato', '==', id).get();
-        itensAdicionaisSnapshot.forEach(async (doc) => {
-            await db.collection('itens_adicionais').doc(doc.id).delete();
+
+        // Criar um array para armazenar as promessas de exclusão de itens adicionais
+        const itensAdicionaisPromises = itensAdicionaisSnapshot.docs.map(async (doc) => {
+            const itemId = doc.id; // ID do item adicional
+
+            // Excluir as opções associadas a esse item adicional
+            const opcoesSnapshot = await db.collection('opcao').where('questionario_id', '==', itemId).get();
+            const opcoesPromises = opcoesSnapshot.docs.map(opcaoDoc => {
+                console.log('Excluindo opção:', opcaoDoc.id); // Exibe o ID da opção sendo excluída
+                return db.collection('opcao').doc(opcaoDoc.id).delete(); // Exclui o documento da coleção 'opcao'
+            });
+
+            // Excluir o item adicional
+            await Promise.all(opcoesPromises); // Aguarda a exclusão das opções
+            return db.collection('itens_adicionais').doc(itemId).delete(); // Exclui o item adicional
         });
 
-        // Excluir opções associadas ao prato com o campo 'questionario_id' igual ao id do prato
-        const opcoesSnapshot = await db.collection('opcao').where('questionario_id', '==', id).get();
-        if (opcoesSnapshot.empty) {
-            console.log('Nenhuma opção encontrada para o prato com ID:', id);
-        } else {
-            opcoesSnapshot.forEach(async (doc) => {
-                console.log('Excluindo opção:', doc.id); // Exibe o ID da opção sendo excluída
-                await db.collection('opcao').doc(doc.id).delete();  // Exclui o documento da coleção 'opcao'
-            });
-        }
+        // Aguarda a exclusão de todos os itens adicionais
+        await Promise.all(itensAdicionaisPromises);
 
         // Excluir o prato
         await db.collection('pratos').doc(id).delete();
@@ -134,8 +139,6 @@ async function excluirPrato(id) {
         alert("Erro ao excluir prato.");
     }
 }
-
-
 
 // Função para editar o prato
 async function editarPrato(id, prato) {
