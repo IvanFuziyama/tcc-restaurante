@@ -107,7 +107,26 @@ async function carregarPratos() {
 // Função para excluir o prato
 async function excluirPrato(id) {
     try {
+        // Excluir itens adicionais associados ao prato
+        const itensAdicionaisSnapshot = await db.collection('itens_adicionais').where('id_prato', '==', id).get();
+        itensAdicionaisSnapshot.forEach(async (doc) => {
+            await db.collection('itens_adicionais').doc(doc.id).delete();
+        });
+
+        // Excluir opções associadas ao prato com o campo 'questionario_id' igual ao id do prato
+        const opcoesSnapshot = await db.collection('opcao').where('questionario_id', '==', id).get();
+        if (opcoesSnapshot.empty) {
+            console.log('Nenhuma opção encontrada para o prato com ID:', id);
+        } else {
+            opcoesSnapshot.forEach(async (doc) => {
+                console.log('Excluindo opção:', doc.id); // Exibe o ID da opção sendo excluída
+                await db.collection('opcao').doc(doc.id).delete();  // Exclui o documento da coleção 'opcao'
+            });
+        }
+
+        // Excluir o prato
         await db.collection('pratos').doc(id).delete();
+
         alert("Prato excluído com sucesso!");
         carregarPratos(); // Atualiza a lista de pratos
     } catch (error) {
@@ -115,6 +134,8 @@ async function excluirPrato(id) {
         alert("Erro ao excluir prato.");
     }
 }
+
+
 
 // Função para editar o prato
 async function editarPrato(id, prato) {
