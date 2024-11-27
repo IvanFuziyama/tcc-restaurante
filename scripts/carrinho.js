@@ -34,7 +34,7 @@ export function exibirCarrinho() {
                     const opcaoItem = document.createElement("li");
 
                     // Mostra a descrição e a quantidade com o texto "quantidades"
-                    opcaoItem.textContent = `${descricao}: ${quantidade} quantidades`;
+                    opcaoItem.textContent = `${descricao}: ${quantidade}x`;
                     opcoesList.appendChild(opcaoItem);
                 }
 
@@ -79,7 +79,7 @@ document.getElementById("finalizar-compra").addEventListener("click", () => {
         if (item.opcoes) {
             resumo += `<ul>`;
             for (const [descricao, quantidade] of Object.entries(item.opcoes)) {
-                resumo += `<li>${descricao}: ${quantidade} quantidades</li>`;
+                resumo += `<li>${descricao}: ${quantidade}x</li>`;
             }
             resumo += `</ul>`;
         }
@@ -113,7 +113,7 @@ document.getElementById("confirmar-pedido").addEventListener("click", () => {
         mensagem += `- ${item.nome}: R$ ${item.preco.toFixed(2)}%0A`;
         if (item.opcoes) {
             for (const [descricao, quantidade] of Object.entries(item.opcoes)) {
-                mensagem += `  ${descricao}: ${quantidade} quantidades%0A`;
+                mensagem += `  ${descricao}: ${quantidade}x%0A`;
             }
         }
     });
