@@ -1,3 +1,19 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
+const firebaseConfig = {
+    apiKey: "AIzaSyCbgUdVBog-R0DmIZi0mG51_uuhDfnWj4c",
+    authDomain: "yaki-bb90f.firebaseapp.com",
+    projectId: "yaki-bb90f",
+    storageBucket: "yaki-bb90f.appspot.com",
+    messagingSenderId: "1025023938370",
+    appId: "1:1025023938370:web:de4f3190bd0d76d36102db",
+    measurementId: "G-Y3NNNQ1004"
+};
+
+// Inicializa o Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app); // Inicializa o Auth
+
 export function exibirCarrinho() {
     const carrinhoContainer = document.getElementById("carrinho-itens");
     carrinhoContainer.innerHTML = ""; // Limpa os itens do carrinho antes de exibir
@@ -73,7 +89,8 @@ document.getElementById("finalizar-compra").addEventListener("click", () => {
     }
 
     // Gera o resumo do pedido
-    let resumo = "<strong>Resumo do Pedido:</strong><ul>";
+    let resumo = `<div class="resumo-modal">`;
+    resumo+= "<strong>Resumo do Pedido:</strong><ul>"
     carrinho.forEach(item => {
         resumo += `<li>${item.nome} - R$ ${item.preco.toFixed(2)}`;
         if (item.opcoes) {
@@ -87,6 +104,7 @@ document.getElementById("finalizar-compra").addEventListener("click", () => {
     });
     resumo += `</ul>`;
     resumo += `<p><strong>Total:</strong> R$ ${calcularTotalCarrinho().toFixed(2)}</p>`;
+
 
     resumoPedido.innerHTML = resumo;
 
@@ -103,32 +121,43 @@ document.getElementById("cancelar-pedido").addEventListener("click", () => {
     document.getElementById("modal-confirmacao").style.display = "none";
 });
 
+
 // Confirma o pedido e envia pelo WhatsApp
 document.getElementById("confirmar-pedido").addEventListener("click", () => {
     const carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || [];
     const total = calcularTotalCarrinho();
+    
+    // Verifica se o usuário está logado
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            let nomeUsuario = user.displayName || "usuário"; // Obtém o nome do usuário ou usa "usuário" como padrão
 
-    let mensagem = "Olá, gostaria de fazer o seguinte pedido:%0A";
-    carrinho.forEach(item => {
-        mensagem += `- ${item.nome}: R$ ${item.preco.toFixed(2)}%0A`;
-        if (item.opcoes) {
-            for (const [descricao, quantidade] of Object.entries(item.opcoes)) {
-                mensagem += `  ${descricao}: ${quantidade}x%0A`;
-            }
+            let mensagem = `Olá, eu sou o ${nomeUsuario}, gostaria de fazer o seguinte pedido:%0A`;
+            carrinho.forEach(item => {
+                mensagem += `- ${item.nome}: R$ ${item.preco.toFixed(2)}%0A`;
+                if (item.opcoes) {
+                    for (const [descricao, quantidade] of Object.entries(item.opcoes)) {
+                        mensagem += `  ${descricao}: ${quantidade}x%0A`;
+                    }
+                }
+            });
+            mensagem += `%0ATotal: R$ ${total.toFixed(2)}`;
+
+            // Substitua pelo número de WhatsApp do restaurante
+            const numeroWhatsapp = "5511985527064";
+            const url = `https://wa.me/${numeroWhatsapp}?text=${mensagem}`;
+
+            window.open(url, "_blank"); // Abre o WhatsApp em uma nova aba
+
+            // Limpa o carrinho após o envio
+            sessionStorage.removeItem("carrinho");
+            document.getElementById("modal-confirmacao").style.display = "none";
+            exibirCarrinho(); // Atualiza o carrinho
+        } else {
+            // Usuário não está logado
+            alert("Você precisa estar logado para fazer um pedido."); // Mensagem de erro
         }
     });
-    mensagem += `%0ATotal: R$ ${total.toFixed(2)}`;
-
-    // Substitua pelo número de WhatsApp do restaurante
-    const numeroWhatsapp = "5511985527064";
-    const url = `https://wa.me/${numeroWhatsapp}?text=${mensagem}`;
-
-    window.open(url, "_blank"); // Abre o WhatsApp em uma nova aba
-
-    // Limpa o carrinho após o envio
-    sessionStorage.removeItem("carrinho");
-    document.getElementById("modal-confirmacao").style.display = "none";
-    exibirCarrinho(); // Atualiza o carrinho
 });
 
 // Calcula o total do carrinho
