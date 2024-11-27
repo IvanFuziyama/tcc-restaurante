@@ -11,6 +11,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
     <script src="../scripts/menu.js" defer></script>
     <script src="../scripts/index.js" defer></script>
+    <script src="../scripts/pedido.js" defer></script>
     <title>Pedido</title>
 </head>
 <body onresize="mudouTamanho()">
@@ -70,38 +71,10 @@
         </nav>
     </header>
     <main id="pedido">
-        <h1>Meu Pedidos de Retirada</h1>
-        <div class="pedido-lista">
-            <!-- Pedido 1 -->
-            <div class="pedido-card">
-                <h3>Pedido #032</h3>
-                <p>09/11/2024 12:00:12</p>
-                <p><strong>Item:</strong> Yakisoba de frango c/bacon (P)</p>
-                <p><strong>Adicionais: </strong>Raspas de gengibre</p>
-                <p><strong>Status:</strong> Pendente</p>
-                <p><strong>Valor total:</strong> R$ 53,10   </p>
-            </div>
-
-            <!-- Pedido 2 -->
-            <div class="pedido-card">
-                <h3>Pedido #011</h3>
-                <p>11/11/2024 11:44:22</p>
-                <p><strong>Item:</strong> Macarrão oriental Carne (G)</p>
-                <p><strong>Adicionais: </strong>Raspas de gengibre, Picância Baixa</p>
-                <p><strong>Status:</strong> Pendente</p>
-                <p><strong>Valor total:</strong> R$ 70,19</p>
-            </div>
-
-            <div class="pedido-card">
-                <h3>Pedido #001</h3>
-                <p>20/11/2024 22:00:42</p>
-                <p><strong>Item:</strong> Yakisoba de frango c/bacon (P)</p>
-                <p><strong>Adicionais:</strong> Raspas de Gengibre</p>
-                <p><strong>Item:</strong>Macarrão oriental Carne (M)</p>
-                <p><strong>Adicionais:</strong>Tiras de Miolo de alcatra - 2</p>
-                <p><strong>Status:</strong> Em preparo</p>
-                <p><strong>Valor total:</strong> R$ 124,50</p>
-            </div>
+        <h1>Meus Pedidos</h1>
+        <div id="pedido-lista">
+            <!-- Os pedidos serão exibidos aqui -->
+        </div>
     </main>
 
 </body>

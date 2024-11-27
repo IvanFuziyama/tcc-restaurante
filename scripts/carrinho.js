@@ -126,9 +126,18 @@ document.getElementById("cancelar-pedido").addEventListener("click", () => {
 document.getElementById("confirmar-pedido").addEventListener("click", () => {
     const carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || [];
     const total = calcularTotalCarrinho();
-    
+    const user = auth.currentUser;
+      // Cria um resumo do pedido
+      const resumoPedido = {
+        usuarioId: user.uid, // Substitua pelo ID do usuário logado
+        itens: carrinho,
+        total: total,
+        status: "Pendente", // ou outro status que você queira definir
+        data: new Date() // Data do pedido
+    };
+
     // Verifica se o usuário está logado
-    auth.onAuthStateChanged((user) => {
+    auth.onAuthStateChanged(async (user) => {
         if (user) {
             let nomeUsuario = user.displayName || "usuário"; // Obtém o nome do usuário ou usa "usuário" como padrão
 
@@ -147,12 +156,25 @@ document.getElementById("confirmar-pedido").addEventListener("click", () => {
             const numeroWhatsapp = "5511985527064";
             const url = `https://wa.me/${numeroWhatsapp}?text=${mensagem}`;
 
+            
+
             window.open(url, "_blank"); // Abre o WhatsApp em uma nova aba
 
             // Limpa o carrinho após o envio
             sessionStorage.removeItem("carrinho");
             document.getElementById("modal-confirmacao").style.display = "none";
             exibirCarrinho(); // Atualiza o carrinho
+
+                 // Armazena o pedido no Firestore
+                 await db.collection('pedidos').add(resumoPedido)
+                 .then(() => {
+                     alert("Pedido confirmado com sucesso!");
+                 })
+                 .catch((error) => {
+                     console.error("Erro ao confirmar o pedido: ", error);
+                     alert("Houve um erro ao confirmar o pedido.");
+                 });
+
         } else {
             // Usuário não está logado
             alert("Você precisa estar logado para fazer um pedido."); // Mensagem de erro
