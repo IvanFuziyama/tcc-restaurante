@@ -61,3 +61,79 @@ document.getElementById("fechar-modal-carrinho").addEventListener("click", () =>
     document.getElementById("modal-carrinho").style.display = "none";
 });
 
+// Manipula a exibição do modal de confirmação
+document.getElementById("finalizar-compra").addEventListener("click", () => {
+    const modalConfirmacao = document.getElementById("modal-confirmacao");
+    const carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || [];
+    const resumoPedido = document.getElementById("resumo-pedido");
+
+    if (carrinho.length === 0) {
+        alert("Seu carrinho está vazio!");
+        return;
+    }
+
+    // Gera o resumo do pedido
+    let resumo = "<strong>Resumo do Pedido:</strong><ul>";
+    carrinho.forEach(item => {
+        resumo += `<li>${item.nome} - R$ ${item.preco.toFixed(2)}`;
+        if (item.opcoes) {
+            resumo += `<ul>`;
+            for (const [descricao, quantidade] of Object.entries(item.opcoes)) {
+                resumo += `<li>${descricao}: ${quantidade} quantidades</li>`;
+            }
+            resumo += `</ul>`;
+        }
+        resumo += `</li>`;
+    });
+    resumo += `</ul>`;
+    resumo += `<p><strong>Total:</strong> R$ ${calcularTotalCarrinho().toFixed(2)}</p>`;
+
+    resumoPedido.innerHTML = resumo;
+
+    modalConfirmacao.style.display = "flex"; // Mostra o modal de confirmação
+});
+
+// Fecha o modal de confirmação
+document.getElementById("fechar-modal-confirmacao").addEventListener("click", () => {
+    document.getElementById("modal-confirmacao").style.display = "none";
+});
+
+// Cancela o pedido
+document.getElementById("cancelar-pedido").addEventListener("click", () => {
+    document.getElementById("modal-confirmacao").style.display = "none";
+});
+
+// Confirma o pedido e envia pelo WhatsApp
+document.getElementById("confirmar-pedido").addEventListener("click", () => {
+    const carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || [];
+    const total = calcularTotalCarrinho();
+
+    let mensagem = "Olá, gostaria de fazer o seguinte pedido:%0A";
+    carrinho.forEach(item => {
+        mensagem += `- ${item.nome}: R$ ${item.preco.toFixed(2)}%0A`;
+        if (item.opcoes) {
+            for (const [descricao, quantidade] of Object.entries(item.opcoes)) {
+                mensagem += `  ${descricao}: ${quantidade} quantidades%0A`;
+            }
+        }
+    });
+    mensagem += `%0ATotal: R$ ${total.toFixed(2)}`;
+
+    // Substitua pelo número de WhatsApp do restaurante
+    const numeroWhatsapp = "5511985527064";
+    const url = `https://wa.me/${numeroWhatsapp}?text=${mensagem}`;
+
+    window.open(url, "_blank"); // Abre o WhatsApp em uma nova aba
+
+    // Limpa o carrinho após o envio
+    sessionStorage.removeItem("carrinho");
+    document.getElementById("modal-confirmacao").style.display = "none";
+    exibirCarrinho(); // Atualiza o carrinho
+});
+
+// Calcula o total do carrinho
+function calcularTotalCarrinho() {
+    const carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || [];
+    return carrinho.reduce((total, item) => total + item.preco, 0);
+}
+
