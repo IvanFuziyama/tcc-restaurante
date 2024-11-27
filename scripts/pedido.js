@@ -1,14 +1,16 @@
 // Listener para verificar o estado de autenticação
 auth.onAuthStateChanged(user => {
+    const pedidosContainer = document.getElementById("pedido-lista-nao-logado");
+    if (pedidosContainer) {
+        pedidosContainer.innerHTML = "<p>Faça o login para ter acesso a todos os pedidos de retirada realizados</p>";
+        pedidosContainer.innerHTML += `<button onclick="window.location.href='login-usuario.html'">Login</button>`;
+    }
     if (user) {
         console.log("Usuário logado:", user.uid);
         carregarPedidos(user); // Passa o objeto completo do usuário para a função
+        pedidosContainer.remove("pedidosContainer")
     } else {
         console.log("Nenhum usuário logado.");
-        const pedidosContainer = document.getElementById("pedido-lista");
-        if (pedidosContainer) {
-            pedidosContainer.innerHTML = "<p>Você precisa estar logado para ver seus pedidos.</p>";
-        }
     }
 });
 

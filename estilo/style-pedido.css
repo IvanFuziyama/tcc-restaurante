@@ -5,6 +5,10 @@
      --amarelo-hover: #c77802;
      --close-hover: #ffffffb7;
 
+     /*botao login*/
+     --botao-login: #4CAF50;
+     --botao-login-hover: #438d47;
+
     --cinza: #eeeeee;
     --vermelho:#B31E22;
     --amarelo:#E99E1E;
@@ -183,7 +187,6 @@ span#user-ativo{
 }
 main#pedido{
     background-color: var(--cor-fundo);
-    min-height: 100vh;
     flex-direction: column;
     text-align: center; /* Centraliza o texto dentro do body */
     margin: auto;
@@ -223,6 +226,30 @@ main#pedido h1{
 }
 .pedido-modal{color: var(--cor-preto);}
 .pedido-modal ul{list-style: none;}
+#pedido-lista-nao-logado {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Organiza o texto e o botão em coluna */
+    text-align: center; /* Centraliza o texto */
+    color: var(--cor-preto);
+    background-color: var(--cor-branco);
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para destaque */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centraliza o elemento exatamente */
+    width: 96%;
+}
+#pedido-lista-nao-logado button{
+    padding: 8px 15px;
+    background-color: var(--botao-login);
+    color: var(--cor-branco);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
 /* Adicionando um estilo para centralizar o conteúdo */
 
