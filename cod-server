@@ -1,0 +1,43 @@
+const express = require('express');
+const nodemailer = require('nodemailer');
+const cors = require('cors');
+
+const app = express();
+app.use(express.json());
+app.use(cors()); // Permite requisições do frontend
+
+const transport = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+        user: 'ivanseiji21@gmail.com',
+        pass: 'pzxprlcwjrqfrzbi',
+    },
+});
+
+app.post('/send-email', async (req, res) => {
+    const { email, resposta } = req.body;
+
+    if (!email || !resposta) {
+        return res.status(400).json({ message: 'Email e resposta são obrigatórios.' });
+    }
+
+    try {
+        await transport.sendMail({
+            from: 'Yakin Box <ivanseiji21@gmail.com>',
+            to: email,
+            subject: 'Obrigado pelo seu feedback',
+            text: resposta,
+        });
+        res.status(200).json({ message: 'Email enviado com sucesso!' });
+    } catch (error) {
+        console.error('Erro ao enviar email:', error);
+        res.status(500).json({ message: 'Erro ao enviar email.' });
+    }
+});
+
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
+});
