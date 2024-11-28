@@ -30,7 +30,7 @@ h1 {
     margin: 0 auto;
 }
 
-.pedido-card {
+.pedido{
     background-color: #fff;
     border-radius: 8px;
     padding: 20px;
@@ -38,16 +38,17 @@ h1 {
     text-align: center;
 }
 
-.pedido-card h3 {
+.pedido h3 {
     font-size: 20px;
     color: var(--preto1);
 }
 
-.pedido-card p {
+.pedido p {
     font-size: 16px;
     color: var(--preto2);
     margin-bottom: 8px;
 }
+.pedido ul{list-style: none;}
 
 .btn-status {
     background-color: var(--amarelo);
