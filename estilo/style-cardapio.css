@@ -124,6 +124,8 @@ span#user-ativo{
 .modal {
     display: none; /* O modal começa escondido */
     position: fixed; /* Fica sobre outros elementos */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
     z-index: 1000; /* Fica acima de outros elementos */
     left: 0;
     top: 0;
@@ -483,6 +485,18 @@ button#finalizar-compra:hover{
     font-size: 18px;
     margin-top: 15px;
     font-weight: bold;
+}
+.modal-content-confirmacao {
+    background-color: var(--cor-branco);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Outras propriedades */
+}
+
+#resumo-pedido {
+    text-align: center; /* Centraliza o texto dentro do resumo */
+    margin: 20px 0; /* Margem para espaçamento */
 }
 
 /* Rodapé */
