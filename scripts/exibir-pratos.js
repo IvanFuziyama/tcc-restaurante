@@ -15,21 +15,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     await carregarCategoriasFiltrar();  // Carregar categorias para filtro
     await carregarCategoriasEditar();   // Carregar categorias para edição
     
+    // Exibir todos os pratos inicialmente
+    await carregarPratos(); 
+
     // Adicionar listener para o filtro de categoria
     const categoriaFiltrarSelect = document.getElementById("categoria-filtrar");
     if (categoriaFiltrarSelect) {
         categoriaFiltrarSelect.addEventListener("change", async function() {
             const categoriaId = this.value;  // Obtém o ID da categoria selecionada
-            await carregarPratos(categoriaId);  // Carregar pratos dessa categoria
-        });
-    }
-    
-    // Adicionar listener para a edição de prato
-    const categoriaEditarSelect = document.getElementById("categoria-editar");
-    if (categoriaEditarSelect) {
-        categoriaEditarSelect.addEventListener("change", async function() {
-            const categoriaId = this.value;  // Obtém a categoria escolhida para o prato
-            // Atualizar a categoria do prato no Firebase (isso vai acontecer quando salvar a edição)
+            await carregarPratos(categoriaId);  // Carregar pratos dessa categoria ou todos
         });
     }
 });
@@ -80,59 +74,70 @@ async function carregarPratos(categoriaId = "") {
 
     let pratosSnapshot;
 
-    // Se uma categoria foi selecionada, filtra os pratos por essa categoria
-    if (categoriaId) {
-        pratosSnapshot = await db.collection('pratos').where("categoria", "==", categoriaId).get();
-    } else {
-        pratosSnapshot = await db.collection('pratos').get(); // Carrega todos os pratos
-    }
-
-    pratosSnapshot.forEach(doc => {
-        const prato = doc.data();
-        const pratoElement = document.createElement('div');
-        pratoElement.classList.add('prato');
-        pratoElement.dataset.id = doc.id;
-
-        // Formatação das informações do prato
-        const informacoesElement = document.createElement('div');
-        informacoesElement.classList.add('informacoes');
-        informacoesElement.innerHTML = `
-            <h2>${prato.nome}</h2>
-            <p><strong>Descrição:</strong> ${prato.descricao}</p>
-            <p><strong>Valor:</strong> R$ ${prato.valor.toFixed(2)}</p>
-        `;
-
-        // Criação da imagem do prato com tamanho fixo
-        const imagemElement = document.createElement('img');
-        if (prato.imagem) {
-            imagemElement.src = prato.imagem;  // URL da imagem do prato
-            imagemElement.alt = prato.nome;
-            imagemElement.style.width = "200px";  // Ajusta o tamanho da imagem
-            imagemElement.style.height = "auto";  // Mantém a proporção
+    try {
+        if (categoriaId) {
+            // Filtra os pratos pela categoria selecionada
+            pratosSnapshot = await db.collection('pratos').where("categoria", "==", categoriaId).get();
         } else {
-            imagemElement.src = 'caminho/para/imagem/padrao.jpg';  // Caso não tenha imagem
-            imagemElement.alt = 'Imagem não disponível';
+            // Carrega todos os pratos
+            pratosSnapshot = await db.collection('pratos').get();
         }
 
-        // Botões de editar e excluir
-        const botaoEditar = document.createElement('button');
-        botaoEditar.innerText = "Editar";
-        botaoEditar.classList.add('botao-editar');
-        botaoEditar.onclick = () => editarPrato(doc.id, prato);
+        if (pratosSnapshot.empty) {
+            listaPratos.innerHTML = "<p>Nenhum prato encontrado.</p>";
+            return;
+        }
 
-        const botaoExcluir = document.createElement('button');
-        botaoExcluir.innerText = "Excluir";
-        botaoExcluir.classList.add('botao-excluir');
-        botaoExcluir.onclick = () => excluirPrato(doc.id);
+        pratosSnapshot.forEach(doc => {
+            const prato = doc.data();
+            const pratoElement = document.createElement('div');
+            pratoElement.classList.add('prato');
+            pratoElement.dataset.id = doc.id;
 
-        // Adiciona os botões e a imagem
-        informacoesElement.appendChild(botaoEditar);
-        informacoesElement.appendChild(botaoExcluir);
-        pratoElement.appendChild(informacoesElement);
-        pratoElement.appendChild(imagemElement);
+            // Formatação das informações do prato
+            const informacoesElement = document.createElement('div');
+            informacoesElement.classList.add('informacoes');
+            informacoesElement.innerHTML = `
+                <h2>${prato.nome}</h2>
+                <p><strong>Descrição:</strong> ${prato.descricao}</p>
+                <p><strong>Valor:</strong> R$ ${prato.valor.toFixed(2)}</p>
+            `;
 
-        listaPratos.appendChild(pratoElement);  // Adiciona o prato à lista
-    });
+            // Criação da imagem do prato com tamanho fixo
+            const imagemElement = document.createElement('img');
+            if (prato.imagem) {
+                imagemElement.src = prato.imagem;  // URL da imagem do prato
+                imagemElement.alt = prato.nome;
+                imagemElement.style.width = "200px";  // Ajusta o tamanho da imagem
+                imagemElement.style.height = "auto";  // Mantém a proporção
+            } else {
+                imagemElement.src = 'caminho/para/imagem/padrao.jpg';  // Caso não tenha imagem
+                imagemElement.alt = 'Imagem não disponível';
+            }
+
+            // Botões de editar e excluir
+            const botaoEditar = document.createElement('button');
+            botaoEditar.innerText = "Editar";
+            botaoEditar.classList.add('botao-editar');
+            botaoEditar.onclick = () => editarPrato(doc.id, prato);
+
+            const botaoExcluir = document.createElement('button');
+            botaoExcluir.innerText = "Excluir";
+            botaoExcluir.classList.add('botao-excluir');
+            botaoExcluir.onclick = () => excluirPrato(doc.id);
+
+            // Adiciona os botões e a imagem
+            informacoesElement.appendChild(botaoEditar);
+            informacoesElement.appendChild(botaoExcluir);
+            pratoElement.appendChild(informacoesElement);
+            pratoElement.appendChild(imagemElement);
+
+            listaPratos.appendChild(pratoElement);  // Adiciona o prato à lista
+        });
+    } catch (error) {
+        console.error("Erro ao carregar pratos:", error);
+        listaPratos.innerHTML = "<p>Erro ao carregar pratos. Tente novamente mais tarde.</p>";
+    }
 }
 
 // Função para excluir o prato
