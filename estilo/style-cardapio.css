@@ -422,6 +422,10 @@ button#finalizar-compra:hover{
 .item-adicional li {
     font-size: 14px;
 }
+.item-adicional input{
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
 /* styles.css */
 #carrinho-itens {
     max-width: 400px; /* Largura máxima do carrinho */
