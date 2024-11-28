@@ -11,54 +11,76 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-// Função para converter a imagem para base64
-function fileToBase64(file) {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onloadend = () => resolve(reader.result);
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-    });
-}
+document.addEventListener('DOMContentLoaded', async () => {
+    await carregarCategoriasFiltrar();  // Carregar categorias para filtro
+    await carregarCategoriasEditar();   // Carregar categorias para edição
+    
+    // Adicionar listener para o filtro de categoria
+    const categoriaFiltrarSelect = document.getElementById("categoria-filtrar");
+    if (categoriaFiltrarSelect) {
+        categoriaFiltrarSelect.addEventListener("change", async function() {
+            const categoriaId = this.value;  // Obtém o ID da categoria selecionada
+            await carregarPratos(categoriaId);  // Carregar pratos dessa categoria
+        });
+    }
+    
+    // Adicionar listener para a edição de prato
+    const categoriaEditarSelect = document.getElementById("categoria-editar");
+    if (categoriaEditarSelect) {
+        categoriaEditarSelect.addEventListener("change", async function() {
+            const categoriaId = this.value;  // Obtém a categoria escolhida para o prato
+            // Atualizar a categoria do prato no Firebase (isso vai acontecer quando salvar a edição)
+        });
+    }
+});
 
-// Função para carregar as categorias e mapeá-las pelo ID
-async function obterCategorias() {
+
+// Função para carregar as categorias no filtro
+async function carregarCategoriasFiltrar() {
     const categoriasRef = db.collection('categorias');
     const snapshot = await categoriasRef.get();
-    const categoriasMap = {};
 
-    // Limpa as opções de categorias
-    const categoriaSelect = document.getElementById('edit-categoria');
-    categoriaSelect.innerHTML = ''; // Limpa as opções existentes
-
-    // Adiciona a opção padrão
-    const optionDefault = document.createElement('option');
-    optionDefault.value = '';
-    optionDefault.textContent = 'Selecione uma Categoria';
-    categoriaSelect.appendChild(optionDefault);
+    const categoriaFiltrarSelect = document.getElementById('categoria-filtrar');
+    categoriaFiltrarSelect.innerHTML = '<option value="">Selecione uma Categoria</option>'; // Limpa antes de adicionar novas
 
     snapshot.forEach(doc => {
-        const data = doc.data();
-        categoriasMap[doc.id] = data.nome;
+        const categoria = doc.data();
 
-        // Cria uma opção para cada categoria
         const option = document.createElement('option');
-        option.value = doc.id;
-        option.textContent = data.nome;
-        categoriaSelect.appendChild(option);
-    });
+        option.value = doc.id;  // ID da categoria
+        option.textContent = categoria.nome;  // Nome da categoria
 
-    return categoriasMap;
+        categoriaFiltrarSelect.appendChild(option);
+    });
 }
 
-// Função para carregar e exibir os pratos
+// Função para carregar as categorias na edição de prato
+async function carregarCategoriasEditar() {
+    const categoriasRef = db.collection('categorias');
+    const snapshot = await categoriasRef.get();
+
+    const categoriaEditarSelect = document.getElementById('categoria-editar');
+    categoriaEditarSelect.innerHTML = '<option value="">Selecione uma Categoria</option>'; // Limpa antes de adicionar novas
+
+    snapshot.forEach(doc => {
+        const categoria = doc.data();
+
+        const option = document.createElement('option');
+        option.value = doc.id;  // ID da categoria
+        option.textContent = categoria.nome;  // Nome da categoria
+
+        categoriaEditarSelect.appendChild(option);
+    });
+}
+
+// Função para carregar os pratos (com filtragem, se necessário)
 async function carregarPratos(categoriaId = "") {
     const listaPratos = document.getElementById('lista-pratos');
-    listaPratos.innerHTML = ''; // Limpa o conteúdo atual
+    listaPratos.innerHTML = ''; // Limpa a lista de pratos
 
     let pratosSnapshot;
 
-    // Filtra os pratos se uma categoria for selecionada
+    // Se uma categoria foi selecionada, filtra os pratos por essa categoria
     if (categoriaId) {
         pratosSnapshot = await db.collection('pratos').where("categoria", "==", categoriaId).get();
     } else {
@@ -69,32 +91,30 @@ async function carregarPratos(categoriaId = "") {
         const prato = doc.data();
         const pratoElement = document.createElement('div');
         pratoElement.classList.add('prato');
-        pratoElement.dataset.id = doc.id; // Armazena o ID do prato para referência futura
+        pratoElement.dataset.id = doc.id;
 
-        // Criação da div para as informações do prato
+        // Formatação das informações do prato
         const informacoesElement = document.createElement('div');
         informacoesElement.classList.add('informacoes');
-
-        // Formata os dados do prato dentro da div de informações
         informacoesElement.innerHTML = `
             <h2>${prato.nome}</h2>
             <p><strong>Descrição:</strong> ${prato.descricao}</p>
             <p><strong>Valor:</strong> R$ ${prato.valor.toFixed(2)}</p>
         `;
 
-        // Criação da imagem do prato
+        // Criação da imagem do prato com tamanho fixo
         const imagemElement = document.createElement('img');
         if (prato.imagem) {
-            imagemElement.src = prato.imagem; // Certifique-se de que a imagem está sendo definida corretamente
+            imagemElement.src = prato.imagem;  // URL da imagem do prato
             imagemElement.alt = prato.nome;
-            imagemElement.style.width = "200px"; // Ajuste o tamanho da imagem se necessário
-            imagemElement.style.height = "auto";
+            imagemElement.style.width = "200px";  // Ajusta o tamanho da imagem
+            imagemElement.style.height = "auto";  // Mantém a proporção
         } else {
-            imagemElement.src = 'caminho/para/imagem/padrao.jpg'; // Coloque uma imagem padrão caso não exista
+            imagemElement.src = 'caminho/para/imagem/padrao.jpg';  // Caso não tenha imagem
             imagemElement.alt = 'Imagem não disponível';
         }
 
-        // Criação dos botões de editar e excluir
+        // Botões de editar e excluir
         const botaoEditar = document.createElement('button');
         botaoEditar.innerText = "Editar";
         botaoEditar.classList.add('botao-editar');
@@ -105,47 +125,20 @@ async function carregarPratos(categoriaId = "") {
         botaoExcluir.classList.add('botao-excluir');
         botaoExcluir.onclick = () => excluirPrato(doc.id);
 
-        // Adiciona os botões de editar e excluir à div de informações
+        // Adiciona os botões e a imagem
         informacoesElement.appendChild(botaoEditar);
         informacoesElement.appendChild(botaoExcluir);
-
-        // Adiciona as informações e a imagem ao prato
         pratoElement.appendChild(informacoesElement);
         pratoElement.appendChild(imagemElement);
 
-        // Adiciona o prato ao lista de pratos
-        listaPratos.appendChild(pratoElement);
+        listaPratos.appendChild(pratoElement);  // Adiciona o prato à lista
     });
 }
 
 // Função para excluir o prato
 async function excluirPrato(id) {
     try {
-        // Excluir itens adicionais associados ao prato
-        const itensAdicionaisSnapshot = await db.collection('itens_adicionais').where('id_prato', '==', id).get();
-
-        // Criar um array para armazenar as promessas de exclusão de itens adicionais
-        const itensAdicionaisPromises = itensAdicionaisSnapshot.docs.map(async (doc) => {
-            const itemId = doc.id; // ID do item adicional
-
-            // Excluir as opções associadas a esse item adicional
-            const opcoesSnapshot = await db.collection('opcao').where('questionario_id', '==', itemId).get();
-            const opcoesPromises = opcoesSnapshot.docs.map(opcaoDoc => {
-                console.log('Excluindo opção:', opcaoDoc.id); // Exibe o ID da opção sendo excluída
-                return db.collection('opcao').doc(opcaoDoc.id).delete(); // Exclui o documento da coleção 'opcao'
-            });
-
-            // Excluir o item adicional
-            await Promise.all(opcoesPromises); // Aguarda a exclusão das opções
-            return db.collection('itens_adicionais').doc(itemId).delete(); // Exclui o item adicional
-        });
-
-        // Aguarda a exclusão de todos os itens adicionais
-        await Promise.all(itensAdicionaisPromises);
-
-        // Excluir o prato
         await db.collection('pratos').doc(id).delete();
-
         alert("Prato excluído com sucesso!");
         carregarPratos(); // Atualiza a lista de pratos
     } catch (error) {
@@ -154,56 +147,90 @@ async function excluirPrato(id) {
     }
 }
 
-// Função para editar o prato
-async function editarPrato(id, prato) {
-    // Exibe o formulário de edição
-    document.getElementById('formulario-edicao').style.display = 'block';
 
-    // Preenche os campos do formulário com os dados do prato
-    document.getElementById('edit-nome').value = prato.nome;
-    document.getElementById('edit-descricao').value = prato.descricao;
-    document.getElementById('edit-valor').value = prato.valor;
-    document.getElementById('edit-categoria').value = prato.categoria;
-
-    // Não exibir a imagem atual, então não adicionamos nada no preview.
-    document.getElementById('imagem-preview').style.display = 'none'; // Esconde a imagem de pré-visualização.
-
-    // Ao enviar o formulário, atualiza o prato
-    document.getElementById('form-edit-prato').onsubmit = async function(event) {
-        event.preventDefault();
-
-        // Obter dados do formulário
-        const updatedPrato = {
-            nome: document.getElementById('edit-nome').value,
-            descricao: document.getElementById('edit-descricao').value,
-            valor: parseFloat(document.getElementById('edit-valor').value),
-            categoria: document.getElementById('edit-categoria').value,
-            imagem: null // Inicialmente sem imagem
-        };
-
-        const imagemInput = document.getElementById('edit-imagem');
-        const imagemFile = imagemInput.files[0];
-
-        if (imagemFile) {
-            // Se houver uma nova imagem selecionada, converte para base64
-            updatedPrato.imagem = await fileToBase64(imagemFile);
+// Função para converter imagem para Base64
+function converterImagemParaBase64(imagemInput) {
+    return new Promise((resolve, reject) => {
+        const file = imagemInput.files[0];
+        const reader = new FileReader();
+        
+        reader.onloadend = () => resolve(reader.result);
+        reader.onerror = (error) => reject(error);
+        
+        if (file) {
+            reader.readAsDataURL(file); // Lê a imagem como base64
         } else {
-            // Caso não haja nova imagem, manter sem alteração de imagem
-            updatedPrato.imagem = prato.imagem; // Não muda a imagem se não for selecionada uma nova
+            reject("Nenhuma imagem selecionada");
+        }
+    });
+}
+
+// Função para editar prato e realizar a atualização no Firestore
+async function editarPrato(idPrato, prato) {
+    // Preencher os campos do formulário com os dados do prato
+    document.getElementById("edit-nome").value = prato.nome;
+    document.getElementById("edit-descricao").value = prato.descricao;
+    document.getElementById("edit-valor").value = prato.valor;
+
+    await carregarCategoriasEditar();
+    const categoriaEditarSelect = document.getElementById("categoria-editar");
+    categoriaEditarSelect.value = prato.categoria;
+    
+    document.getElementById("formulario-edicao").style.display = 'block';
+
+    const formEditPrato = document.getElementById('form-edit-prato');
+    formEditPrato.onsubmit = async function(event) {
+        event.preventDefault();
+        
+        const nome = document.getElementById('edit-nome').value;
+        const descricao = document.getElementById('edit-descricao').value;
+        const valor = parseFloat(document.getElementById('edit-valor').value);
+        const categoriaId = document.getElementById('categoria-editar').value;
+        
+        const imagemInput = document.getElementById('edit-imagem');
+        let novaImagemBase64 = prato.imagem || null;
+
+        // Se uma nova imagem for escolhida, converta para Base64
+        if (imagemInput.files.length > 0) {
+            try {
+                novaImagemBase64 = await converterImagemParaBase64(imagemInput);
+            } catch (error) {
+                console.error("Erro ao converter imagem:", error);
+                alert("Erro ao converter a imagem. Tente novamente.");
+                return;
+            }
+        }
+
+        if (!nome || !descricao || !valor || !categoriaId) {
+            alert("Preencha todos os campos corretamente!");
+            return;
         }
 
         try {
-            await db.collection('pratos').doc(id).update(updatedPrato);
+            const pratoRef = db.collection('pratos').doc(idPrato);
+            await pratoRef.update({
+                nome: nome,
+                descricao: descricao,
+                valor: valor,
+                categoria: categoriaId,
+                imagem: novaImagemBase64,  // Salva a imagem como Base64
+            });
             alert("Prato atualizado com sucesso!");
-            carregarPratos(); // Atualiza a lista de pratos
-            cancelarEdicao(); // Oculta o formulário de edição
+            fecharFormularioEdicao();
+            carregarPratos();  // Recarrega a lista de pratos
         } catch (error) {
-            console.error("Erro ao atualizar prato: ", error);
-            alert("Erro ao atualizar prato.");
+            console.error("Erro ao atualizar prato:", error);
+            alert("Erro ao atualizar prato. Tente novamente.");
         }
     };
 }
 
+
+// Função para fechar o formulário de edição
+function fecharFormularioEdicao() {
+    document.getElementById("formulario-edicao").style.display = 'none';
+    document.getElementById('form-edit-prato').reset();  // Limpa os campos do formulário
+}
 
 
 // Função para cancelar a edição
@@ -211,18 +238,8 @@ function cancelarEdicao() {
     document.getElementById('formulario-edicao').style.display = 'none';
 }
 
-// Carregar categorias ao iniciar
-document.addEventListener('DOMContentLoaded', async () => {
-    await obterCategorias(); // Carrega as categorias
-    await carregarPratos(); // Carrega todos os pratos ao iniciar
-});
-
-document.getElementById("edit-categoria").addEventListener("change", async (event) => {
-    const categoriaID = event.target.value; // Obtém o ID da categoria selecionada
-    await carregarPratos(categoriaID); // Carrega pratos com base no ID da categoria selecionada
-});
-
-
-function voltar(){
-    window.location.href = "../paginas-adm/adm-cardapio.html"
+// Função para voltar
+function voltar() {
+    window.location.href = "../paginas-adm/adm-cardapio.html";
 }
+    
