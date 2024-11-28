@@ -66,3 +66,21 @@ h1 {
     background-color: var(--vermelho);
     color: #fff;
 }
+.botoes-status {
+    margin-top: 10px;
+}
+
+.botoes-status button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    background-color: var(--amarelo); /* Cor do botão */
+    color: var(--cor-preto);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.botoes-status button:hover {
+    background-color: #C0925E; /* Cor ao passar o mouse */
+}

@@ -84,7 +84,7 @@ async function carregarPedidos() {
                               .map(([descricao, quantidade]) => `<li>${descricao}: ${quantidade}x</li>`)
                               .join('')
                         : '';
-                    return `<li>${item.nome} - R$ ${item.preco.toFixed(2)}${opcoesHtml ? `<ul>${opcoesHtml}</ul>` : ''}</li>`;
+                    return `<li>${item.nome} - R$ ${item.preco.toFixed(2)}${opcoesHtml ? `<ul>${opcoesHtml}</ul>` : ''}<hr></li>`;
                 })
                 .join('');
 
@@ -95,6 +95,11 @@ async function carregarPedidos() {
                 <ul>${itensHtml}</ul>
                 <p><strong>Status:</strong> ${pedidoData.status}</p>
                 <p><strong>Total:</strong> R$ ${pedidoData.total.toFixed(2)}</p>
+                <div class="botoes-status">
+                <button onclick="atualizarStatusPedido('${doc.id}', 'Pendente')">Pendente</button>
+                <button onclick="atualizarStatusPedido('${doc.id}', 'Em preparo')">Em preparo</button>
+                <button onclick="atualizarStatusPedido('${doc.id}', 'Finalizado')">Finalizado</button>
+                </div>
             `;
 
             pedidosContainer.appendChild(pedidoDiv);
