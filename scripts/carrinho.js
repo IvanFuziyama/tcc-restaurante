@@ -126,14 +126,15 @@ document.getElementById("cancelar-pedido").addEventListener("click", () => {
 document.getElementById("confirmar-pedido").addEventListener("click", () => {
     const carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || [];
     const total = calcularTotalCarrinho();
-    const user = auth.currentUser;
-      // Cria um resumo do pedido
-      const resumoPedido = {
-        usuarioId: user.uid, // Substitua pelo ID do usuário logado
+    const user = auth.currentUser ;
+
+    // Cria um resumo do pedido
+    const resumoPedido = {
+        usuarioId: user.uid,
         itens: carrinho,
         total: total,
-        status: "Pendente", // ou outro status que você queira definir
-        data: new Date() // Data do pedido
+        status: "Pendente",
+        data: new Date()
     };
 
     // Verifica se o usuário está logado
@@ -174,13 +175,11 @@ document.getElementById("confirmar-pedido").addEventListener("click", () => {
                      console.error("Erro ao confirmar o pedido: ", error);
                      alert("Houve um erro ao confirmar o pedido.");
                  });
-
-        } else {
-            // Usuário não está logado
-            alert("Você precisa estar logado para fazer um pedido."); // Mensagem de erro
-        }
-    });
-});
+             } else {
+                 alert("Você precisa estar logado para fazer um pedido.");
+             }
+         });
+     });    
 
 // Calcula o total do carrinho
 function calcularTotalCarrinho() {
