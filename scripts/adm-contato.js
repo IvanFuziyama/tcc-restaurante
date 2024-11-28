@@ -42,27 +42,35 @@ async function excluirContato(id) {
     }
 }
 
-// Função para enviar a resposta ao Firestore
+
 // Função para enviar a resposta do administrador para o e-mail do usuário
-async function enviarResposta(email, resposta) {
-    try {
-        const response = await fetch('http://localhost:3000/enviar-resposta', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, resposta })
-        });
-
-        if (response.ok) {
-            alert('Resposta enviada com sucesso!');
-        } else {
-            alert('Erro ao enviar a resposta.');
-        }
-    } catch (error) {
-        console.error('Erro:', error);
-        alert('Erro ao enviar a resposta.');
+// Função de envio do formulário
+  document.getElementById("enviar-resposta").onclick = function(){
+  const nodemailer = require('nodemailer')
+  const nome = document.getElementById('nome').value;
+  const email = document.getElementById('email').value;
+  const resposta = document.getElementById('resposta').value;  // Corrigido para 'msg'
+  const transport = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth:{
+      user: 'ivanseiji21@gmail.com',
+      pass: 'pzxprlcwjrqfrzbi',
     }
-}
+  })
 
+  transport.sendMail({
+    from: 'ivan <ivanseiji21@gmail.com>',
+    name: nome,
+    to: email,
+    subject: 'Sobre o feedback',
+    html: '<h1>Olá </h1> <p>Agradeço pelo seu feedback</p>',
+    text: resposta,
+  })
+  .then(() => console.log ("E-mail enviado com sucesso"))
+  .catch((error) => console.log("Erro ao enviar o email", error))
+  }
 // Chama a função para listar os contatos quando a página carregar
 listarContatos();
 
