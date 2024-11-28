@@ -1,13 +1,4 @@
-// Firebase config
-const firebaseConfig = {
-    apiKey: "AIzaSyCbgUdVBog-R0DmIZi0mG51_uuhDfnWj4c",
-    authDomain: "yaki-bb90f.firebaseapp.com",
-    projectId: "yaki-bb90f",
-    storageBucket: "yaki-bb90f.firebasestorage.app",
-    messagingSenderId: "1025023938370",
-    appId: "1:1025023938370:web:de4f3190bd0d76d36102db",
-    measurementId: "G-Y3NNNQ1004"
-};
+
 
 const db = firebase.firestore();
 
@@ -78,15 +69,12 @@ async function removerCategoria(categoriaId) {
 async function salvarPrato(prato) {
     const pratoRef = db.collection('pratos').doc(); // Cria um novo documento
     await pratoRef.set(prato);
-    // alert('Prato cadastrado com sucesso!');
-    // alert("ID_prato: "+pratoRef.id);
     return pratoRef.id;
 }
 
 async function salvar_questionario(questionario){
     const questionarioRef = db.collection('itens_adicionais').doc(); // Cria um novo documento
     await questionarioRef.set(questionario);
-    alert("questionario: "+JSON.stringify(questionario));
     return questionarioRef.id;
 }
 
@@ -140,11 +128,9 @@ formCardapio.addEventListener('submit', async (event) => {
 
     let id_prato = await salvarPrato(prato);
 
-    alert("questionarios: "+JSON.stringify(list_questionarios));
-    alert("itens: "+JSON.stringify(list_itens));
+    alert("Prato salvo com sucesso!");
 
     list_questionarios.forEach(async function(count_questionario){
-        alert("count_questionario="+count_questionario);
         const descricao = document.getElementById(
             nomes_campos_questionario.descricao
             + count_questionario
@@ -160,7 +146,6 @@ formCardapio.addEventListener('submit', async (event) => {
 
         let questionario_id = await salvar_questionario(questionario);
         
-        alert("questionario_id="+questionario_id);
 
         list_itens.forEach(async function(opcao_vals) {
             const count_opcao = opcao_vals[0];
@@ -178,8 +163,7 @@ formCardapio.addEventListener('submit', async (event) => {
                     preco, // Agora é garantido ser um número
                     questionario_id
                 };
-        
-                alert("opcao: " + JSON.stringify(opcao));
+
         
                 await salvar_opcao(opcao);
             }
@@ -250,8 +234,6 @@ export function addQuestionario() {
     
     const questionariosId_html = questionariosCount;
 
-    alert("Adcionado questionario "+questionariosId_html);
-
     // Cria um div para o questionário
     const questionarioBox = document.createElement('div');
     questionarioBox.className = 'questionario-box';
@@ -311,7 +293,6 @@ export function addQuestionario() {
 
 
 export function add_opcao(questionario_count) {
-    alert(`Ação para a Pergunta ${questionario_count}!`);
     itensCount++;
     const itemId_html = itensCount;
 

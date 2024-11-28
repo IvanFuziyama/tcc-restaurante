@@ -1,6 +1,7 @@
 // Inicializa o Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
 import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js"; // Importa o módulo de autenticação
 
 // Configuração do Firebase
 const firebaseConfig = {
@@ -18,6 +19,7 @@ const app = initializeApp(firebaseConfig);
 
 // Inicializa o Firestore
 const db = getFirestore(app);
+
 
 import { exibirCarrinho } from './carrinho.js';
 
@@ -136,6 +138,14 @@ document.getElementById("categoria").addEventListener("change", async (event) =>
 
 // Função para adicionar ao carrinho
 window.adicionarAoCarrinho = function(nome, preco) {
+    const user = auth.currentUser ; // Obtém o usuário logado
+
+    if (!user) {
+        // Se não houver usuário logado, exibe um alerta
+        alert("Você precisa estar logado para adicionar itens ao carrinho.");
+        return; // Sai da função se não estiver logado
+    }
+    
     let carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || [];    
 
     // Coletar opções adicionais selecionadas
