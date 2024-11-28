@@ -27,7 +27,7 @@ export function exibirCarrinho() {
     } else {
         let valorTotal = 0; // Inicializa o valor total
 
-        carrinho.forEach(item => {
+        carrinho.forEach((item, index) => {
             const itemDiv = document.createElement("div");
             itemDiv.classList.add("item-carrinho");
             const precoFormatado = item.preco.toFixed(2); // Formata o preço com 2 casas decimais
@@ -37,8 +37,10 @@ export function exibirCarrinho() {
 
             // Cria o HTML básico do item
             itemDiv.innerHTML = `
-                <p><strong>${item.nome}</strong></p>
-                <p>R$ ${precoFormatado}</p>
+                <div class="item-info">
+                    <p><strong>${item.nome}</strong> - R$ ${precoFormatado}</p>
+                    <button class="remover-item" data-index="${index}">X</button> <!-- Botão para remover -->
+                </div>
             `;
 
             // Verifica e adiciona as opções adicionais, se existirem
@@ -48,8 +50,6 @@ export function exibirCarrinho() {
 
                 for (const [descricao, quantidade] of Object.entries(item.opcoes)) {
                     const opcaoItem = document.createElement("li");
-
-                    // Mostra a descrição e a quantidade com o texto "quantidades"
                     opcaoItem.textContent = `${descricao}: ${quantidade}x`;
                     opcoesList.appendChild(opcaoItem);
                 }
@@ -62,7 +62,29 @@ export function exibirCarrinho() {
 
         // Atualiza o valor total no modal
         document.getElementById("carrinho-total").textContent = `Total: R$ ${valorTotal.toFixed(2)}`;
+
+        // Adiciona o evento de clique para remover itens
+        const removerButtons = document.querySelectorAll('.remover-item');
+        removerButtons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                const index = event.target.getAttribute('data-index');
+                removerDoCarrinho(index);
+            });
+        });
     }
+}
+
+function removerDoCarrinho(index) {
+    let carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || [];
+
+    // Remove o item do carrinho usando o índice
+    carrinho.splice(index, 1);
+
+    // Atualiza o carrinho no sessionStorage
+    sessionStorage.setItem('carrinho', JSON.stringify(carrinho));
+
+    // Exibe novamente o carrinho atualizado
+    exibirCarrinho();
 }
 
 

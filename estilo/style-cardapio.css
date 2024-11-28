@@ -433,6 +433,7 @@ button#finalizar-compra:hover{
 }
 
 .item-carrinho {
+    position: relative;
     border-bottom: 1px solid #ddd; /* Linha de separação entre itens */
     padding: 10px 0; /* Preenchimento vertical */
 }
@@ -450,6 +451,23 @@ button#finalizar-compra:hover{
     margin: 5px 0; /* Margem entre opções */
     font-size: 14px; /* Tamanho da fonte */
     color: #555; /* Cor do texto */
+}
+.item-info {
+    display: flex; /* Usar flexbox para alinhar o texto e o botão */
+    justify-content: space-between; /* Espaça os itens igualmente */
+    align-items: center; /* Alinha verticalmente */
+}
+
+.remover-item {
+    background: none; /* Remove o fundo do botão */
+    border: none; /* Remove a borda do botão */
+    color: red; /* Cor do texto do botão */
+    font-weight: bold; /* Deixa o texto em negrito */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    font-size: 16px; /* Tamanho do texto */
+    position: absolute; /* Permite o posicionamento no canto */
+    top: 10px; /* Distância do topo do item */
+    right: 10px; /* Distância da direita do item */
 }
 .carrinho-total{color: var(--cor-preto);}
 /* Estilo da div resumo-modal */
