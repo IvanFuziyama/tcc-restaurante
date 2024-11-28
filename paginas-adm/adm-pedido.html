@@ -11,7 +11,6 @@
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>   
     <script type="module" src="../scripts/adm-sidebar.js" defer></script>
-    <script src="../scripts/adm-inicio.js" defer></script>
     <script src="../scripts/adm-pedido.js" defer></script>
     <script src="../scripts/adm-seguranca.js" defer></script> <!--Se não estiver logado vai para a página de login do adm-->
     <title>Administrador</title>
@@ -72,20 +71,20 @@
     </nav>
     <main>
         <h1>Pedidos</h1>
-        <div class="pedido-lista">
+        <div id="pedido-lista">
             <!-- Pedido 1 -->
-            <div class="pedido-card">
-                <h3>Pedido #001</h3>
-                <p><strong>Cliente:</strong> João da Silva</p>
-                <p>20/11/2024 22:00:42</p>
-                <p><strong>Item:</strong> Yakisoba de frango c/bacon (P)</p>
-                <p><strong>Adicionais:</strong> Raspas de Gengibre</p>
-                <p><strong>Item:</strong>Macarrão oriental Carne (M)</p>
-                <p><strong>Adicionais:</strong>Tiras de Miolo de alcatra - 2</p>
-                <p><strong>Status:</strong> Em preparo</p>
-                <p><strong>Valor total:</strong> R$ 124,50</p>
-                <button class="btn-status">Alterar Status</button>
-            </div>
+                <!-- <div class="pedido-card">
+                    <h3>Pedido #001</h3>
+                    <p><strong>Cliente:</strong> João da Silva</p>
+                    <p>20/11/2024 22:00:42</p>
+                    <p><strong>Item:</strong> Yakisoba de frango c/bacon (P)</p>
+                    <p><strong>Adicionais:</strong> Raspas de Gengibre</p>
+                    <p><strong>Item:</strong>Macarrão oriental Carne (M)</p>
+                    <p><strong>Adicionais:</strong>Tiras de Miolo de alcatra - 2</p>
+                    <p><strong>Status:</strong> Em preparo</p>
+                    <p><strong>Valor total:</strong> R$ 124,50</p>
+                    <button class="btn-status">Alterar Status</button>
+                </div> -->
 
         </div>
     </main>
