@@ -23,7 +23,7 @@ async function listarContatos() {
             <p id="mensagem"><strong>Mensagem:</strong> ${contatoData.mensagem}</p>
             <textarea id="resposta-${doc.id}" placeholder="Escreva a resposta aqui"></textarea>
             <button class="but-enviar-resposta" onclick="enviarResposta('${doc.id}')">Enviar Resposta</button>
-            <button class ="but-excluir-resposta" onclick="excluirContato('${doc.id}')">Excluir</button>
+            <button class="but-excluir-resposta" onclick="excluirContato('${doc.id}')">Excluir</button>
         `;
         
         contatosContainer.appendChild(contatoDiv);
@@ -44,33 +44,56 @@ async function excluirContato(id) {
 
 
 // Função para enviar a resposta do administrador para o e-mail do usuário
-// Função de envio do formulário
-  document.getElementById("enviar-resposta").onclick = function(){
-  const nodemailer = require('nodemailer')
-  const nome = document.getElementById('nome').value;
-  const email = document.getElementById('email').value;
-  const resposta = document.getElementById('resposta').value;  // Corrigido para 'msg'
-  const transport = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
-    auth:{
-      user: 'ivanseiji21@gmail.com',
-      pass: 'pzxprlcwjrqfrzbi',
-    }
-  })
+async function enviarResposta(contatoId) {
+  try {
+      const resposta = document.getElementById(`resposta-${contatoId}`).value;
 
-  transport.sendMail({
-    from: 'ivan <ivanseiji21@gmail.com>',
-    name: nome,
-    to: email,
-    subject: 'Sobre o feedback',
-    html: '<h1>Olá </h1> <p>Agradeço pelo seu feedback</p>',
-    text: resposta,
-  })
-  .then(() => console.log ("E-mail enviado com sucesso"))
-  .catch((error) => console.log("Erro ao enviar o email", error))
+      if (!resposta) {
+          alert("Por favor, insira uma resposta antes de enviar.");
+          return;
+      }
+
+      // Recupera o email do contato a partir do Firestore
+      const contatoDoc = await db.collection('contatos').doc(contatoId).get();
+      const contatoData = contatoDoc.data();
+
+      if (!contatoData || !contatoData.email) {
+          alert("Não foi possível encontrar o email do contato.");
+          return;
+      }
+
+      const email = contatoData.email;
+
+      // Faz a requisição ao backend para enviar o email
+      const response = await fetch('http://localhost:3000/send-email', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, resposta }),
+      });
+
+      if (response.ok) {
+          alert("Resposta enviada com sucesso!");
+
+          // Exclui o contato do Firestore
+          await db.collection('contatos').doc(contatoId).delete();
+
+          // Recarrega a página
+          location.reload();
+      } else {
+          const errorData = await response.json();
+          alert(`Erro ao enviar resposta: ${errorData.message}`);
+      }
+  } catch (error) {
+      console.error("Erro ao enviar resposta: ", error);
+      alert("Erro ao enviar resposta.");
   }
+}
+
+
+
+
 // Chama a função para listar os contatos quando a página carregar
 listarContatos();
 
