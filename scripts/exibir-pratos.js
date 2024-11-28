@@ -29,6 +29,13 @@ async function obterCategorias() {
 
     // Limpa as opções de categorias
     const categoriaSelect = document.getElementById('edit-categoria');
+    categoriaSelect.innerHTML = ''; // Limpa as opções existentes
+
+    // Adiciona a opção padrão
+    const optionDefault = document.createElement('option');
+    optionDefault.value = '';
+    optionDefault.textContent = 'Selecione uma Categoria';
+    categoriaSelect.appendChild(optionDefault);
 
     snapshot.forEach(doc => {
         const data = doc.data();
@@ -45,15 +52,20 @@ async function obterCategorias() {
 }
 
 // Função para carregar e exibir os pratos
-async function carregarPratos() {
+async function carregarPratos(categoriaId = "") {
     const listaPratos = document.getElementById('lista-pratos');
     listaPratos.innerHTML = ''; // Limpa o conteúdo atual
 
-    // Obtém as categorias com seus nomes
-    const categoriasMap = await obterCategorias();
+    let pratosSnapshot;
 
-    const snapshot = await db.collection('pratos').get();
-    snapshot.forEach(doc => {
+    // Filtra os pratos se uma categoria for selecionada
+    if (categoriaId) {
+        pratosSnapshot = await db.collection('pratos').where("categoria", "==", categoriaId).get();
+    } else {
+        pratosSnapshot = await db.collection('pratos').get(); // Carrega todos os pratos
+    }
+
+    pratosSnapshot.forEach(doc => {
         const prato = doc.data();
         const pratoElement = document.createElement('div');
         pratoElement.classList.add('prato');
@@ -68,16 +80,18 @@ async function carregarPratos() {
             <h2>${prato.nome}</h2>
             <p><strong>Descrição:</strong> ${prato.descricao}</p>
             <p><strong>Valor:</strong> R$ ${prato.valor.toFixed(2)}</p>
-            <p><strong>Categoria:</strong> ${categoriasMap[prato.categoria] || 'Categoria não encontrada'}</p>
         `;
 
         // Criação da imagem do prato
         const imagemElement = document.createElement('img');
         if (prato.imagem) {
-            imagemElement.src = prato.imagem;
+            imagemElement.src = prato.imagem; // Certifique-se de que a imagem está sendo definida corretamente
             imagemElement.alt = prato.nome;
             imagemElement.style.width = "200px"; // Ajuste o tamanho da imagem se necessário
             imagemElement.style.height = "auto";
+        } else {
+            imagemElement.src = 'caminho/para/imagem/padrao.jpg'; // Coloque uma imagem padrão caso não exista
+            imagemElement.alt = 'Imagem não disponível';
         }
 
         // Criação dos botões de editar e excluir
@@ -197,8 +211,17 @@ function cancelarEdicao() {
     document.getElementById('formulario-edicao').style.display = 'none';
 }
 
-// Carrega os pratos ao carregar a página
-document.addEventListener('DOMContentLoaded', carregarPratos);
+// Carregar categorias ao iniciar
+document.addEventListener('DOMContentLoaded', async () => {
+    await obterCategorias(); // Carrega as categorias
+    await carregarPratos(); // Carrega todos os pratos ao iniciar
+});
+
+document.getElementById("edit-categoria").addEventListener("change", async (event) => {
+    const categoriaID = event.target.value; // Obtém o ID da categoria selecionada
+    await carregarPratos(categoriaID); // Carrega pratos com base no ID da categoria selecionada
+});
+
 
 function voltar(){
     window.location.href = "../paginas-adm/adm-cardapio.html"
