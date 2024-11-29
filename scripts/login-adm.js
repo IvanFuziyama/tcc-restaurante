@@ -21,23 +21,28 @@ function entrar() {
     const senha = document.getElementById("senha").value;
     const msgErro = document.querySelector(".msg-erro");
 
-    auth.signInWithEmailAndPassword(email, senha)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            // Verifica se o email do usuário logado corresponde ao autorizado
-            if (user.email === emailAutorizado) {
-                // Redireciona para a página do administrador se o email for autorizado
-                window.location.href = "../paginas-adm/adm.html";
-            } else {
-                // Desloga o usuário se o email não for autorizado
-                auth.signOut();
-                msgErro.textContent = "Este usuário não tem permissão para acessar.";
-            }
-        })
-        .catch((error) => {
-            console.error("Erro ao fazer login:", error);
-            msgErro.textContent = "Email ou senha incorretos.";
-        });
+     // Define a persistência da sessão para que não interfira em outros usuários
+     auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
+     .then(() => {
+         return auth.signInWithEmailAndPassword(email, senha);
+     })
+     .then((userCredential) => {
+         const user = userCredential.user;
+
+         // Verifica se o email do usuário logado corresponde ao autorizado
+         if (user.email === emailAutorizado) {
+             // Redireciona para a página do administrador se o email for autorizado
+             window.location.href = "../paginas-adm/adm.html";
+         } else {
+             // Desloga o usuário se o email não for autorizado
+             auth.signOut();
+             msgErro.textContent = "Este usuário não tem permissão para acessar.";
+         }
+     })
+     .catch((error) => {
+         console.error("Erro ao fazer login:", error);
+         msgErro.textContent = "Email ou senha incorretos.";
+     });
 }
 
 // Função para redefinir senha
