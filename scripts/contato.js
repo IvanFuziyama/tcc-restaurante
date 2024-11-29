@@ -31,7 +31,7 @@
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       });
       alert('Mensagem enviada com sucesso!');
-      form.reset();
+   
     } catch (error) {
       console.error("Erro ao enviar mensagem: ", error);
       alert('Erro ao enviar a mensagem. Tente novamente.');
@@ -54,7 +54,6 @@
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       });
       alert('Mensagem enviada com sucesso!');
-      form.reset();
     } catch (error) {
       console.error("Erro ao enviar mensagem: ", error);
       alert('Erro ao enviar a mensagem. Tente novamente.');
