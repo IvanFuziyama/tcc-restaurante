@@ -200,8 +200,25 @@ document.getElementById("confirmar-pedido").addEventListener("click", () => {
              } else {
                  alert("Você precisa estar logado para fazer um pedido.");
              }
+             await verificarPedidosExpirados();
          });
      });    
+
+     async function verificarPedidosExpirados() {
+        const pedidosSnapshot = await db.collection('pedidos').where('status', '==', 'Pendente').get();
+        const agora = new Date();
+    
+        pedidosSnapshot.forEach(async (doc) => {
+            const pedidoData = doc.data();
+            const dataPedido = pedidoData.data.toDate(); // Converte o timestamp do Firestore para Date
+    
+            // Verifica se a diferença é maior que 10 minutos (600000 milissegundos)
+            if (agora - dataPedido > 600000) {
+                await db.collection('pedidos').doc(doc.id).delete(); // Exclui o pedido
+                console.log(`Pedido ${doc.id} expirado e excluído.`);
+            }
+        });
+    }
 
 // Calcula o total do carrinho
 function calcularTotalCarrinho() {

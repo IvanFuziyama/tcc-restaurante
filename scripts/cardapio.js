@@ -247,7 +247,7 @@ export async function mostrarModal(nome, descricao, preco, imagem, pratoId) {
                     
                         const opcaoElement = document.createElement("li");
                         const descricaoOpcao = opcaoData.descricao_opcao || "Descrição não disponível";
-                        const preco = opcaoData.preco || "Preço não definido";
+                        const preco = opcaoData.preco || "0.00";
                     
                         const label = document.createElement("label");
                         label.textContent = `${descricaoOpcao} - R$ ${preco}`;

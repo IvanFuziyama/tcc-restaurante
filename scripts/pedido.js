@@ -9,10 +9,30 @@ auth.onAuthStateChanged(user => {
         console.log("Usuário logado:", user.uid);
         carregarPedidos(user); // Passa o objeto completo do usuário para a função
         pedidosContainer.remove("pedidosContainer")
+
+        // Chama a função para verificar pedidos expirados
+        verificarPedidosExpirados(); // Adicione esta linha
+        setInterval(verificarPedidosExpirados, 60000); // Verifica a cada 60 segundos
     } else {
         console.log("Nenhum usuário logado.");
     }
 });
+
+async function verificarPedidosExpirados() {
+    const pedidosSnapshot = await db.collection('pedidos').where('status', '==', 'Pendente').get();
+    const agora = new Date();
+
+    pedidosSnapshot.forEach(async (doc) => {
+        const pedidoData = doc.data();
+        const dataPedido = pedidoData.data.toDate(); // Converte o timestamp do Firestore para Date
+
+        // Verifica se a diferença é maior que 5 minutos (300000 milissegundos)
+        if (agora - dataPedido > 36000000) {
+            await db.collection('pedidos').doc(doc.id).delete(); // Exclui o pedido
+            console.log(`Pedido ${doc.id} expirado e excluído.`);
+        }
+    });
+}
 
 // Função auxiliar para formatar opções
 function formatarOpcoes(opcoes) {
@@ -72,7 +92,6 @@ async function carregarPedidos(user) { // Agora user é um argumento passado par
             itensHtml = "<li>Sem itens</li>";
         }
         
-        
     
         // Define o nome do usuário
         const nomeUsuario = user.displayName || "usuário"; // Garante que "user" está acessível neste escopo
@@ -89,5 +108,6 @@ async function carregarPedidos(user) { // Agora user é um argumento passado par
             </div>
         `;
         pedidosContainer.appendChild(pedidoCard);
+        
     });
 }    
