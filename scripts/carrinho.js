@@ -176,7 +176,7 @@ document.getElementById("confirmar-pedido").addEventListener("click", () => {
             mensagem += `%0ATotal: R$ ${total.toFixed(2)}`;
 
             // Substitua pelo número de WhatsApp do restaurante
-            const numeroWhatsapp = "5511985527064";
+            const numeroWhatsapp = "5511912803303";
             const url = `https://wa.me/${numeroWhatsapp}?text=${mensagem}`;
 
             
