@@ -44,6 +44,7 @@ form select {
     border-radius: 5px;
     border: 1px solid var(--cor-fundo);
     width: 100%;
+    
 }
 button#salvar-categoria{
     margin-bottom: 10px;
@@ -119,3 +120,7 @@ button#gerenciar-categorias-btn{
     border-radius: 4px;
     box-sizing: border-box;
 }
+#questionarios-container button{
+    margin: 5px 0;
+}
+button#add-questionario{margin: 5px 0 10px 0}
